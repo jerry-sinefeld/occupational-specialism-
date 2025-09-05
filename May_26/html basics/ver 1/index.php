@@ -10,8 +10,11 @@ echo "<html>"; // opens html
     echo "<body>"; // opens body
 
         echo "<h1>cody is balding</h1>"; // opens first header
+        echo "<hr>";
 
-        echo "this is my page."; // writes first paragraph
+        echo "baldy baldy"; // writes first paragraph
+        echo "<br>";
+        echo "has no hair";
 
     echo "</body>"; // closes body
 
