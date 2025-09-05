@@ -13,8 +13,27 @@ echo "<html>"; // opens html
         echo "<hr>";
 
         echo "baldy baldy"; // writes first paragraph
+
         echo "<br>";
+
         echo "has no hair";
+
+        echo "<a href = 'https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjb7MCvysGPAxWHUkEAHVshASsQFnoECDcQAQ&url=https%3A%2F%2Fwww.nhs.uk%2Fsymptoms%2Fhair-loss%2F&usg=AOvVaw1F4xFsgDLrgENaKiKx8hbl&opi=89978449'>  Go to page 2.</a>";
+
+    echo "<img src='receding_hairline_test.jfif'>";
+
+        echo "</table>";
+            echo "<tr>";
+                echo "<td>Hello 1 </td>";
+                echo "<td>Hello 2 </td>";
+                echo "<td>Hello 3 </td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td>Hello 4 </td>";
+            echo "<td>Hello 5 </td>";
+            echo "<td>Hello 6 </td>";
+            echo "</tr>";
+
 
     echo "</body>"; // closes body
 
