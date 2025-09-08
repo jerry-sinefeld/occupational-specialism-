@@ -35,8 +35,10 @@ echo "<body>"; // opens body
     echo "<label for='not_bald'>Yes very</label> <br>";
     echo "<br>";
     echo "<p> how many years have you been bald?</p>";
-    echo "<label> ";
+    echo "<label for='quantity'>Age</label> ";
     echo "<input type='number'id='quantity' name='quantity' min='1' max='5'>";
+    echo "<br>";
+    echo "<br>";
     echo "<input type='submit' name='submit' value='Login'>";
     echo "</form>";
 echo "</body>"; // closes body
