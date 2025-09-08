@@ -1,0 +1,26 @@
+body{
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif; /* font family lists different fonts to load in case certain OS's don't support your preferred fonts*/
+    background-color: #36454F;
+}
+
+p{
+    color: peachpuff;
+    border: solid 1px brown ;
+}
+
+#my_id{
+    color: yellow;
+    border: solid 12px green;
+
+}
+
+img{
+    color: lightgrey;
+    border: solid 5px;
+}
+
+hr{
+
+    border-top: 4px dashed purple
+}

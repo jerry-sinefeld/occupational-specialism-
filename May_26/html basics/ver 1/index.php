@@ -3,11 +3,14 @@
 echo "<!DOCTYPE html>"; // desired tag for correct structure of an html page to declare what type it is
 
 echo "<html>"; // opens html
-    echo "<head>"; // opens head
+    echo "<head>";// opens head
         echo "<title>May 26</title>"; // opens title,writes it and close it
-
+        echo "<link rel='stylesheet' href='CSS/styles.css'>";
     echo "</head>"; // closes head
+
     echo "<body>"; // opens body
+        echo "<p id = 'my_id'>bonjour</p>";
+        echo "<p >bonjour</p>";
 
         echo "<h1>cody is balding</h1>"; // opens first header
         echo "<hr>";
@@ -20,7 +23,7 @@ echo "<html>"; // opens html
 
         echo "<a href = 'https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjb7MCvysGPAxWHUkEAHVshASsQFnoECDcQAQ&url=https%3A%2F%2Fwww.nhs.uk%2Fsymptoms%2Fhair-loss%2F&usg=AOvVaw1F4xFsgDLrgENaKiKx8hbl&opi=89978449'>  Go to advice.</a>";
 
-    echo "<img src='receding_hairline_test.jfif'>";
+    echo "<img src='images/receding_hairline_test.jfif'>";
 
         echo "</table>";
             echo "<tr>";
