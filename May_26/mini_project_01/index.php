@@ -11,6 +11,8 @@ echo "<html>"; //opens html
     echo "<body>";
         echo "<p>RESIDENT E<span class='seven_color'>VIL</span> COMPLETIONIST GUIDE</p>";
 
+        echo "<h1>Welcome to the family, son!</h1><br>";
+
 
 
 
