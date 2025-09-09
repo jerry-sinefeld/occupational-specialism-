@@ -1,6 +1,26 @@
 .seven_color{
     color: darkorange;
 }
+body{
+    background-color: #1c1f1c ;
+    color: ghostwhite;
+}
 
+@font-face {
+    font-family:'re7_title_font';
+    src: url("C:/Users/22OCallaS/PhpstormProjects/occupational-specialism-/May_26/mini_project_01/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');
+}
 
-p
+p {
+    text-align: center;
+    font-size: large;
+    font-family: re7_title_font;
+}
+h1 {
+    text-align: center;
+
+}
+
+div {
+    text-align: center;
+}

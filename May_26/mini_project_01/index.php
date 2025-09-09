@@ -1,6 +1,6 @@
 <?php //OPENS PHP
 
-echo "!DOCTYPE html"; //declares the doc as a html so it follows the correct structure
+echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
 echo "<html>"; //opens html
     echo "<head>"; //opens head
@@ -9,7 +9,7 @@ echo "<html>"; //opens html
     echo "</head>";
 
     echo "<body>";
-        echo "<p>RESIDENT E<span class='seven_color'>VIL</span> completionist guide</p>";
+        echo "<p>RESIDENT E<span class='seven_color'>VIL</span> COMPLETIONIST GUIDE</p>";
 
 
 
