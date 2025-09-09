@@ -28,6 +28,15 @@ h2 {
     font-family: Rodin,Arial;
 }
 
+div.container{
+    text-align: center;
+    font-family: Rodin,Arial;
+}
+
+ol.coll_ol{
+    display: inline-block;
+    text-align: center;
+}
 
 div {
     text-align: center;

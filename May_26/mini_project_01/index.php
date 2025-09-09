@@ -26,14 +26,5 @@ echo "<html>"; //opens html
         echo "<p>Finally, we have the <a href='collectibles.php'>collectibles</a> section which will give you the edge when it comes to getting that sweet sweet 100% achievement"; //content as well as links to other pages
 
 
-
-
-
-
-
-
-
-
-
 echo "</html>"; //closes html
 ?>
