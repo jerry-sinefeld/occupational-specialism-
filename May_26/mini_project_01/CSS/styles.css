@@ -5,7 +5,9 @@ body{
     background-color: #1c1f1c ;
     color: lightgrey;
 }
-.center{
+video{
+    display: block;
+    margin: auto;
 }
 @font-face {
     font-family:'re7_title_font';
@@ -19,9 +21,13 @@ p {
 }
 h1 {
     text-align: center;
-    font-family: Rodin,Arial;
-
+    font-family: Rodin, Arial;
 }
+h2 {
+    text-align: center;
+    font-family: Rodin,Arial;
+}
+
 
 div {
     text-align: center;
