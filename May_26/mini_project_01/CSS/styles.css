@@ -1,46 +1,49 @@
-.seven_color{
-    color: darkorange;
+/*by creating a separate css file and calling it in the heads of our pages we avoid having to constantly write the same CSS over and over again as well as safeguarding if we want to make any drastic changes to the website as a whole we can just change one thing in this file and it will apply to all pages*/
+
+
+.seven_color{/*class name for the vil in resident evil*/
+    color: darkorange;/*designates color*/
 }
 body{
-    background-color: #1c1f1c ;
-    color: lightgrey;
+    background-color: #1c1f1c ;/*designates background color*/
+    color: lightgrey;/**/
 }
 video{
-    display: block;
-    margin: auto;
+    display: block;/*chooses how the video should be displayed*/
+    margin: auto;/*margin auto aligns the desired item to the centre of the screen by default*/
 }
 @font-face {
-    font-family:'re7_title_font';
-    src: url("C:/Users/22OCallaS/PhpstormProjects/occupational-specialism-/May_26/mini_project_01/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');
+    font-family:'re7_title_font'; /*creates a name for custom font*/
+    src: url("C:/Users/22OCallaS/PhpstormProjects/occupational-specialism-/May_26/mini_project_01/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');/*designates where to pull the font from via filepath I'm sure theres a better way t do this but I don't know it. I also have stated what format the font file is in*/
 }
 
 p {
-    text-align: center;
-    font-size: large;
-    font-family:re7_title_font ,Arial;
+    text-align: center;/*aligns all text to the centre*/
+    font-size: large;/*designates the size of the font*/
+    font-family:re7_title_font ,Arial;/*decides the font family, first being the preferred and second being the backup*/
 }
 h1 {
-    text-align: center;
-    font-family: Rodin, Arial;
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin, Arial;/*decides the font family, first being the preferred and second being the backup*/
 }
 h2 {
-    text-align: center;
-    font-family: Rodin,Arial;
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin,Arial;/*decides the font family, first being the preferred and second being the backup*/
 }
 
 div.container{
-    text-align: center;
-    font-family: Rodin,Arial;
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin,Arial;/*decides the font family, first being the preferred and second being the backup*/
 }
 
 ol.coll_ol{
-    display: inline-block;
-    text-align: center;
+    display: inline-block;/*formats the list so the text in the list wraps around the inline block(centre of the screen)*/
+    text-align: center;/*aligns all text to the centre*/
 }
 
 div {
-    text-align: center;
+    text-align: center;/*aligns all text to the centre*/
 }
 input{
-    text-align: center;
+    text-align: center;/*aligns all text to the centre*/
 }
