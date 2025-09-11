@@ -13,7 +13,7 @@ echo "<html>"; //opens html
 
         echo "<h1>Welcome to the family, son!</h1>"; // opens and writes to the first header
         echo "<hr>";
-        echo "<video width='420' height='340' controls> <source src='Images/Re7_welcome.mp4' type='video/mp4'></video>"; //plays a stored video and decides its size and type
+        echo "<video controls> <source src='Images/Re7_welcome.mp4' type='video/mp4'></video>"; //plays a stored video and decides its size and type
         echo "<p>Are you a returning resident evil 7 player, or a fresh face taking their first steps into the baker estate?</p>"; //content
         echo "<p>no matter your answer you've come to the right place, here you will find all the neat tips and tricks that you'll need to take on the baker family!</p>"; //content
         echo "<p>First things first, you'll need to know what you're getting yourself into before you decide to begin. The resident evil games are known as survival horror games for a reason. You must survive!"; //content

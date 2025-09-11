@@ -15,13 +15,13 @@ echo "<body>";//opens body
 echo "<div class='container'>"; //creates a div and gives it a class so I can apply this specific layout to chosen divs
     echo "<ol class='coll_ol'>"; //creates an ordered list with a name to be referenced in the css
         echo "<li>Antique Coins</li>"; //created a placeholder in the list which won't be displayed to the user
-        echo "<img width='600' height='280' src='Images/antique_coin.jfif' alt='Antique coin'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
+        echo "<img class='coll_size' src='Images/antique_coin.jfif' alt='Antique coin'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
         echo "<p>there are 18 antique coins on normal and easy mode, these are upped to 32 on madhouse. You should have 7 coins before leaving the main house</p>";
         echo "<li>Files</li>"; //created a placeholder in the list which won't be displayed to the user
-        echo "<img width='600' height='380' src='Images/Files_coll.jfif' alt='Files'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
+        echo "<img class='enc_size' src='Images/Files_coll.jfif' alt='Files'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
         echo "<p>there are 32 files across the game to find. these must be found during a single playthrough.</p>"; //content
         echo "<li>Mr Nowhere</li>"; //created a placeholder in the list which won't be displayed to the user
-        echo "<img width='600' height='380' src='Images/Mr_everywhere.jpg' alt='bobblehead'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
+        echo "<img 'enc_size' src='Images/Mr_everywhere.jpg' alt='bobblehead'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
         echo "<p>there are 20 mr everywheres spread across the game to find.These are carried from run to run so if you destroy one you won't have to again</p>"; //content
     echo "</ol>"; //closes ordered list
 echo "</div>"; //closes div

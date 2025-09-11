@@ -11,6 +11,8 @@ body{
 video{
     display: block;/*chooses how the video should be displayed*/
     margin: auto;/*margin auto aligns the desired item to the centre of the screen by default*/
+    width: 420px;
+    height: 340px;
 }
 @font-face {
     font-family:'re7_title_font'; /*creates a name for custom font*/
@@ -35,6 +37,61 @@ div.container{
     text-align: center;/*aligns all text to the centre*/
     font-family: Rodin,Arial,sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
+.enc.size {
+    width: 600px;
+    height: 380px;
+}
+.coll_size{
+    width: 600px;
+    height: 280px;
+
+}
+
+#jack{
+    width: 350px;
+    height: 350px;
+}
+
+#marge{
+    width:225px;
+    height:225px;
+
+}
+
+#Lucas{
+    width:189px;
+    height:267px;
+}
+#Molded{
+    width:450px;
+    height:360px;
+}
+
+#Blade_molded{
+    width:228px;
+    height:221px;
+}
+
+#crawler_molded{
+    width:450px;
+    height:360px;
+}
+
+#Fat_molded{
+    width:450px;
+    height:360px;
+}
+
+#tripwire{
+    width:450px;
+    height:360px;
+}
+
+#Box_trap{
+    width:450px;
+    height:360px;
+}
+
 
 ol.coll_ol{
     display: inline-block;/*formats the list so the text in the list wraps around the inline block(centre of the screen)*/
