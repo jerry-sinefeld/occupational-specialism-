@@ -6,13 +6,13 @@
 }
 body{
     background-color: #1c1f1c ;/*designates background color*/
-    color: lightgrey;/**/
+    color: lightgrey;/*sets color*/
 }
 video{
     display: block;/*chooses how the video should be displayed*/
     margin: auto;/*margin auto aligns the desired item to the centre of the screen by default*/
-    width: 420px;
-    height: 340px;
+    width: 420px;/*sets width*/
+    height: 340px;/*sets height*/
 }
 @font-face {
     font-family:'re7_title_font'; /*creates a name for custom font*/
@@ -38,58 +38,58 @@ div.container{
     font-family: Rodin,Arial,sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
 .enc.size {
-    width: 600px;
-    height: 380px;
+    width: 600px;/*sets width*/
+    height: 380px;/*sets height*/
 }
 .coll_size{
-    width: 600px;
-    height: 280px;
+    width: 600px;/*sets width*/
+    height: 280px;/*sets height*/
 
 }
 
 #jack{
-    width: 350px;
-    height: 350px;
+    width: 350px;/*sets width*/
+    height: 350px;/*sets height*/
 }
 
 #marge{
-    width:225px;
-    height:225px;
+    width:225px;/*sets width*/
+    height:225px;/*sets height*/
 
 }
 
 #Lucas{
-    width:189px;
-    height:267px;
+    width:189px;/*sets width*/
+    height:267px;/*sets height*/
 }
 #Molded{
-    width:450px;
-    height:360px;
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
 }
 
 #Blade_molded{
-    width:228px;
-    height:221px;
+    width:228px;/*sets width*/
+    height:221px;/*sets height*/
 }
 
 #crawler_molded{
-    width:450px;
-    height:360px;
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
 }
 
 #Fat_molded{
-    width:450px;
-    height:360px;
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
 }
 
 #tripwire{
-    width:450px;
-    height:360px;
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
 }
 
 #Box_trap{
-    width:450px;
-    height:360px;
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
 }
 
 
