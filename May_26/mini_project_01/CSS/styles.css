@@ -20,20 +20,20 @@ video{
 p {
     text-align: center;/*aligns all text to the centre*/
     font-size: large;/*designates the size of the font*/
-    font-family:re7_title_font ,Arial;/*decides the font family, first being the preferred and second being the backup*/
+    font-family:re7_title_font ,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
 h1 {
     text-align: center;/*aligns all text to the centre*/
-    font-family: Rodin, Arial;/*decides the font family, first being the preferred and second being the backup*/
+    font-family: Rodin, Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
 h2 {
     text-align: center;/*aligns all text to the centre*/
-    font-family: Rodin,Arial;/*decides the font family, first being the preferred and second being the backup*/
+    font-family: Rodin,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
 
 div.container{
     text-align: center;/*aligns all text to the centre*/
-    font-family: Rodin,Arial;/*decides the font family, first being the preferred and second being the backup*/
+    font-family: Rodin,Arial,sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
 
 ol.coll_ol{
