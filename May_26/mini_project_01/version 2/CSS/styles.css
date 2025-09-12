@@ -16,13 +16,14 @@ video{
 }
 @font-face {
     font-family:'re7_title_font'; /*creates a name for custom font*/
-    src: url("C:/Users/22OCallaS/PhpstormProjects/occupational-specialism-/May_26/mini_project_01/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');/*designates where to pull the font from via filepath I'm sure theres a better way t do this but I don't know it. I also have stated what format the font file is in*/
+    src: url("/May_26/mini_project_01/version 1/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');/*designates where to pull the font from via filepath I'm sure theres a better way t do this but I don't know it. I also have stated what format the font file is in*/
 }
 
-p {
+.res_title{
     text-align: center;/*aligns all text to the centre*/
-    font-size: large;/*designates the size of the font*/
-    font-family:re7_title_font ,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+    font-size: x-large;/*designates the size of the font*/
+    font-family:re7_title_font,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+
 }
 h1 {
     text-align: center;/*aligns all text to the centre*/
@@ -33,9 +34,13 @@ h2 {
     font-family: Rodin,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
 }
 
-div.container{
-    text-align: center;/*aligns all text to the centre*/
-    font-family: Rodin,Arial,sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: x-large;
+    font-family: Arial,sans-serif;
 }
 .enc.size {
     width: 600px;/*sets width*/

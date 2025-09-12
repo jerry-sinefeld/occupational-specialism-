@@ -1,0 +1,106 @@
+/*by creating a separate css file and calling it in the heads of our pages we avoid having to constantly write the same CSS over and over again as well as safeguarding if we want to make any drastic changes to the website as a whole we can just change one thing in this file and it will apply to all pages*/
+
+
+.seven_color{/*class name for the vil in resident evil*/
+    color: darkorange;/*designates color*/
+}
+body{
+    background-color: #1c1f1c ;/*designates background color*/
+    color: lightgrey;/*sets color*/
+}
+video{
+    display: block;/*chooses how the video should be displayed*/
+    margin: auto;/*margin auto aligns the desired item to the centre of the screen by default*/
+    width: 420px;/*sets width*/
+    height: 340px;/*sets height*/
+}
+@font-face {
+    font-family:'re7_title_font'; /*creates a name for custom font*/
+    src: url("/May_26/mini_project_01/version 1/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');/*designates where to pull the font from via filepath I'm sure theres a better way t do this but I don't know it. I also have stated what format the font file is in*/
+}
+
+p {
+    text-align: center;/*aligns all text to the centre*/
+    font-size: large;/*designates the size of the font*/
+    font-family:re7_title_font ,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+}
+h1 {
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin, Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+}
+h2 {
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+}
+
+div.container{
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin,Arial,sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+}
+.enc.size {
+    width: 600px;/*sets width*/
+    height: 380px;/*sets height*/
+}
+.coll_size{
+    width: 600px;/*sets width*/
+    height: 280px;/*sets height*/
+
+}
+
+#jack{
+    width: 350px;/*sets width*/
+    height: 350px;/*sets height*/
+}
+
+#marge{
+    width:225px;/*sets width*/
+    height:225px;/*sets height*/
+
+}
+
+#Lucas{
+    width:189px;/*sets width*/
+    height:267px;/*sets height*/
+}
+#Molded{
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
+}
+
+#Blade_molded{
+    width:228px;/*sets width*/
+    height:221px;/*sets height*/
+}
+
+#crawler_molded{
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
+}
+
+#Fat_molded{
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
+}
+
+#tripwire{
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
+}
+
+#Box_trap{
+    width:450px;/*sets width*/
+    height:360px;/*sets height*/
+}
+
+
+ol.coll_ol{
+    display: inline-block;/*formats the list so the text in the list wraps around the inline block(centre of the screen)*/
+    text-align: center;/*aligns all text to the centre*/
+}
+
+div {
+    text-align: center;/*aligns all text to the centre*/
+}
+input{
+    text-align: center;/*aligns all text to the centre*/
+}

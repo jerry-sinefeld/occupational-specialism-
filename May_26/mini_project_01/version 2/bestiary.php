@@ -11,12 +11,13 @@ echo "<head>"; //opens head
 echo "</head>"; //closes head
 
 echo "<body>";//opens body
-    echo "<p>RESIDENT E<span class='seven_color'>VIL</span> BESTIARY</p>"; //opening paragraph that I use as a semi title, this contains the span tag which allows you to color chosen words and/or letters
-    echo "<p>To the <a href='index.php'>landing page</a>"; //link to landing page
+    echo "<div class='res_title'>";
+        echo "<p1>RESIDENT E<span class='seven_color'>VIL</span> BESTIARY</p1>"; //opening paragraph that I use as a semi title, this contains the span tag which allows you to color chosen words and/or letters
+    echo "</div>";    require_once "Assets/nav.php";
+    echo "<div class='container'>"; //creates a div and gives it a class so I can apply this specific layout to chosen divs
     echo "<h1>The encyclopedia</h1><br>"; //header
     echo "<p>Here you'll find useful info on all the enemies in the game.</p>";//content
 
-echo "<div class='container'>"; //creates a div and gives it a class so I can apply this specific layout to chosen divs
     echo "<ol class='coll_ol"; //creates an ordered list with a name to be referenced in the css
         echo "<li>placeholder</li>"; //created a placeholder in the list which won't be displayed to the user
         echo "<img src=''>"; //creates an image with a source
