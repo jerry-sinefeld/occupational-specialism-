@@ -1,0 +1,88 @@
+body{
+    background-color: #60A8D4 ;/*designates background color*/
+    color: white;/*sets color*/
+}
+video{
+    display: block;/*chooses how the video should be displayed*/
+    margin: auto;/*margin auto aligns the desired item to the centre of the screen by default*/
+    width: 420px;/*sets width*/
+    height: 340px;/*sets height*/
+}
+
+h1 {
+    text-align: left;/*aligns all text to the left*/
+    font-family: Rodin, Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+}
+h2 {
+    text-align: center;/*aligns all text to the centre*/
+    font-family: Rodin,Arial, sans-serif;/*decides the font family, first being the preferred and second being the backup*/
+}
+
+.container{
+    background-color: #60A8D4;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+    font-size: x-large;
+    font-family: Arial,sans-serif;
+}
+
+.div.main{
+    background-color: #60A8D4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: x-large;
+    font-family: Arial,sans-serif;
+}
+.links{
+    display: flex;
+    justify-content: end;
+    text-align: right;
+    flex-direction: column;
+    font-size: x-large;
+    font-family: Arial,sans-serif;
+}
+ol.coll_ol{
+    display: inline-block;/*formats the list so the text in the list wraps around the inline block(centre of the screen)*/
+    text-align: center;/*aligns all text to the centre*/
+}
+
+input{
+    text-align: center;/*aligns all text to the centre*/
+}
+
+.flav{
+    text-align: left;
+    display: -moz-box;
+    color: white;
+
+}
+h2{
+    text-align: left;
+}
+
+.links_boxes{
+    display: flex; /*flexboxes allow me to put the links in a row*/
+    justify-content: space-around; /*puts space between each link*/
+    align-items:center ; /*says it in the name, it aligns all items to the center of the screen*/
+    background-color: white;/*sets background color*/
+    padding: 10px; /*specifies the space between the link and the text above and below*/
+}
+
+.Booking_table{
+    background-color: white;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color:black
+}
+
+th,td{
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
+

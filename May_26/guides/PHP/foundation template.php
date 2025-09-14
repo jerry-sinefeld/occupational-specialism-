@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 echo "<html>"; //opens html
     echo "<head>"; //opens head
         echo "<title></title>"; //opens and writes title
-        echo "<link rel='stylesheet' href='/styles.css'>"; //links the file to the stylesheet which contains all the css
+        echo "<link rel='stylesheet' href='/CSS/styles.css'>"; //links the file to the stylesheet which contains all the css
     echo "</head>"; //closes head
 
 echo "<body>"; //opens body
