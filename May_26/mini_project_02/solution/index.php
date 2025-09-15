@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 echo "<html>"; //opens html
     echo "<head>"; //opens head
         echo "<title>Landing page</title>"; //opens and writes title
-        echo "<link rel='stylesheet' href='CSS/styles.css'>"; //links the file to the stylesheet which contains all the css
+        echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
     echo "</head>"; //closes head
 
     echo "<body>"; //opens body
@@ -13,9 +13,9 @@ echo "<html>"; //opens html
                 echo "<h1>Gibjon Tutoring</h1><br>";
                 echo "<div id='main'>"; //creates a div with the id of main
                     echo "<div class='links'>";//opens the links div
-                        require_once "Assets/nav.php"; //opens the nav php file that adds a navbar
+                        require_once "assets/nav.php"; //opens the nav php file that adds a navbar
                     echo "</div>";//closes div
-                    echo "<img class='Tutor_1' src='Images/Tutor.jpg' alt='Tutor'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
+                    echo "<img class='Tutor_1' src='images/Tutor.jpg' alt='Tutor'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
                     echo "<div class='flav'>";//opens the flavour div
                         echo "<h2>Welcome To Gibjon Tutoring!</h2>";//another header
                         echo "<p>Here at Gibjon your child’s growth is our number one priority, We believe that creating engaging environments is the best Way to set your child up for continued advancement.</p>";

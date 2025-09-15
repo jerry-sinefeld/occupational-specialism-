@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; // declares doctype
 echo "<html>"; // opens html
 
 echo "<head>";// opens head
-    echo "<link rel='stylesheet' href='CSS/styles.css'>"; //opens the stylesheet css which contains all clarifications for style
+    echo "<link rel='stylesheet' href='css/styles.css'>"; //opens the stylesheet css which contains all clarifications for style
 echo "</head>"; // closes head
 
 echo "<body>"; // opens body

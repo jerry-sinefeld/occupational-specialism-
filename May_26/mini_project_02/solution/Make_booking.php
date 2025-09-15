@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 echo "<html>"; //opens html
     echo "<head>"; //opens head
         echo "<title></title>"; //opens and writes title
-        echo "<link rel='stylesheet' href='CSS/styles.css'>"; //links the file to the stylesheet which contains all the css
+        echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
     echo "</head>"; //closes head
 
     echo "<body>"; //opens body
@@ -26,7 +26,7 @@ echo "<html>"; //opens html
                     echo "The hours the Tutor is available are:" . $_POST["Tutor_hours"]; //posts hours of tutors availability
                 }
                 echo "<div class='links'>";//opens the links class
-                    require_once "Assets/nav.php"; //opens the nav php file that adds a navbar
+                    require_once "assets/nav.php"; //opens the nav php file that adds a navbar
                 echo "</div>";//closes the div
                 echo "<form method='post' action=''>";//creates a form with the intention to post
                 echo "<table>"; //opens table

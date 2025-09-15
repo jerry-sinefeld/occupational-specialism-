@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 echo "<html>"; //opens html
     echo "<head>"; //opens head
         echo "<title></title>"; //opens and writes title
-        echo "<link rel='stylesheet' href='CSS/styles.css'>"; //links the file to the stylesheet which contains all the css
+        echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
     echo "</head>"; //closes head
 
     echo "<body>"; //opens body
@@ -18,7 +18,7 @@ echo "<html>"; //opens html
                     echo "your password:" . $_POST["password"]; //posts password
                 }
                 echo "<div class='links'>";//opens the links div
-                    require_once "Assets/nav.php"; //opens the nav php file that adds a navbar
+                    require_once "assets/nav.php"; //opens the nav php file that adds a navbar
                 echo "</div>";//closes div
                 echo "<form method='post' action=''>";//creates the form and designates what it should do with the received data
                     echo "<label for='num'>Email:</label>"; //creates the email box and what it contains

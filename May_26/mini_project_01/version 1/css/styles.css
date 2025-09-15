@@ -1,4 +1,4 @@
-/*by creating a separate css file and calling it in the heads of our pages we avoid having to constantly write the same CSS over and over again as well as safeguarding if we want to make any drastic changes to the website as a whole we can just change one thing in this file and it will apply to all pages*/
+/*by creating a separate css file and calling it in the heads of our pages we avoid having to constantly write the same css over and over again as well as safeguarding if we want to make any drastic changes to the website as a whole we can just change one thing in this file and it will apply to all pages*/
 
 
 .seven_color{/*class name for the vil in resident evil*/
@@ -16,7 +16,7 @@ video{
 }
 @font-face {
     font-family:'re7_title_font'; /*creates a name for custom font*/
-    src: url("/May_26/mini_project_01/version 1/Assets/Plak-Black-Extra-Condensed.ttf") format('truetype');/*designates where to pull the font from via filepath I'm sure theres a better way t do this but I don't know it. I also have stated what format the font file is in*/
+    src: url("/May_26/mini_project_01/version 1/assets/Plak-Black-Extra-Condensed.ttf") format('truetype');/*designates where to pull the font from via filepath I'm sure theres a better way t do this but I don't know it. I also have stated what format the font file is in*/
 }
 
 p {

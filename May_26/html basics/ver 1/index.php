@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; // desired tag for correct structure of an html page to 
 echo "<html>"; // opens html
     echo "<head>";// opens head
         echo "<title>May 26</title>"; // opens title,writes it and close it
-        echo "<link rel='stylesheet' href='CSS/styles.css'>";
+        echo "<link rel='stylesheet' href='css/styles.css'>";
     echo "</head>"; // closes head
 
     echo "<body>"; // opens body

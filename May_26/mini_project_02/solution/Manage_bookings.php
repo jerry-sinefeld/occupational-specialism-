@@ -5,7 +5,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 echo "<html>"; //opens html
     echo "<head>"; //opens head
         echo "<title>Manage bookings</title>"; //opens and writes title
-        echo "<link rel='stylesheet' href='CSS/styles.css'>"; //links the file to the stylesheet which contains all the css
+        echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
     echo "</head>"; //closes head
 
     echo "<body>"; //opens body
@@ -13,7 +13,7 @@ echo "<html>"; //opens html
             echo "<h1>Manage bookings</h1><br>";
             echo "<div id='main'>"; //creates a div with the id of main
                 echo "<div class='links'>";//opens the links class
-                    require_once "Assets/nav.php"; //opens the nav php file that adds a navbar
+                    require_once "assets/nav.php"; //opens the nav php file that adds a navbar
                 echo "</div>"; //closes links div
                 echo "<table class='Booking_table'>";
                     echo "<thead>";//opens the headers of the table
