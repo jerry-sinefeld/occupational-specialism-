@@ -19,31 +19,31 @@ h2 {
 }
 
 .container{
-    background-color: #60A8D4;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    flex-direction: column;
-    font-size: x-large;
-    font-family: Arial,sans-serif;
+    background-color: #60A8D4;/*sets background color*/
+    display: flex;/*sets the display as a flexbox*/
+    justify-content: left;/*moves the content to the left of the screen*/
+    align-items: center;/*aligns elements to the center of the screen*/
+    flex-direction: column;/*changes how the flex box is aligned meaning that I can change which direction the text moves across the screen*/
+    font-size: x-large;/*declares font size*/
+    font-family: Arial,sans-serif/*sets font and a backup font*/
 }
 
 .div.main{
-    background-color: #60A8D4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: x-large;
-    font-family: Arial,sans-serif;
+    background-color: #60A8D4;/*sets background color*/
+    display: flex;/*sets the display as a flexbox*/
+    justify-content: center;/*moves all content to the center*/
+    align-items: center;/*aligns all items to the center*/
+    flex-direction: column;/*changes how the flex box is aligned meaning that I can change which direction the text moves across the screen*/
+    font-size: x-large;/*declares font size*/
+    font-family: Arial,sans-serif;/*sets font and a backup font*/
 }
 .links{
-    display: flex;
-    justify-content: end;
-    text-align: right;
-    flex-direction: column;
-    font-size: x-large;
-    font-family: Arial,sans-serif;
+    display: flex;/*sets the display as a flexbox*/
+    justify-content: end;/*sets the text to the end of the box it is contained in*/
+    text-align: right;/*aligns text to the right*/
+    flex-direction: column;/*changes how the flex box is aligned meaning that I can change which direction the text moves across the screen*/
+    font-size: x-large;/*declares font size*/
+    font-family: Arial,sans-serif;/*sets font and a backup font*/
 }
 ol.coll_ol{
     display: inline-block;/*formats the list so the text in the list wraps around the inline block(centre of the screen)*/
@@ -55,13 +55,13 @@ input{
 }
 
 .flav{
-    text-align: left;
-    display: -moz-box;
-    color: white;
+    text-align: left;/*aligns text to the left*/
+    display: -moz-box;/*I'll be completely honest I don't know how or why this works but it moved everything to the left and didn't without it*/
+    color: white;/*sets font color*/
 
 }
 h2{
-    text-align: left;
+    text-align: left;/*aligns text to the left*/
 }
 
 .links_boxes{
@@ -73,16 +73,15 @@ h2{
 }
 
 .Booking_table{
-    background-color: white;
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    color:black
+    background-color: white;/*sets background color*/
+    width: 100%;/*sets width of the table to 100% of the box*/
+    border-collapse: separate;/*allows us to define the amount of space between cells*/
+    border-spacing: 0;/*sets no space between cells*/
+    color:black/*sets text color*/
 }
 
 th,td{
-    text-align: left;
-    padding: 15px;
-    border-bottom: 1px solid black;
+    text-align: left;/*aligns all text to the left*/
+    padding: 15px;/*specifies padding size*/
+    border-bottom: 1px solid black;/*adds a solid black line to the table helping to separate entries and create a more defined table*/
 }
-
