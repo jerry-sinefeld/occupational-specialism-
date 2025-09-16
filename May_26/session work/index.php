@@ -1,10 +1,11 @@
 <?php //OPENS php
 session_start();
+require_once "assets/common.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === 'POST' )  {
+    $_SESSION['msg'] = $_POST["message"];
 
 }
-
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
@@ -18,7 +19,8 @@ echo "<html>"; //opens html
     echo "<div class='container'>";
     require_once "assets/nav.php";
     require_once "assets/topbar.php";
-    echo "<div id='main'>";
+    echo "<div class='main'>";
+    echo usr_msg();
     echo "<h2>session work</h2>";
     echo "<form method='post' action=''>";
         echo "<input type='text' name='message' placeholder='message'>";
