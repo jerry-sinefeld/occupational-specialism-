@@ -26,13 +26,16 @@ echo "<html>"; //opens html
     echo "<form action='' method='post'>"; //creates the form and tells the form what to do
     echo "<label for='str'>Name:</label>"; //creates the name text box and what it contains
     echo "<input type='text' name='str' id='str' placeholder= 'enter your name' required>"; //creates the name field
-    echo "$sanitized_string = filter_var(str, FILTER_SANITIZE_STRING)";
+    echo $sanitized_string = filter_var($_POST["str"], FILTER_SANITIZE_STRING);
     echo "<label for='email'>Email:</label>";
     echo "<input type='email' name='email' placeholder='Email'/>"; //creates the email field
+    echo $sanitized_email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     echo "<label for='url'>URL:</label>";
     echo "<input type='url' name='url' placeholder='URL'/>";
+    echo $sanitized_url = filter_var($_POST["url"], FILTER_SANITIZE_URL);
     echo "<label for='int'>enter a number:</label>";
     echo "<input type='number' name='int' placeholder='enter a number'/>";
+    echo $sanitized_int = filter_var($_POST["int"], FILTER_SANITIZE_NUMBER_INT);
     echo "<br>"; //breakline
     echo "<input type='submit' name='submit' value='Submit'>"; //creates the submit box
 
