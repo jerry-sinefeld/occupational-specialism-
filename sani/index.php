@@ -16,29 +16,29 @@ echo "<html>"; //opens html
     echo "<div id='main'>";
 
     echo "<form method='post' action='' >"; //creates the form and tells the form what to do
-    #echo "<label for='str'>Name:</label>"; //creates the name text box and what it contains
+    echo "<label for='str'>Name:</label>"; //creates the name text box and what it contains
     echo "<input type='text' name='stri' placeholder= 'enter your name' >"; //creates the name field
-    #echo "<label for='email'>Email:</label>";
+    echo "<label for='email'>Email:</label>";
     echo "<input type='email' name='email' placeholder='Email'/>"; //creates the email field
-    #echo "<label for='url'>URL:</label>";
+    echo "<label for='url'>URL:</label>";
     echo "<input type='url' name='url' placeholder='URL'/>";
-    #echo "<label for='int'>enter a number:</label>";
+    echo "<label for='int'>enter a number:</label>";
     echo "<input type='number' name='int' placeholder='enter a number'/>";
     echo "<br>"; //breakline
     echo "<input type='submit' name='submit' value='Submit'>"; //creates the submit box
     echo "</form>";
 if ($_SERVER["REQUEST_METHOD"] === "POST") /*requests the server to post the inputted*/ {
-    #echo "your string: " . $_POST['stri'];
+    echo "your string: " . $_POST['stri'];
     echo "your string: " .filter_var($_POST['stri'], FILTER_SANITIZE_STRING);
     echo "<br>"; //breakline
     echo "your email:" . $_POST['email']; //posts code
-    #echo  filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    echo  filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     echo "<br>"; //breakline
     echo "your url:" . $_POST['url']; //posts password
-    #echo  filter_var($_POST['url'], FILTER_SANITIZE_URL);
+    echo  filter_var($_POST['url'], FILTER_SANITIZE_URL);
     echo "<br>"; //breakline
     echo "number:" . $_POST['int']; //posts the checkbox
-    #echo  filter_var($_POST['int'], FILTER_SANITIZE_NUMBER_INT);
+    echo  filter_var($_POST['int'], FILTER_SANITIZE_NUMBER_INT);
 }
 
     echo "</div>";
