@@ -14,6 +14,8 @@ echo "<html>"; //opens html
     require_once "assets/topbar.php";
     require_once "assets/nav.php";
     echo "<div id='main'>";
+        echo "<p>test<p/>";
+
 
 
 
