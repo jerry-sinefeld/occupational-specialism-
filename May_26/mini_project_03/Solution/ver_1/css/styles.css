@@ -57,9 +57,12 @@ body{
     font-size: x-large;
     font-family: Arial,sans-serif;
     padding: 0;
-    border-left-width: 100px;
-    border-right-width: 100px;
+    border-left-width: 90px;
+    border-right-width: 90px;
+    border-top-width:50px ;
+    border-bottom-width:50px ;
     border-color:#A33040;
     border-style: solid;
-    margin:0;
+    margin-left:50px ;
+    margin-right: 50px;
 }
