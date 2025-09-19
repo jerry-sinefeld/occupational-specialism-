@@ -11,8 +11,8 @@ echo "<html>"; //opens html
 
     echo "<body>"; //opens body
     echo "<div class='container'>";
-    require_once "assets/nav.php";
     require_once "assets/topbar.php";
+    require_once "assets/nav.php";
     echo "<div id='main'>";
 
 

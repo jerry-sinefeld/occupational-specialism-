@@ -15,7 +15,7 @@ echo "<html>"; //opens html
                     echo "<div class='links'>";//opens the links div
                         require_once "assets/nav.php"; //opens the nav php file that adds a navbar
                     echo "</div>";//closes div
-                    echo "<img class='Tutor_1' src='images/Tutor.jpg' alt='Tutor'>"; //displays an image with a source as well as measurements and alternate text that appears if image doesn't load
+                    echo "<img class='Tutor_1' src='images/Tutor.jpg' alt='Tutor'>"; //displays an images with a source as well as measurements and alternate text that appears if images doesn't load
                     echo "<div class='flav'>";//opens the flavour div
                         echo "<h2>Welcome To Gibjon Tutoring!</h2>";//another header
                         echo "<p>Here at Gibjon your child’s growth is our number one priority, We believe that creating engaging environments is the best Way to set your child up for continued advancement.</p>";

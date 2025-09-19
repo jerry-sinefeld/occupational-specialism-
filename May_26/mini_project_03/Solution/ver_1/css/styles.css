@@ -1,20 +1,34 @@
 .container{
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     font-size: x-large;
     font-family: Arial,sans-serif;
 }
-
-nav ul{
-    list-style-type: none;/*remove bullet points*/
-    margin: 0;/*remove margin*/
-    padding: 0;/*remove padding*/
-    display: flex;/*makes it into a flexbox*/
-    justify-content: flex-start;/*makes everything display in a line*/
-    background-color:#1c1f1c;/*sets background color*/
+nav{
+    width: 100%;
 }
+
+nav ul {
+    list-style-type: none; /*remove bullet points*/
+    margin: 0; /*remove margin*/
+    padding: 0; /*remove padding*/
+    width: 100%;
+    display: flex; /*makes it into a flexbox*/
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #1c1f1c; /*sets background color*/
+}
+
 nav li:hover{ /*changes how the item looks when hovering over it*/
     background-color: whitesmoke; /*changes background color*/
+}
+
+#pass_protector{
+    width: 40%;
+    height:50%;
+    object-fit: cover;
+    background-color:#4B272C ;
+
+
 }
