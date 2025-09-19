@@ -4,10 +4,16 @@
     flex-direction: column;
     font-size: x-large;
     font-family: Arial,sans-serif;
+    background-color: #4B272C;
 }
 nav{
     width: 100%;
 }
+nav a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
 
 nav ul {
     list-style-type: none; /*remove bullet points*/
@@ -17,11 +23,11 @@ nav ul {
     display: flex; /*makes it into a flexbox*/
     flex-direction: column;
     align-items: flex-end;
-    background-color: #1c1f1c; /*sets background color*/
+    background-color: #513838; /*sets background color*/
 }
 
 nav li:hover{ /*changes how the item looks when hovering over it*/
-    background-color: whitesmoke; /*changes background color*/
+    background-color: darkred; /*changes background color*/
 }
 
 #pass_protector{
@@ -29,6 +35,8 @@ nav li:hover{ /*changes how the item looks when hovering over it*/
     height:50%;
     object-fit: cover;
     background-color:#4B272C ;
+}
 
-
+body{
+    background-color: #4B272C;
 }
