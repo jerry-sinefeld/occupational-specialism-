@@ -1,17 +1,17 @@
 .container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    font-size: x-large;
-    font-family: Arial,sans-serif;
-    background-color: #4B272C;
+    display: flex;/*declares the box everything is contained in as a flexbox*/
+    justify-content: center;/*centers everything*/
+    flex-direction: column;/*changes the direction the box flexes specifically it declares it as a column*/
+    font-size: x-large;/*sets the font size*/
+    font-family: Arial,sans-serif;/*sets the font*/
+    background-color: #4B272C;/*sets background color*/
 }
 nav{
-    width: 100%;
+    width: 100%; /*makes the nav bar the width of the page*/
 }
 nav a{
-    color: whitesmoke;
-    text-decoration: none;
+    color: whitesmoke;/*changes the color of the text in the nave to white*/
+    text-decoration: none;/*removes the underline from the link*/
 }
 
 
@@ -19,11 +19,11 @@ nav ul {
     list-style-type: none; /*remove bullet points*/
     margin: 0; /*remove margin*/
     padding: 0; /*remove padding*/
-    width: 100%;
-    height: 120px;
+    width: 100%;/*makes the width the length of the page*/
+    height: 120px;/*makes the height 120 pixels*/
     display: flex; /*makes it into a flexbox*/
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: column;/*changes the direction the box flexes specifically it declares it as a column*/
+    align-items: flex-end;/*makes the text start from the end of the text box*/
     background-color: #513838; /*sets background color*/
 }
 
@@ -32,41 +32,39 @@ nav li:hover{ /*changes how the item looks when hovering over it*/
 }
 
 #pass_protector{
-    width: 40%;
-    height:50%;
-    object-fit: cover;
-    background-color:#4B272C ;
+    width: 40%;/*makes the width of the image 40% of the box it is contained in*/
+    height:50%;/*makes the height of the image 50% of the box it is contained in*/
+    object-fit: cover;/*makes the image fill the box and clips it if it doesn't*/
+    background-color:#4B272C ;/*sets the background color of the box*/
 }
 
 body{
-    background-color: #4B272C;
-    padding: 0;
-    margin: 0;
+    background-color: #4B272C;/*sets the background color of the body*/
+    padding: 0;/*removes padding*/
+    margin: 0;/*removes margin*/
 }
 
 #topbar{
-    border-style: solid;
-    border-color:black;
+    border-style: solid;/*gives the topbar a solid visible border*/
+    border-color:black;/*colors the border*/
 }
 
 #main{
-    text-align: center;
-    justify-content: center;
-    align-content: center;
-    color: whitesmoke;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-size: x-large;
-    font-family: Arial,sans-serif;
-    width: 50%;
-    padding: 0;
-    border-left-width: 90px;
-    border-right-width: 90px;
-    border-top-width:50px ;
-    border-bottom-width:50px ;
-    border-color:#A33040;
-    border-style: solid;
-    margin-left:50px ;
-    margin-right: 50px;
+    text-align: center;/*aligns the text to the center of the screen*/
+    color: whitesmoke;/*sets the text color to white*/
+    display: flex;/*declares the box main is contained in as a flexbox*/
+    align-items: center;/*aligns all items in the main to the center*/
+    flex-direction: column;/*changes the direction the box flexes specifically it declares it as a column*/
+    font-size: x-large;/*sets the font size to extra large*/
+    font-family: Arial,sans-serif;/*declares font and a backup font*/
+    width: 50%;/*sets the width of the box to be 50% the screen*/
+    padding: 0;/*removes padding*/
+    border-left-width: 90px;/*sets the width of the left border*/
+    border-right-width: 90px;/*sets the width of the right border*/
+    border-top-width:50px ;/*sets the width of the top border*/
+    border-bottom-width:50px ;/*sets the width of the bottom border*/
+    border-color:#A33040;/*sets the color of the border*/
+    border-style: solid;/*gives it a style of the center*/
+    margin-left:50px ;/*sets the width of the left margin*/
+    margin-right: 50px;/*sets the width of the right margin*/
 }

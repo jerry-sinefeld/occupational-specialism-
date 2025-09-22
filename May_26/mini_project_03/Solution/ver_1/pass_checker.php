@@ -22,8 +22,9 @@ echo "<html>"; //opens html
                 echo "</form>"; //closes form
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inputted*/ {
+
                     $_tally = 9; //creates a variable with a value of 9 as that is how many requirements there are
-                    $_password = $_POST['pass']; //defines the variable of $_password as whatever is inputted into the pass input
+                    $_password = filter_var($_POST['pass'],FILTER_SANITIZE_STRING); //defines the variable of $_password as whatever is inputted into the pass input and filters it
                     $_spec_char = '/[!@#$"£%^&*()_=+{};:,.<>]/'; //a variable with a collection of all the special characters I could think of, I'm sure there's a better way of doing this.
 
                     if (!preg_match('/[A-Z]/', $_password)) { //checks if an uppercase character doesn't exist in the password variable
@@ -72,7 +73,7 @@ echo "<html>"; //opens html
                         echo "Your password cannot be password or Password."; //improvement message
                         echo "<br>"; //breakline
                     }
-                    echo "your password is: " . $_POST['pass']; //prints out the inputted password
+                    echo "your password is: " . $_POST['pass']. " if text has been removed from your password it is likely you have used < or >. this is prevented due to security reasons"; //prints out the inputted password and sanitizes it by removing any text that can be used to manipulate html.
                     echo "<br>"; //breakline
                     echo "your score is: " . $_tally . "/9"; //prints out your score is and then the tally variable which is where score is stored
                 }
