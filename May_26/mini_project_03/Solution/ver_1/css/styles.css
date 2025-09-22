@@ -51,6 +51,8 @@ body{
 
 #main{
     text-align: center;
+    justify-content: center;
+    align-content: center;
     color: whitesmoke;
     display: flex;
     align-items: center;
