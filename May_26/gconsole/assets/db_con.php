@@ -7,7 +7,7 @@ function dbconnect_insert()
 
     $dbusername = "root"; //sets dbusername we would not usually use root as it gives you global access to the database which is not secure
 
-    $dbpassword = "password1G";//sets password
+    $dbpassword = "";//sets password
 
     $dbname = "gconsole";//sets name to connect to
 

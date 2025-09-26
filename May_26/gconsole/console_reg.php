@@ -33,10 +33,7 @@ require_once "assets/nav.php";
 echo "<div id='main'>";
 echo "<h1>welcome to the gaming hub</h1><br>";
 echo "<h2>Register</h2>";
-if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inputted*/ {
-    echo "your name:" . $_POST["num"]; //posts name
-    echo "<br>"; //breakline
-}
+
 
 echo "<br>";
 
@@ -53,9 +50,6 @@ echo "<form action='' method='post'>"; //creates the form and tells the form wha
     echo "<br>";
     echo "<label for='sign'>sign up date</label>"; //creates the name text box and what it contains
     echo "<input type='text' name='sign' id='sign' placeholder= 'enter sign up date' required>"; //creates the name field
-    echo "<br>";
-    echo "<label for='dob'>dob</label>"; //creates the name text box and what it contains
-    echo "<input type='text' name='dob' id='dob' placeholder= 'enter your d.o.b' required>"; //creates the name field
     echo "<br>";
     echo "<label for='country'>country</label>"; //creates the name text box and what it contains
     echo "<input type='text' name='country' id='country' placeholder= 'enter your country of origin' required>"; //creates the name field
