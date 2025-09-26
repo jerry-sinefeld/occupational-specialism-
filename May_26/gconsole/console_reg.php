@@ -4,6 +4,20 @@
 //OPENS php
 session_start();
 
+require_once ("assets/db_con.php");
+require_once ("assets/common.php");
+
+if  ($_SERVER["REQUEST_METHOD"] === "POST"){
+    try {
+        new_console(dbconnect_insert(), $_POST);
+        $_SESSION["username"] = "SUCCESS: console created";
+    }
+    catch (PDOException $e){
+        $_SESSION['usermessage'] = $e->getMessage();
+    }
+}
+
+
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
 echo "<html>"; //opens html
@@ -23,6 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inpu
     echo "your name:" . $_POST["num"]; //posts name
     echo "<br>"; //breakline
 }
+
+echo "<br>";
+
+    echo user_message();
+
+echo "<br>";
+
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
     echo "<label for='manufacturer'>manufacturer</label>"; //creates the name text box and what it contains
     echo "<input type='text' name='manufacturer' id='manufacturer' placeholder= 'enter the manufacturer' required>"; //creates the name field

@@ -1,6 +1,10 @@
 <?php //OPENS php
 session_start();
 
+
+require_once "assets/db_con.php";
+
+
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
 echo "<html>"; //opens html
@@ -16,7 +20,14 @@ echo "<html>"; //opens html
     echo "<div id='main'>";
     echo "<h1>welcome to the gaming hub</h1><br>";
     echo "<h2>Register</h2>";
-
+    echo "<img src = 'images/cinema.jpg'> <br>";
+    try {
+        $conn = dbconnect_insert();
+        echo "success";
+    }
+        catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 
 
     echo "</div>";

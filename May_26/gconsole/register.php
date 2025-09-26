@@ -19,7 +19,7 @@ echo "<div id='main'>";
 echo "<h1>welcome to the gaming hub</h1><br>";
 echo "<h2>Register</h2>";
 if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inputted*/ {
-    echo "your name:" . $_POST["num"]; //posts name
+    echo "your name:" . $_POST["username"]; //posts name
     echo "<br>"; //breakline
 }
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do

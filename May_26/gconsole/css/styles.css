@@ -30,3 +30,10 @@ nav li:hover{ /*changes how the item looks when hovering over it*/
 .topbar{
 
 }
+nav a{
+    padding: 5px 20px 5px 20px;
+    font-size: x-large;
+    color: antiquewhite;
+    text-decoration: none;
+
+}

@@ -22,10 +22,10 @@ echo "<html>"; //opens html
                 echo "<br>"; //breakline
             }
             echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-            echo "<label for='num'>Name:</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='num' id='num' placeholder= 'enter your name' required>"; //creates the name field
-            echo "<label for='num'>Name:</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='num' id='num' placeholder= 'enter your name' required>"; //creates the name field
+            echo "<label for='userrname'>Name:</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='userrname' id='userrname' placeholder= 'enter your username' required>"; //creates the name field
+            echo "<label for='passsword'>Name:</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='passsword' id='passsword' placeholder= 'enter your password' required>"; //creates the name field
             echo "<br>";
             echo "<input type='submit' name='submit' value='submit'>";
         echo "</form>";
