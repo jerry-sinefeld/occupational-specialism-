@@ -1,7 +1,14 @@
 <?php //OPENS php
-session_start();
+if (!isset($_GET["message"])){
+    session_start();
+    $message = false;
+} else{
+    // decodes the message for display
+    $message = htmlspecialchars(urldecode($_GET["message"]));
+}
 
 
+require_once "assets/common.php";
 require_once "assets/db_con.php";
 
 
@@ -20,7 +27,13 @@ echo "<html>"; //opens html
     echo "<div id='main'>";
     echo "<h1>welcome to the gaming hub</h1><br>";
     echo "<h2>home</h2>";
-    echo user_message();
+
+    if (!$message) {
+        echo user_message();
+    } else{
+        echo $message;
+    }
+
     try {
         $conn = dbconnect_insert();
         echo "success";

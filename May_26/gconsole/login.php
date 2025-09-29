@@ -43,12 +43,15 @@ echo "<html>"; //opens html
         echo "<div id='main'>";
             echo "<h1>welcome to the gaming hub</h1><br>";
             echo "<h2>Login</h2>";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inputted*/ {
+                echo "your name:" . $_POST["userrname"]; //posts name
+                echo "<br>"; //breakline
+            }
             echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-            echo "<label for='username'>Name:</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='username' id='username' placeholder= 'enter your username' required>"; //creates the name field
-            echo "<br>";
-            echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='password' id='password' placeholder= 'enter your password' required>"; //creates the name field
+            echo "<label for='userrname'>Name:</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='userrname' id='userrname' placeholder= 'enter your username' required>"; //creates the name field
+            echo "<label for='passsword'>Name:</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='passsword' id='passsword' placeholder= 'enter your password' required>"; //creates the name field
             echo "<br>";
             echo "<input type='submit' name='submit' value='submit'>";
         echo "</form>";
