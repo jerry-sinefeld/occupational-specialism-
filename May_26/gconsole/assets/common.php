@@ -5,7 +5,7 @@ function reg_user($conn,$post)
         try{
             //prepare and execute the sql query
             $sql = "INSERT INTO user (username, password, sign_up_date, dob, country) VALUES(?,?,?,?,?)";
-            $stmt = $conn->prepare($sql);
+            $stmt = $conn->prepare($sql);//prepare the sql for data
 
             $stmt->bindParam(1, $post["username"]);
             //hash the password
@@ -18,7 +18,7 @@ function reg_user($conn,$post)
             $stmt->bindParam(5, $post["country"]);
 
             $stmt->execute();
-            $conn = null;
+            $conn = null;//closes the connection so it can't be abused by packet sniffers
             return true;}
 
             catch (PDOException $e){
@@ -32,7 +32,29 @@ function reg_user($conn,$post)
         }
 }
 
+function login($conn,$post){
+    try{
+        $sql = "SELECT user_id, password FROM user WHERE username = ?"; //select everything from the user table where username = the entered username
+        $stmt = $conn->prepare($sql);//prepare the sql for data
+        $stmt->bindParam(1,$post["username"]); /*now that the databse is prepped to recieve data you are now binding the data with the previous sql statement.
+        This prevents it from ever being modified, increasing security */
+        $stmt->execute(); //execute sql
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $conn = null;//closes the connection so it can't be abused by packet sniffers
 
+        if ($result) {
+            return $result;
+        } else {
+            $_SESSION['ERROR'] = "User not found";
+            header("location: login.php");
+            exit;
+        }
+    } catch (Exception $e){
+        $_SESSION['ERROR'] ="User login" . $e->getMessage();
+        header("location: login.php");
+        exit;
+    }
+}
 
 
 
