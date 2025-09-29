@@ -20,7 +20,6 @@ echo "<html>"; //opens html
     echo "<div id='main'>";
     echo "<h1>welcome to the gaming hub</h1><br>";
     echo "<h2>home</h2>";
-    echo "<img src = 'images/cinema.jpg'> <br>";
     echo user_message();
     try {
         $conn = dbconnect_insert();

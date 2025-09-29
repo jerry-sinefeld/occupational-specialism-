@@ -34,9 +34,9 @@ function reg_user($conn,$post)
 
 function login($conn,$post){
     try{
-        $sql = "SELECT user_id, password FROM user WHERE username = ?"; //select everything from the user table where username = the entered username
+        $sql = "SELECT * FROM user WHERE username = ?"; //select everything from the user table where username = the entered username
         $stmt = $conn->prepare($sql);//prepare the sql for data
-        $stmt->bindParam(1,$post["username"]); /*now that the databse is prepped to recieve data you are now binding the data with the previous sql statement.
+        $stmt->bindParam(1,$post); /*now that the database is prepped to recieve data you are now binding the data with the previous sql statement.
         This prevents it from ever being modified, increasing security */
         $stmt->execute(); //execute sql
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
