@@ -7,12 +7,12 @@ function dbconnect_insert()
 
     $dbusername = "root"; //sets dbusername we would not usually use root as it gives you global access to the database which is not secure
 
-    $dbpassword = "password1G";//sets password
+    $dbpassword = "";//sets password
 
     $dbname = "gconsole";//sets name to connect to
 
     //the items above should not be stored here at all, all it takes is one person to figure out that if they download this file they know how to access your database
-    //these credentials should be stored in a file outside of the folder structure of the webserver
+    //these credentials should be stored in a file outside the folder structure of the webserver
 
 
     try { //attempt block of code or catch and error
