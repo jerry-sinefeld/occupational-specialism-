@@ -2,6 +2,9 @@
 //OPENS php
 session_start();
 
+require_once "assets/db_con.php";
+require_once "assets/common.php";
+
 if (isset($_SESSION['user'])) {//checks if user is already logged in if so it directs you to the index page
     $_SESSION['usermessage'] = "You are already logged in";
     header('Location: index.php'); //headers only work if no content has loaded on the page
