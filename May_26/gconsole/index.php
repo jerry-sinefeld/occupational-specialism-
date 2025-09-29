@@ -19,7 +19,7 @@ echo "<html>"; //opens html
     require_once "assets/nav.php";
     echo "<div id='main'>";
     echo "<h1>welcome to the gaming hub</h1><br>";
-    echo "<h2>Register</h2>";
+    echo "<h2>home</h2>";
     echo "<img src = 'images/cinema.jpg'> <br>";
     try {
         $conn = dbconnect_insert();
