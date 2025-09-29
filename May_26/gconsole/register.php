@@ -7,7 +7,17 @@ require_once "assets/common.php"; //requires these files to run, if they are not
 require_once "assets/db_con.php"; //requires these files to run, if they are not present it will not run
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $_SESSION["usermessage"] = "The result of the only user: " . only_user(dbconnect_insert(), $_POST["username"]);
+
+    if(!only_user(dbconnect_insert(), $_POST["username"])){
+
+        if (reg_user(dbconnect_insert(),$_POST)){
+            $_SESSION["usermessage"] = "user created successfully";
+        } else{
+            $_SESSION["usermessage"] = "user creation failed";
+        }
+    } else {
+        $_SESSION["usermessage"] = "user already exists";
+    }
 }
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
@@ -34,7 +44,7 @@ echo "<html>"; //opens html
                     echo "<input type='text' name='password' id='password' placeholder= 'enter your password' required>"; //creates the name field
                     echo "<br>";
                     echo "<label for='sign'>sign up date</label>"; //creates the name text box and what it contains
-                    echo "<input type='text' name='sign' id='sign' placeholder= 'enter sign up date' required>"; //creates the name field
+                    echo "<input type='text' name='sign_up_date' id='sign_up_date' placeholder= 'enter sign up date' required>"; //creates the name field
                     echo "<br>";
                     echo "<label for='dob'>dob</label>"; //creates the name text box and what it contains
                     echo "<input type='text' name='dob' id='dob' placeholder= 'enter your d.o.b' required>"; //creates the name field

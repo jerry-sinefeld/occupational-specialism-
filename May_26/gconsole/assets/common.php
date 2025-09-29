@@ -2,7 +2,6 @@
 
 function reg_user($conn,$post)
 {
-    if(!only_user($conn,$post["username"])){
         try{
             //prepare and execute the sql query
             $sql = "INSERT INTO user (username, password, sign_up_date, dob, country) VALUES(?,?,?,?,?)";
@@ -10,11 +9,14 @@ function reg_user($conn,$post)
 
             $stmt->bindParam(1, $post["username"]);
             //hash the password
-            $hpswd = password_hash($post["password"], PASSWORD_DEFAULT); //hashes password
+            $hpswd = password_hash($post["password"], PASSWORD_DEFAULT); /*hashes password using prebuilt library in php
+            I have to use the default encryption because my dev environment doesn't have access to any other libraries.
+            If this was a real situation in a real production environment I would use are PASSWORD_BCRYPT OR PASSWORD_ARGON2I/2ID to make encryption even more secure*/
             $stmt->bindParam(2, $hpswd);
             $stmt->bindParam(3, $post["sign_up_date"]);
             $stmt->bindParam(4, $post["dob"]);
             $stmt->bindParam(5, $post["country"]);
+
             $stmt->execute();
             $conn = null;
             return true;}
@@ -28,7 +30,6 @@ function reg_user($conn,$post)
             error_log("User registration error: ".$e->getMessage());
             throw new Exception("User registration error". $e);
         }
-    }
 }
 
 
