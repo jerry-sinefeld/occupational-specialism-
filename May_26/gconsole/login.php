@@ -32,7 +32,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 
 echo "<html>"; //opens html
     echo "<head>"; //opens head
-        echo "<title></title>"; //opens and writes title
+        echo "<title>GConsole</title>"; //opens and writes title
         echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
     echo "</head>"; //closes head
 
@@ -43,15 +43,12 @@ echo "<html>"; //opens html
         echo "<div id='main'>";
             echo "<h1>welcome to the gaming hub</h1><br>";
             echo "<h2>Login</h2>";
-            if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inputted*/ {
-                echo "your name:" . $_POST["userrname"]; //posts name
-                echo "<br>"; //breakline
-            }
             echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-            echo "<label for='userrname'>Name:</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='userrname' id='userrname' placeholder= 'enter your username' required>"; //creates the name field
-            echo "<label for='passsword'>Name:</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='passsword' id='passsword' placeholder= 'enter your password' required>"; //creates the name field
+            echo "<label for='username'>Name:</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='username' id='username' placeholder= 'enter your username' required>"; //creates the name field
+            echo "<br>";
+            echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='password' id='password' placeholder= 'enter your password' required>"; //creates the name field
             echo "<br>";
             echo "<input type='submit' name='submit' value='submit'>";
         echo "</form>";
