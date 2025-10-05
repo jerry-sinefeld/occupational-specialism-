@@ -3,12 +3,12 @@
 function reg_user($conn,$post)
 {
     try{
-        //prepare and execute the sql query
+        //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
         $sql = "INSERT INTO user (f_name, last_name,username, password, dob, postcode,nhs_numb ,allergies) VALUES(?,?,?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
         $stmt->bindParam(1, $post["f_name"]);
-        //hash the password
+        //hash the password1`
         $stmt->bindParam(2, $post["last_name"]);
         $stmt->bindParam(3, $post["username"]);
         $hpswd = password_hash($post["password"], PASSWORD_DEFAULT); /*hashes password using prebuilt library in php
@@ -45,9 +45,9 @@ function login($conn,$post){
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $conn = null;//closes the connection so it can't be abused by packet sniffers
 
-        if ($result) {
+        if ($result) { //result= user found
             return $result;
-        } else {
+        } else { //if user isn't found send back to login page (resets page)
             $_SESSION['ERROR'] = "User not found";
             header("location: login.php");
             exit;
@@ -63,11 +63,11 @@ function user_message()
 {
     if (isset($_SESSION['usermessage'])) {
         $message = "<p>" . $_SESSION['usermessage'] . "</p>";
-        unset($_SESSION['usermessage']);
+        unset($_SESSION['usermessage']); //clears the message variable to be used for other errors
         return $message;
     } else{
         $message = "";
-        return $message;
+        return $message; //returns empty string if no message exists
     }
 }
 
@@ -95,49 +95,49 @@ function only_user($conn, $username)
 
 function check_pass_strength($password) {
     $errors = [];
-    $_tally = 9;
+    $_tally = 9; // max score
 
     // Sanitize the password before validation to prevent manipulation
     $_password = filter_var($password, FILTER_SANITIZE_STRING);
     // All common special characters
     $_spec_char = '/[!@#$"£%^&*()_=+{};:,.<>?]/';
 
-    // --- Validation Checks ---
-    if (!preg_match('/[A-Z]/', $_password)) {
+    // Validation Checks
+    if (!preg_match('/[A-Z]/', $_password)) { //must contain uppercase
         $_tally--;
         $errors[] = "Your password must contain at least one uppercase character.";
     }
-    if (!preg_match('/[a-z]/', $_password)) {
+    if (!preg_match('/[a-z]/', $_password)) { //must contain lowercase
         $_tally--;
         $errors[] = "Your password must contain at least one lowercase character.";
     }
-    if (!preg_match('/[0-9]/', $_password)) {
+    if (!preg_match('/[0-9]/', $_password)) { //// Must contain a number
         $_tally--;
         $errors[] = "Your password must contain at least one number.";
     }
-    if (strlen($_password) < 8) { // Changed to < 8 for clarity as 8 is the minimum length
+    if (strlen($_password) < 8) { // must be 8 characters or more
         $_tally--;
         $errors[] = "Your password must be at least 8 characters long.";
     }
-    if (preg_match('/^[0-9]/', $_password)) {
+    if (preg_match('/^[0-9]/', $_password)) { //cannot start with a number
         $_tally--;
         $errors[] = "Your password should not start with a number.";
     }
     // Check if the first character is a special character
-    if (preg_match($_spec_char, $_password[0])) {
+    if (preg_match($_spec_char, $_password[0])) { // cannot start with a special character
         $_tally--;
         $errors[] = "Your password should not start with a special character.";
     }
     // Check if the last character is a special character
-    if (preg_match($_spec_char, substr($_password, -1))) {
+    if (preg_match($_spec_char, substr($_password, -1))) { //cannot end with a special
         $_tally--;
         $errors[] = "Your password should not end with a special character.";
     }
-    if (!preg_match($_spec_char, $_password)) {
+    if (!preg_match($_spec_char, $_password)) { //must contain a special characters
         $_tally--;
         $errors[] = "Your password must contain at least one special character.";
     }
-    if (strtolower($_password) === 'password') {
+    if (strtolower($_password) === 'password') { //cannot be the word password
         $_tally--;
         $errors[] = "Your password cannot be 'password'.";
     }
@@ -145,15 +145,15 @@ function check_pass_strength($password) {
     $message = "Password score: " . $_tally . "/9. ";
     if ($_tally < 9) {
         $message .= "Password validation failed! Criteria not met:";
-        $message .= "<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
+        $message .= "<ul><li>" . implode("</li><li>", $errors) . "</li></ul>"; // list all errors
     } else {
-        $message = "Password validation passed! Score: " . $_tally . "/9.";
+        $message = "Password validation passed! Score: " . $_tally . "/9."; //success message
     }
 
     $message .= "Note: If characters were removed from your input, it is due to security sanitization (&lt; or &gt;).";
 
 
-    return [
+    return [ //returns the result and the final message
         'success' => $_tally === 9,
         'tally' => $_tally,
         'message' => $message,
