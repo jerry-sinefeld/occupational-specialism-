@@ -1,2 +1,161 @@
 <?php
-#common subroutines go here#
+
+function reg_user($conn,$post)
+{
+    try{
+        //prepare and execute the sql query
+        $sql = "INSERT INTO user (f_name, last_name,username, password, dob, postcode,nhs_numb ,allergies) VALUES(?,?,?,?,?,?,?,?)";
+        $stmt = $conn->prepare($sql);//prepare the sql for data
+
+        $stmt->bindParam(1, $post["f_name"]);
+        //hash the password
+        $stmt->bindParam(2, $post["last_name"]);
+        $stmt->bindParam(3, $post["username"]);
+        $hpswd = password_hash($post["password"], PASSWORD_DEFAULT); /*hashes password using prebuilt library in php
+            I have to use the default encryption because my dev environment doesn't have access to any other libraries.
+            If this was a real situation in a real production environment I would use are PASSWORD_BCRYPT OR PASSWORD_ARGON2I/2ID to make encryption even more secure*/
+        $stmt->bindParam(4, $hpswd);
+        $stmt->bindParam(5, $post["dob"]);
+        $stmt->bindParam(6, $post["postcode"]);
+        $stmt->bindParam(7, $post["nhs_numb"]);
+        $stmt->bindParam(8, $post["allergies"]);
+
+        $stmt->execute();
+        $conn = null;//closes the connection so it can't be abused by packet sniffers
+        return true;}
+
+    catch (PDOException $e){
+        //handle database errors
+        error_log("User reg database error: ".$e->getMessage());
+        throw new PDOException("User reg database error". $e);
+    }catch (Exception $e){
+        //catch any other errors
+        error_log("User registration error: ".$e->getMessage());
+        throw new Exception("User registration error". $e);
+    }
+}
+
+function login($conn,$post){
+    try{
+        $sql = "SELECT * FROM user WHERE username = ?"; //select everything from the user table where username = the entered username
+        $stmt = $conn->prepare($sql);//prepare the sql for data
+        $stmt->bindParam(1,$post); /*now that the database is prepped to recieve data you are now binding the data with the previous sql statement.
+        This prevents it from ever being modified, increasing security */
+        $stmt->execute(); //execute sql
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $conn = null;//closes the connection so it can't be abused by packet sniffers
+
+        if ($result) {
+            return $result;
+        } else {
+            $_SESSION['ERROR'] = "User not found";
+            header("location: login.php");
+            exit;
+        }
+    } catch (Exception $e){
+        $_SESSION['ERROR'] ="User login" . $e->getMessage();
+        header("location: login.php");
+        exit;
+    }
+}
+
+function user_message()
+{
+    if (isset($_SESSION['usermessage'])) {
+        $message = "<p>" . $_SESSION['usermessage'] . "</p>";
+        unset($_SESSION['usermessage']);
+        return $message;
+    } else{
+        $message = "";
+        return $message;
+    }
+}
+
+function only_user($conn, $username)
+{
+    try {
+        $sql = "SELECT username FROM user WHERE username = ?"; //set up sql statement
+        $stmt = $conn->prepare($sql); //prepares
+        $stmt->bindParam(1, $username);//we are binding the data from our form to a sql statement this makes it more secure from an sql attack and makes it unlikely for people to hijack an sql statement
+        $stmt->execute();//run the sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); //fetches results
+        $conn = null; //closes the connection so it can't be abused by packet sniffers
+        if ($result) {//if there is a result
+            return true; //print 1 to the screen meaning that username is in use
+        } else {
+            return false;//print nothing meaning that username is not in user
+        }
+    } catch (PDOException $e) { //catch error
+        // log the error (important)
+        error_log("database error in only_user: " . $e->getMessage());
+        //throw the exception
+        throw $e; //re-throw the exception
+    }
+}
+
+function check_pass_strength($password) {
+    $errors = [];
+    $_tally = 9;
+
+    // Sanitize the password before validation to prevent manipulation
+    $_password = filter_var($password, FILTER_SANITIZE_STRING);
+    // All common special characters
+    $_spec_char = '/[!@#$"£%^&*()_=+{};:,.<>?]/';
+
+    // --- Validation Checks ---
+    if (!preg_match('/[A-Z]/', $_password)) {
+        $_tally--;
+        $errors[] = "Your password must contain at least one uppercase character.";
+    }
+    if (!preg_match('/[a-z]/', $_password)) {
+        $_tally--;
+        $errors[] = "Your password must contain at least one lowercase character.";
+    }
+    if (!preg_match('/[0-9]/', $_password)) {
+        $_tally--;
+        $errors[] = "Your password must contain at least one number.";
+    }
+    if (strlen($_password) < 8) { // Changed to < 8 for clarity as 8 is the minimum length
+        $_tally--;
+        $errors[] = "Your password must be at least 8 characters long.";
+    }
+    if (preg_match('/^[0-9]/', $_password)) {
+        $_tally--;
+        $errors[] = "Your password should not start with a number.";
+    }
+    // Check if the first character is a special character
+    if (preg_match($_spec_char, $_password[0])) {
+        $_tally--;
+        $errors[] = "Your password should not start with a special character.";
+    }
+    // Check if the last character is a special character
+    if (preg_match($_spec_char, substr($_password, -1))) {
+        $_tally--;
+        $errors[] = "Your password should not end with a special character.";
+    }
+    if (!preg_match($_spec_char, $_password)) {
+        $_tally--;
+        $errors[] = "Your password must contain at least one special character.";
+    }
+    if (strtolower($_password) === 'password') {
+        $_tally--;
+        $errors[] = "Your password cannot be 'password'.";
+    }
+
+    $message = "Password score: " . $_tally . "/9. ";
+    if ($_tally < 9) {
+        $message .= "Password validation failed! Criteria not met:";
+        $message .= "<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
+    } else {
+        $message = "Password validation passed! Score: " . $_tally . "/9.";
+    }
+
+    $message .= "Note: If characters were removed from your input, it is due to security sanitization (&lt; or &gt;).";
+
+
+    return [
+        'success' => $_tally === 9,
+        'tally' => $_tally,
+        'message' => $message,
+    ];
+}
