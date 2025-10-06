@@ -26,9 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $_SESSION["usermessage"] = $password_check['message'];
     }
-
-
-
 }
 
 
@@ -73,7 +70,7 @@ echo "<p>Optional:</p>";
 echo "<label for='allergies'>allergies</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='allergies' id='allergies' placeholder= 'enter your allergies'>"; //creates the name field
 echo "<br>";
-echo "<input type='submit' name='submit' value='submit'>";
+echo "<input type='submit' name='submit' value='Register'>";
 echo "</form>";
 echo "<br>";
 echo "<br>";
