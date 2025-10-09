@@ -1,5 +1,12 @@
 <?php //OPENS php
-session_start();
+
+if (!isset($_GET["message"])){
+    session_start();
+    $message = false;
+} else{
+    // decodes the message for display
+    $message = htmlspecialchars(urldecode($_GET["message"]));
+}
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
@@ -29,6 +36,21 @@ General Consultations: Face-to-face and remote appointments for acute and chroni
 Preventative Care: Health checks, immunisations (including flu), and travel health advice.
 Maternity and Child Health: Pre and post-natal care, and baby clinics.";
     echo "</p>";
+
+    if (!$message) {
+        echo user_message();
+    } else{
+        echo $message;
+    }
+
+    try {
+        $conn = dbconnect_insert();
+        echo "success";
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
     echo "</div>";
     echo "</div>";
     echo "</body>";

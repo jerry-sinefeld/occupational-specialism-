@@ -1,5 +1,14 @@
 <?php //OPENS php
-session_start();
+if (!isset($_GET["message"])){
+    session_start();
+    $message = false;
+} else{
+    // decodes the message for display
+    $message = htmlspecialchars(urldecode($_GET["message"]));
+}
+
+require_once "assets/common.php";
+require_once "assets/db_con.php";
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
@@ -15,6 +24,19 @@ echo "<html>"; //opens html
     require_once "assets/nav.php";
     echo "<div id='main'>";
 
+    if (!$message) {
+        echo user_message();
+    } else{
+        echo $message;
+    }
+
+    try {
+        $conn = dbconnect_insert();
+        echo "success";
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 
 
     echo "</div>";

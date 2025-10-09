@@ -7,6 +7,12 @@ session_start();
 require_once ("assets/db_con.php"); //requires these files to run, if they are not present it will not run
 require_once ("assets/common.php"); //requires these files to run, if they are not present it will not run
 
+if (!isset($_SESSION['user'])) {//checks if user is already logged in if so it directs you to the index page
+    $_SESSION['usermessage'] = "You need to be logged in to see this page.";
+    header('Location: login.php'); //headers only work if no content has loaded on the page
+    exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
+}
+
 if  ($_SERVER["REQUEST_METHOD"] === "POST"){ //makes the request mothod post to post it on the screen and uses an absolute comparator to ensure that it doesn't accept anything other than post
     try {
         new_console(dbconnect_insert(), $_POST); // runs the new console subroutine with the variables captured from dbconnect_insert

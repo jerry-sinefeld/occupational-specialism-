@@ -3,10 +3,13 @@
 echo "<div class='navi'/>";
     echo "<nav>";
         echo "<ul>";
-            echo "<li> <a href='link_1'>link1</a></li>";
-            echo "<li> <a href='link_2'>link2</a></li>";
-            echo "<li> <a href='link_3'>link3</a></li>";
-            echo "<li> <a href='link_4'>link4</a></li>";
+            if(!isset($_SESSION['user'])) {
+                echo "<li> <a href='link_1'>Login</a></li>";
+                echo "<li> <a href='link_2'>Register</a></li>";
+            }else {
+                echo "<li> <a href='link_3'>link3</a></li>";
+                echo "<li> <a href='link_4'>link4</a></li>";
+            }
         echo "</ul>";
     echo "</nav>";
 

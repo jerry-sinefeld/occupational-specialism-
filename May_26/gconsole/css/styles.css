@@ -24,7 +24,7 @@ nav ul{
     background-color:#1c1f1c;/*sets background color*/
 }
 nav li:hover{ /*changes how the item looks when hovering over it*/
-    background-color: whitesmoke; /*changes background color*/
+    background-color: black; /*changes background color*/
 }
 
 .topbar{

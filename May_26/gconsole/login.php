@@ -25,9 +25,6 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-
-
-
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
 echo "<html>"; //opens html
