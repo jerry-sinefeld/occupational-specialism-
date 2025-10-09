@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if(!only_user(dbconnect_insert(), $_POST["username"])){
 
         if (reg_user(dbconnect_insert(),$_POST)){
+            auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(),$_POST["username"]),"reg", "User has registered");
             $_SESSION["usermessage"] = "user created successfully";
         } else{
             $_SESSION["usermessage"] = "user creation failed";

@@ -16,7 +16,8 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($usr && password_verify($_POST['password'], $usr['password'])) {
         $_SESSION['user'] = true;
         $_SESSION['userid'] = $usr['user_id'];
-        $_SESSION['usermessage'] = "You are logged in";
+        $_SESSION['usermessage'] = "SUCCESS: You are logged in";
+        auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has logged in");
         header('Location: index.php');
         exit;
     } else {

@@ -13,9 +13,10 @@ if (!isset($_SESSION['user'])) {//checks if user is already logged in if so it d
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
 }
 
-if  ($_SERVER["REQUEST_METHOD"] === "POST"){ //makes the request mothod post to post it on the screen and uses an absolute comparator to ensure that it doesn't accept anything other than post
+if  ($_SERVER["REQUEST_METHOD"] === "POST"){ //makes the request method post to post it on the screen and uses an absolute comparator to ensure that it doesn't accept anything other than post
     try {
         new_console(dbconnect_insert(), $_POST); // runs the new console subroutine with the variables captured from dbconnect_insert
+        auditor(dbconnect_insert(), $_SESSION['userid'], "con reg", "Console registered");
         $_SESSION["username"] = "SUCCESS: console created";
     }
     catch (PDOException $e){
@@ -39,10 +40,7 @@ echo "<html>"; //opens html
         echo "<div id='main'>";
         echo "<h1>welcome to the gaming hub</h1><br>";
         echo "<h2>Register</h2>";
-        if ($_SERVER["REQUEST_METHOD"] == "POST") /*requests the server to post the inputted*/ {
-            echo "your name:" . $_POST["num"]; //posts name
-            echo "<br>"; //breakline
-        }
+
 
         echo "<br>";
 
@@ -55,19 +53,16 @@ echo "<html>"; //opens html
             echo "<input type='text' name='manufacturer' id='manufacturer' placeholder= 'enter the manufacturer' required>"; //creates the name field
             echo "<br>";
             echo "<label for='console_name'>console name</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='console_name' id='console_name' placeholder= 'enter your consoles name' required>"; //creates the name field
+            echo "<input type='text' name='c_name' id='c_name' placeholder= 'enter your consoles name' required>"; //creates the name field
             echo "<br>";
-            echo "<label for='sign'>sign up date</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='sign' id='sign' placeholder= 'enter sign up date' required>"; //creates the name field
+            echo "<label for='release_date'>release date</label>"; //creates the name text box and what it contains
+            echo "<input type='text' name='release_date' id='release_date' placeholder= 'enter your consoles release date' required>"; //creates the name field
             echo "<br>";
-            echo "<label for='dob'>dob</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='dob' id='dob' placeholder= 'enter your d.o.b' required>"; //creates the name field
-            echo "<br>";
-            echo "<label for='country'>country</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='country' id='country' placeholder= 'enter your country of origin' required>"; //creates the name field
+            echo "<label for='controller_no'>controller no</label>";
+            echo "<input type='text' name='controller_no' id='controller_no' placeholder= 'enter controller no' required>";
             echo "<br>";
             echo "<label for='bits'>what bit is your console</label>"; //creates the name text box and what it contains
-            echo "<input type='text' name='bits' id='bits' placeholder= 'enter your country of origin' required>"; //creates the name field
+            echo "<input type='text' name='bit' id='bit' placeholder= 'enter your country of origin' required>"; //creates the name field
             echo "<br>";
             echo "<input type='submit' name='submit' value='submit'>";
         echo "</form>";
