@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $password_check = check_pass_strength($_POST["password"]);
 
-    if ($password_check === ['success']) {
+    if ($password_check['success']) {
 
         if (!only_user(dbconnect_insert(), $_POST["username"])) {
 

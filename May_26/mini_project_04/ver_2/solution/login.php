@@ -45,7 +45,7 @@ echo "<div id='main'>";
 echo "<h1>Welcome to Oaks Primary Surgery</h1><br>";
 echo "<h2>Login</h2>";
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-echo "<label for='username'>Name:</label>"; //creates the name text box and what it contains
+echo "<label for='username'>Username:</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='username' id='username' placeholder= 'enter your username' required>"; //creates the name field
 echo "<br>";
 echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains

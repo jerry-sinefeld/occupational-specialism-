@@ -4,11 +4,11 @@ function reg_user($conn,$post)
 {
     try{
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO user (f_name, last_name,username, password, dob, postcode,nhs_numb ,allergies) VALUES(?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO user (f_name, last_name, username, password, dob, postcode,nhs_numb ,allergies) VALUES(?,?,?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
         $stmt->bindParam(1, $post["f_name"]);
-        //hash the password1`
+        //hash the passwor
         $stmt->bindParam(2, $post["last_name"]);
         $stmt->bindParam(3, $post["username"]);
         $hpswd = password_hash($post["password"], PASSWORD_DEFAULT); /*hashes password using prebuilt library in php
@@ -156,20 +156,30 @@ function check_pass_strength($password) {
     return [ //returns the result and the final message
         'success' => $_tally === 9,
         'tally' => $_tally,
-        'message' => $message,
+        'message' => $message
     ];
 }
 
-function auditor($conn, $userid, $code, $long){
-    $sql= "INSERT INTO audit (date,userid,code,longdesc) VALUES(?,?,?,?)";
+function auditor($conn, $patient_id, $code, $long){
+    $sql= "INSERT INTO audit (patient_id,date,code,longdesc) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
-    $stmt->bindParam(1, $date); //bind parameters for security
-    $stmt->bindParam(2, $userid);
+    $stmt->bindParam(1, $patient_id); //bind parameters for security
+    $stmt->bindParam(2, $date);
     $stmt->bindParam(3, $code);
     $stmt->bindParam(4, $long);
 
     $stmt->execute();
     $conn = null;
     return true;
+}
+
+function getnewuserid($conn, $username){
+    $sql = "SELECT patient_id FROM user WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $username);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result["user_id"];
 }

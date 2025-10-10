@@ -8,7 +8,8 @@ if (!isset($_GET["message"])){
     $message = htmlspecialchars(urldecode($_GET["message"]));
 }
 
-
+require_once "assets/common.php";
+require_once "assets/db_con.php";
 
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
