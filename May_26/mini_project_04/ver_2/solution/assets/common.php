@@ -160,11 +160,11 @@ function check_pass_strength($password) {
     ];
 }
 
-function auditor($conn, $patient_id, $code, $long){
-    $sql= "INSERT INTO audit (patient_id,date,code,longdesc) VALUES(?,?,?,?)";
+function auditor($conn, $patientid, $code, $long){
+    $sql= "INSERT INTO audit (patientid,date,code,longdesc) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
-    $stmt->bindParam(1, $patient_id); //bind parameters for security
+    $stmt->bindParam(1, $patientid); //bind parameters for security
     $stmt->bindParam(2, $date);
     $stmt->bindParam(3, $code);
     $stmt->bindParam(4, $long);
@@ -181,5 +181,5 @@ function getnewuserid($conn, $username){
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $conn = null;
-    return $result["user_id"];
+    return $result["patient_id"];
 }
