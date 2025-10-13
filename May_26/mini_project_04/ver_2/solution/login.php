@@ -15,7 +15,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($usr && password_verify($_POST['password'], $usr['password'])) {
         $_SESSION['user'] = true;
-        $_SESSION['userid'] = $usr['user_id'];
+        $_SESSION['userid'] = $usr['patient_id'];
         $_SESSION['usermessage'] = "You are logged in";
         auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has logged in");
         header('Location: index.php');
@@ -26,9 +26,6 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-
-
-
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
 echo "<html>"; //opens html
