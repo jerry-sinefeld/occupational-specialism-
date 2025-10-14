@@ -1,0 +1,63 @@
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: x-large;
+    font-family: Arial,sans-serif;
+}
+
+nav ul {
+    list-style-type: none; /*remove bullet points*/
+    margin: 0; /*remove margin*/
+    padding: 0; /*remove padding*/
+    width: 100%;/*makes the width the length of the page*/
+    height: 80px;/*makes the height 120 pixels*/
+    display: flex; /*makes it into a flexbox*/
+    flex-direction: row;
+    justify-content: center;
+    background-color: #045CBC; /*sets background color*/
+}
+
+nav a{
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    display: block; /* turns a into a block so that I can edit its height and padding etc*/
+    padding: 10px 10px;
+}
+
+nav a:hover{ /*changes how the item looks when hovering over it*/
+    background-color:#81305D ; /*changes background color*/
+}
+
+nav{
+    width: 100%; /*makes the nav bar the width of the page*/
+}
+nav a{
+    color: white;/*changes the color of the text in the nave to white*/
+    text-decoration: none;/*removes the underline from the link*/
+}
+
+.topbar{
+    background-color: #045CBC;
+    color: white;
+}
+
+#main{
+    background-color: #045CBC;
+    text-align: center;/*aligns the text to the center of the screen*/
+    color: white;/*sets the text color to white*/
+    display: flex;/*declares the box main is contained in as a flexbox*/
+    align-items: center;/*aligns all items in the main to the center*/
+    flex-direction: column;/*changes the direction the box flexes specifically it declares it as a column*/
+    font-size: x-large;/*sets the font size to extra large*/
+    font-family: Arial,sans-serif;/*declares font and a backup font*/
+    width: 50%;/*sets the width of the box to be 50% the screen*/
+    margin: 0 auto;
+    padding: 0;/*removes padding*/
+    border-left-width: 90px;/*sets the width of the left border*/
+    border-right-width: 90px;/*sets the width of the right border*/
+    border-top-width:50px ;/*sets the width of the top border*/
+    border-bottom-width:50px ;/*sets the width of the bottom border*/
+    border-style: solid;/*gives it a style of the center*/
+    }
