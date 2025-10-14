@@ -183,3 +183,18 @@ function getnewuserid($conn, $username){
     $conn = null;
     return $result["patient_id"];
 }
+
+function staff_getter($conn)
+{
+    $sql = "SELECT doc_id, name, available, role, room_numb FROM doctor WHERE role != ? ORDER BY role DESC";
+    //get all staff from database where role does not equal "adm" - this is the admin role - cannot be booked
+    $stmt = $conn->prepare($sql);
+    $exclude_role = "adm";
+
+    $stmt->bindParam(1, $exclude_role);
+
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC); //by adding in all for fetchall it will bring back all records throughout the database that match our conditions
+    $conn = null;
+    return $result;
+}
