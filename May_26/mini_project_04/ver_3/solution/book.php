@@ -17,6 +17,6 @@ foreach ($staff as $staf) {
     } else if ($staf ['role'] = 'nur') {
         $role = 'Nurse';
     }
-    echo "<option value=" . $staf ['doc_id'] . ">" . $role . "". $staf['name']."".
+    echo "<option value =" . $staf ['doc_id'] . ">" . $role . " ". $staf['name']." ".
         $staf['lname']. "room". $staf['room_numb']. "</option>";
 }
