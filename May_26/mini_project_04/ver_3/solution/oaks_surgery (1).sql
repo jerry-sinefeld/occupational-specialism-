@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2025 at 10:47 AM
+-- Generation Time: Oct 20, 2025 at 11:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,7 +54,26 @@ CREATE TABLE `audit` (
 --
 
 INSERT INTO `audit` (`auditid`, `patientid`, `date`, `code`, `longdesc`) VALUES
-(1, 6, '2025-10-12', 'reg', 'User has registered');
+(2, 7, '2025-10-13', 'reg', 'User has registered'),
+(3, 7, '2025-10-13', 'log', 'User has logged in'),
+(4, 7, '2025-10-13', 'logout', 'User has logged out'),
+(5, 7, '2025-10-13', 'log', 'User has logged in'),
+(6, 7, '2025-10-13', 'logout', 'User has logged out'),
+(11, 10, '2025-10-13', 'reg', 'User has registered');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `docaudit`
+--
+
+CREATE TABLE `docaudit` (
+  `docauditid` int(11) NOT NULL,
+  `doc_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `code` text NOT NULL,
+  `longdesc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -65,8 +84,10 @@ INSERT INTO `audit` (`auditid`, `patientid`, `date`, `code`, `longdesc`) VALUES
 CREATE TABLE `doctor` (
   `doc_id` int(11) NOT NULL,
   `name` text NOT NULL,
+  `lname` text NOT NULL,
   `doc_password` text NOT NULL,
   `available` text NOT NULL,
+  `role` text NOT NULL,
   `room_numb` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -106,9 +127,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`patient_id`, `f_name`, `last_name`, `username`, `password`, `dob`, `postcode`, `nhs_numb`, `allergies`) VALUES
-(4, 'jeff', 'jeff jeff', 'fljwnfvnsjlkn', '$2y$10$UeRfGs31LuEMJZgGwclik.0lIe2EM/yDXC1Zby/wPD9/Cj6MRMlEK', '12/05/2394', 'LS2355R', 12143542, ''),
-(5, 'Alice', 'Johnson', 'AJMed_2024', '$2y$10$kg.yrKwoOQ9T/q1liODIxOJsWn9G2jARVDPxFHES6bge5xPvS6Zw6', '15/05/1990', 'SW1A 0AA', 1234567890, 'Penicillin'),
-(6, 'Alice', 'Johnson', 'ajmed2024', '$2y$10$ubmXc7UbL0EDLZjYNj6XBOEtbFP6aEpMBMfy0X1jPOiPgv.d7qd1C', '15/05/1990', 'SW1A 0AA', 1234567890, 'Penicillin');
+(7, 'Ben', 'Smith', 'Smithy_B92', '$2y$10$XdKalSwn93g6KVBWjbTgD.lJ/tpkobV9bj9dCa5bh1qOT7jAD9aiS', '20/11/1992', 'M1 1AE', 2147483647, 'none'),
+(10, 'Alice', 'Johnson', 'AJMed_2024', '$2y$10$jBzTnlDrKJTCYIXxL0mPUuPEGNTGm1GDHiHpgKr0h0AxpB4w/vaCK', '15/09/1990', 'SW1A 0AA', 1234567890, 'Penicillin ');
 
 --
 -- Indexes for dumped tables
@@ -126,6 +146,13 @@ ALTER TABLE `appointment`
 ALTER TABLE `audit`
   ADD PRIMARY KEY (`auditid`),
   ADD KEY `patient_id` (`patientid`);
+
+--
+-- Indexes for table `docaudit`
+--
+ALTER TABLE `docaudit`
+  ADD PRIMARY KEY (`docauditid`),
+  ADD KEY `doc_id` (`doc_id`);
 
 --
 -- Indexes for table `doctor`
@@ -162,7 +189,13 @@ ALTER TABLE `appointment`
 -- AUTO_INCREMENT for table `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `auditid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `auditid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `docaudit`
+--
+ALTER TABLE `docaudit`
+  MODIFY `docauditid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -180,7 +213,7 @@ ALTER TABLE `has`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -191,6 +224,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `audit`
   ADD CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`patientid`) REFERENCES `user` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `docaudit`
+--
+ALTER TABLE `docaudit`
+  ADD CONSTRAINT `docaudit_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `doctor` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `has`
