@@ -4,12 +4,29 @@ session_start();
 require_once "assets/common.php";
 require_once "assets/db_con.php";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $tmp = $_POST["date"]. '' . $_POST["app_time"]; //combines the two fields with a time and a date in it as a string
-    $epoch_time = strtotime($tmp); /*the line above could be placed inside the brackets here however if your server is overloaded
+if($_SERVER["REQUEST_METHOD"] == "POST"){//this block must always be at the top so that headers/redirects can be used successfully
+
+
+    try {
+
+
+        $tmp = $_POST["date"] . '' . $_POST["app_time"]; //combines the two fields with a time and a date in it as a string
+        $epoch_time = strtotime($tmp); /*the line above could be placed inside the brackets here however if your server is overloaded
       then the processing to do this can cause issues due to it receiving the request to transfer a string to a time that has not been created yet so we create
      the string before beginning the transfer to a time */
-
+        if (commit_booking(dbconnect_insert(), $epoch_time)){
+            $_SESSION['usermessage'] = "SUCCESS: YOUR BOOKING HAS BEEN CREATED!";
+            header("Location: bookings.php");
+            exit;
+        } else {
+            $_SESSION['usermessage'] = "ERROR: YOUR BOOKING HAS FAILED!";
+        }
+    }
+    catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR:". $e->getMessage();
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR:". $e->getMessage();
+    }
     echo $epoch_time;
     echo "<br>";
     echo time();
@@ -52,7 +69,7 @@ echo "<html>";
             $role = 'Nurse';
         }
         echo "<option value =" . $staf ['doc_id'] . ">" . $role . " ". $staf['name']." ".
-            $staf['lname']. "room". $staf['room_numb']. "</option>";
+            $staf['lname']. " " . "Room". " "  . $staf['room_numb']. "</option>";
     }
     echo "</select>";
 

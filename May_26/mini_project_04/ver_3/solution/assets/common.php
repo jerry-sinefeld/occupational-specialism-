@@ -186,7 +186,7 @@ function getnewuserid($conn, $username){
 
 function staff_getter($conn)
 {
-    $sql = "SELECT doc_id, name, available, role, room_numb FROM doctor WHERE role != ? ORDER BY role DESC";
+    $sql = "SELECT doc_id, name,lname, available, role, room_numb FROM doctor WHERE role != ? ORDER BY role DESC";
     //get all staff from database where role does not equal "adm" - this is the admin role - cannot be booked
     $stmt = $conn->prepare($sql);
     $exclude_role = "adm";
@@ -197,4 +197,19 @@ function staff_getter($conn)
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC); //by adding in all for fetchall it will bring back all records throughout the database that match our conditions
     $conn = null;
     return $result;
+}
+
+function commit_booking($conn, $epoch)
+{
+    $sql = "INSERT INTO book (app_time, app_reason, patient_name, app_date) VALUES(?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(1, $_SESSION['userid']);
+    $stmt->bindParam(2, $_POST['staff']);
+    $stmt->bindParam(3, $epoch);
+    $tmp = time();
+    $stmt->bindParam(4, $tmp);
+    $stmt->execute();
+    $conn = null;
+    return true;
 }
