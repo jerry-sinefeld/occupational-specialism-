@@ -201,12 +201,12 @@ function staff_getter($conn)
 
 function commit_booking($conn, $epoch)
 {
-    $sql = "INSERT INTO book (app_time, app_reason, patient_name, app_date) VALUES(?,?,?,?)";
+    $sql = "INSERT INTO appointment (app_time, app_reason, patient_id, app_date) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(1, $_SESSION['userid']);
+    $stmt->bindParam(3, $_SESSION['userid']);
     $stmt->bindParam(2, $_POST['staff']);
-    $stmt->bindParam(3, $epoch);
+    $stmt->bindParam(1, $epoch);
     $tmp = time();
     $stmt->bindParam(4, $tmp);
     $stmt->execute();

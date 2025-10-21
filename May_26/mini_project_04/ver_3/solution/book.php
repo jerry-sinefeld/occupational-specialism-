@@ -68,7 +68,7 @@ echo "<html>";
         } else if ($staf ['role'] = 'nur') {
             $role = 'Nurse';
         }
-        echo "<option value =" . $staf ['doc_id'] . ">" . $role . " ". $staf['name']." ".
+        echo "<option value =''" . $staf ['doc_id'] . "'>" . $role . " ". $staf['name']." ".
             $staf['lname']. " " . "Room". " "  . $staf['room_numb']. "</option>";
     }
     echo "</select>";
