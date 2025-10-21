@@ -1,5 +1,5 @@
 <?php
-
+//remove ALL try-catch statements from common (TO DO)
 function reg_user($conn,$post)
 {
     try{
