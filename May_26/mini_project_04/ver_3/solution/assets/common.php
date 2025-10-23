@@ -219,7 +219,7 @@ function commit_booking($conn, $epoch)
 
 function appt_getter($conn){
 
-    $sql = "SELECT app.app_id, app.app_time,app.app_date,d.name,d.lname,d.available,d.role,d.room_numb FROM appointment app JOIN doctor d ON app.doc_id = d.doc_id WHERE app.patient_id = ? ORDER BY app.app_date ASC";
+    $sql = "SELECT app.app_id, app.app_time,app.app_date,d.name,d.lname,d.available,d.role,d.room_numb FROM appointment app JOIN doctor d ON app.doc_id = d.doc_id WHERE app.patient_id = ? ORDER BY app.app_date ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $_SESSION['userid']);
@@ -232,4 +232,13 @@ function appt_getter($conn){
         return false;
     }
 
+}
+
+function cancel_appt($conn, $app_id){
+    $sql = "DELETE FROM appointment WHERE app_id = ?"; //deletes the appointment entry from the database
+    $stmt = $conn->prepare($sql);//prepares the sql
+    $stmt->bindParam(1, $app_id); //binds the parameter to the variable
+    $stmt->execute();//executes the sql
+    $conn = null; //closes connection
+    return true;
 }

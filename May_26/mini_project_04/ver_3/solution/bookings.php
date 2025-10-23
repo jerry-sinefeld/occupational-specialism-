@@ -9,6 +9,23 @@ if (!isset($_SESSION['userid'])) {
     $_SESSION['usermessage'] = "ERROR: You are not logged in.";
     header("location: login.php");
     exit;
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['appdelete'])) {
+        try {
+            if (cancel_appt(dbconnect_insert(), $_POST['apptid'])){
+                $_SESSION['usermessage'] = "Appointment cancelled.";
+            } else {
+                $_SESSION['usermessage'] = "Appointment could not be cancelled.";
+            }
+
+        } catch (PDOException $e) {
+            $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        } catch (Exception $e){
+            $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        }
+    } elseif (isset($_POST['appchange'])) {
+        $_SESSION['apptid'] = $_POST['apptid'];
+    }
 }
 
 
@@ -45,12 +62,20 @@ if (!$appts){
         }elseif ($appt['role'] = "nur") {
             $role = "Nurse";
         }
+
+        echo "<form action= '' method='post'>"; // creating a form for each entry in the table
+
         echo "<tr>";
         echo "<td> Date:" . date('M d, Y @ h:i A', $appt['app_time']) . "</td>";
         echo "<td> Time:" . date('M d, Y @ h:i A' , $appt['app_date']) . "</td>";
         echo "<td> With:" . $role . " " . $appt['name'] . " " . $appt['lname'] . "</td>";
         echo "<td> In Room : "  . $appt['room_numb'] . "</td>";
+        echo "<td><input type='hidden' name='apptid' value=".$appt['app_id'] . ">
+            <input type='submit' name='appdelete' value='Cancel appt' />
+            <input type='submit' name='appchange' value='Change appt' /></td>";
+
         echo "</tr>";
+        echo "</form>";
     }
 
 }
