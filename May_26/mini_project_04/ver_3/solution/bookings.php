@@ -25,6 +25,8 @@ if (!isset($_SESSION['userid'])) {
         }
     } elseif (isset($_POST['appchange'])) {
         $_SESSION['apptid'] = $_POST['apptid'];
+        header("location: change_book.php");
+        exit;
     }
 }
 
@@ -51,6 +53,7 @@ echo "<h2>Primary Oaks - Your Bookings</h2>";
 
 echo "<p class='content'> Below are your bookings </p>";
 $appts = appt_getter(dbconnect_insert());
+
 if (!$appts){
     echo "no appts found";
 } else {
@@ -66,10 +69,11 @@ if (!$appts){
         echo "<form action= '' method='post'>"; // creating a form for each entry in the table
 
         echo "<tr>";
-        echo "<td> Date:" . date('M d, Y @ h:i A', $appt['app_time']) . "</td>";
-        echo "<td> Time:" . date('M d, Y @ h:i A' , $appt['app_date']) . "</td>";
+        echo "<td> Appt time:" . date('M d, Y @ h:i A', $appt['app_time']) . "</td>";
+        echo "<td> Made on:" . date('M d, Y @ h:i A' , $appt['app_date']) . "</td>";
         echo "<td> With:" . $role . " " . $appt['name'] . " " . $appt['lname'] . "</td>";
         echo "<td> In Room : "  . $appt['room_numb'] . "</td>";
+        echo "<td> Reason : "  . $appt['app_reason'] . "</td>";
         echo "<td><input type='hidden' name='apptid' value=".$appt['app_id'] . ">
             <input type='submit' name='appdelete' value='Cancel appt' />
             <input type='submit' name='appchange' value='Change appt' /></td>";

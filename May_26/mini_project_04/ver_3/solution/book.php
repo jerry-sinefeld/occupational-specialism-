@@ -7,9 +7,10 @@ require_once "assets/db_con.php";
 if($_SERVER["REQUEST_METHOD"] == "POST"){//this block must always be at the top so that headers/redirects can be used successfully
 
     try {
-        $tmp = $_POST["date"] . '' . $_POST["app_time"]; //combines the two fields with a time and a date in it as a string
-        $epoch_time = strtotime($tmp); /*the line above could be placed inside the brackets here however if your server is overloaded
-      then the processing to do this can cause issues due to it receiving the request to transfer a string to a time that has not been created yet so we create
+        $tmp = $_POST["adate"] . ' ' . $_POST["atime"];
+        $epoch_time = strtotime($tmp);
+        /*the line above could be placed inside the brackets here however if your server is overloaded
+ then the processing to do this can cause issues due to it receiving the request to transfer a string to a time that has not been created yet so we create
      the string before beginning the transfer to a time */
         if (commit_booking(dbconnect_insert(), $epoch_time)){
             $_SESSION['usermessage'] = "SUCCESS: YOUR BOOKING HAS BEEN CREATED!";
@@ -49,13 +50,15 @@ echo "<html>";
 
     $staff = staff_getter(dbconnect_insert());
 
-    echo "<label for ='date'>Appointment date</label>";
-    echo "<input type='date' name='date' value='" . date("Y-m-d") . "'>";
+    echo "<label for ='adate'>Appointment date</label>";
+    echo "<input type='date' name='adate' value='" . date("Y-m-d") . "'>";
 
     echo "<br>";
 
-    echo "<label for ='app_time'>Appointment time</label>";
-    echo "<input type='time' name='app_time'>";
+    echo "<br>";
+
+    echo "<label for ='atime'>Appointment time</label>";
+    echo "<input type='time' name='atime' value='" . date("H:i") . "'>";
 
     echo "<br>";
 
@@ -73,6 +76,11 @@ echo "<html>";
     }
 
     echo "</select>";
+
+    echo "<br>";
+
+    echo "<label for='app_reason'>Appointment Reason </label>";
+    echo "<input type='text' name='app_reason' placeholder='Appointment reason'>";
 
     echo "<br>";
 

@@ -204,14 +204,11 @@ function commit_booking($conn, $epoch)
     $sql = "INSERT INTO appointment (app_time, app_reason, patient_id,doc_id, app_date) VALUES(?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $epoch);
-    $thas = "";
-    $stmt->bindParam(2, $thas);
+    $stmt->bindParam(2, $_POST['app_reason']);
     $stmt->bindParam(3, $_SESSION['userid']);
     $stmt->bindParam(4, $_POST['staff']);
     $tmp = time();
     $stmt->bindParam(5, $tmp);
-
-
     $stmt->execute();
     $conn = null;
     return true;
@@ -219,7 +216,7 @@ function commit_booking($conn, $epoch)
 
 function appt_getter($conn){
 
-    $sql = "SELECT app.app_id, app.app_time,app.app_date,d.name,d.lname,d.available,d.role,d.room_numb FROM appointment app JOIN doctor d ON app.doc_id = d.doc_id WHERE app.patient_id = ? ORDER BY app.app_date ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
+    $sql = "SELECT app.app_id, app.app_time,app.app_reason,app.app_date,d.name,d.lname,d.available,d.role,d.room_numb FROM appointment app JOIN doctor d ON app.doc_id = d.doc_id WHERE app.patient_id = ? ORDER BY app.app_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $_SESSION['userid']);
@@ -240,5 +237,30 @@ function cancel_appt($conn, $app_id){
     $stmt->bindParam(1, $app_id); //binds the parameter to the variable
     $stmt->execute();//executes the sql
     $conn = null; //closes connection
+    return true;
+}
+
+function appt_fetch($conn, $app_id)
+{
+    $sql = "SELECT * FROM appointment WHERE app_id = ?"; //select everything in the appointment where app ID
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(1, $app_id);
+
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+}
+
+function appt_update($conn, $app_id, $app_time)
+{
+    $sql = "UPDATE appointment SET app_time = ?, app_reason = ? WHERE app_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $app_time);
+    $stmt->bindParam(2, $_POST['app_reason']);
+    $stmt->bindParam(3, $app_id);
+    $stmt->execute();
+    $conn = null;
     return true;
 }
