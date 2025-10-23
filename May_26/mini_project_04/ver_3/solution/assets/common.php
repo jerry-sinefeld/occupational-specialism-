@@ -201,15 +201,35 @@ function staff_getter($conn)
 
 function commit_booking($conn, $epoch)
 {
-    $sql = "INSERT INTO appointment (app_time, app_reason, patient_id, app_date) VALUES(?,?,?,?)";
+    $sql = "INSERT INTO appointment (app_time, app_reason, patient_id,doc_id, app_date) VALUES(?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(3, $_SESSION['userid']);
-    $stmt->bindParam(2, $_POST['staff']);
     $stmt->bindParam(1, $epoch);
+    $thas = "";
+    $stmt->bindParam(2, $thas);
+    $stmt->bindParam(3, $_SESSION['userid']);
+    $stmt->bindParam(4, $_POST['staff']);
     $tmp = time();
-    $stmt->bindParam(4, $tmp);
+    $stmt->bindParam(5, $tmp);
+
+
     $stmt->execute();
     $conn = null;
     return true;
+}
+
+function appt_getter($conn){
+
+    $sql = "SELECT app.app_id, app.app_time,app.app_date,d.name,d.lname,d.available,d.role,d.room_numb FROM appointment app JOIN doctor d ON app.doc_id = d.doc_id WHERE app.patient_id = ? ORDER BY app.app_date ASC";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(1, $_SESSION['userid']);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    if ($result){
+        return $result;
+    } else{
+        return false;
+    }
+
 }
