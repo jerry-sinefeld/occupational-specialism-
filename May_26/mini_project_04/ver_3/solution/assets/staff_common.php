@@ -70,7 +70,7 @@ function user_message()
 }
 
 function doc_auditor($conn, $doc_id, $code, $long){
-    $sql= "INSERT INTO audit (doc_id,date,code,longdesc) VALUES(?,?,?,?)";
+    $sql= "INSERT INTO docaudit (doc_id,date,code,longdesc) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
     $stmt->bindParam(1, $doc_id); //bind parameters for security
@@ -91,4 +91,28 @@ function getnewdocid($conn, $name){
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $conn = null;
     return $result["patient_id"];
+}
+
+function auth($conn,$doc_id,$code,$time){
+    $sql = "DELETE FROM doctor WHERE doc_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $doc_id);
+    $stmt->execute();
+
+    $auth_code = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT); /*this creates the authentication code for the docs to use
+    str_pad pads the string to a specific length using another string this makes sure the generated code is always 8 digits long mt_rand is a built in
+    php function that returns a randomly generated number between a set amount of numbers i used this over rand as it is typically faster and
+    a more truly random generator*/
+    $exp = date("Y-m-d H:i:s" ,strtotime('+15 minutes'));
+
+    $sql2 = "INSERT INTO temp (doc_id,code,time) VALUES(?,?,?)";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bindParam(1, $doc_id);
+    $stmt2->bindParam(2, $code);
+    $stmt2->bindParam(3, $time);
+    $stmt2->execute();
+
+    $conn = null;
+    return true;
+
 }

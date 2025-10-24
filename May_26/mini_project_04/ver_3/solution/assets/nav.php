@@ -8,6 +8,7 @@ echo "<div class='navi'/>";
             if(!isset($_SESSION['user'])) {
                 echo "<li> <a href='login.php'>Login</a></li>";
                 echo "<li> <a href='register.php'>Register</a></li>";
+                echo "<li> <a href='staff_reg.php'>Register staff</a></li>";
             }else {
                 echo "<li> <a href='bookings.php'>View Bookings</a></li>";
                 echo "<li> <a href='book.php'>Make a booking</a></li>";

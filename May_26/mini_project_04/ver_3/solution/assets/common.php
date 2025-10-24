@@ -264,3 +264,18 @@ function appt_update($conn, $app_id, $app_time)
     $conn = null;
     return true;
 }
+
+function appt_audit($conn, $app_id,$code, $long){
+    $sql= "INSERT INTO audit (app_id,date,code,longdesc) VALUES(?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
+    $stmt->bindParam(1, $app_id); //bind parameters for security
+    $stmt->bindParam(2, $date);
+    $stmt->bindParam(3, $code);
+    $stmt->bindParam(4, $long);
+
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
+
