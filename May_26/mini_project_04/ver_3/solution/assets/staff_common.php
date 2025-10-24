@@ -26,21 +26,19 @@ function reg_doc($conn,$post)
 {
     try{
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO doctor (name, doc_password, available, role, ) VALUES(?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO doctor (name,lname,doc_password,active, role,room_numb ) VALUES(?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
-        $stmt->bindParam(1, $post["f_name"]);
+        $stmt->bindParam(1, $post["name"]);
         //hash the password
-        $stmt->bindParam(2, $post["last_name"]);
-        $stmt->bindParam(3, $post["username"]);
-        $hpswd = password_hash($post["password"], PASSWORD_DEFAULT); /*hashes password using prebuilt library in php
+        $stmt->bindParam(2, $post["lname"]);
+        $hpswd = password_hash($post["doc_password"], PASSWORD_DEFAULT); /*hashes password using prebuilt library in php
             I have to use the default encryption because my dev environment doesn't have access to any other libraries.
             If this was a real situation in a real production environment I would use are PASSWORD_BCRYPT OR PASSWORD_ARGON2I/2ID to make encryption even more secure*/
-        $stmt->bindParam(4, $hpswd);
-        $stmt->bindParam(5, $post["dob"]);
-        $stmt->bindParam(6, $post["postcode"]);
-        $stmt->bindParam(7, $post["nhs_numb"]);
-        $stmt->bindParam(8, $post["allergies"]);
+        $stmt->bindParam(3, $hpswd);
+        $stmt->bindParam(4, $post["active"]);
+        $stmt->bindParam(5, $post["role"]);
+        $stmt->bindParam(6, $post["room_numb"]);
 
         $stmt->execute();
         $conn = null;//closes the connection so it can't be abused by packet sniffers
@@ -93,26 +91,55 @@ function getnewdocid($conn, $name){
     return $result["patient_id"];
 }
 
-function auth($conn,$doc_id,$code,$time){
-    $sql = "DELETE FROM doctor WHERE doc_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $doc_id);
-    $stmt->execute();
-
+function code_request($conn,$doc_id){
     $auth_code = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT); /*this creates the authentication code for the docs to use
     str_pad pads the string to a specific length using another string this makes sure the generated code is always 8 digits long mt_rand is a built in
-    php function that returns a randomly generated number between a set amount of numbers i used this over rand as it is typically faster and
+    php function that returns a randomly generated number between a set amount of numbers I used this over rand as it is typically faster and
     a more truly random generator*/
-    $exp = date("Y-m-d H:i:s" ,strtotime('+15 minutes'));
+
+    $exp = time();
+    $exp = $exp + 900;
 
     $sql2 = "INSERT INTO temp (doc_id,code,time) VALUES(?,?,?)";
     $stmt2 = $conn->prepare($sql2);
     $stmt2->bindParam(1, $doc_id);
-    $stmt2->bindParam(2, $code);
-    $stmt2->bindParam(3, $time);
+    $stmt2->bindParam(2, $auth_code);
+    $stmt2->bindParam(3, $exp);
     $stmt2->execute();
 
     $conn = null;
-    return true;
+    return $auth_code;
 
+}
+
+function auth($conn, $doc_id, $code){
+    $sql = "SELECT * FROM temp WHERE code = ?  ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $code);
+    $stmt->execute();
+
+    $token_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    //check if a result comes back at all
+    //compare the current time hasn't passed the stored time
+    //create an active field in doctor that registers as active when the doctor successfully verifies using the auth code and gives them access to the system. Use tinyint 1/0
+    if (!$token_data) {
+        return false;
+    }
+
+    $token_id = $token_data["temp_id"];
+    $stmt = null;
+
+    $sql_update = "UPDATE temp SET used = 1 WHERE temp_id = ?";
+    $mark_used = $conn->prepare($sql_update);
+    $mark_used->bindParam(1, $token_id);
+    $mark_used->execute();
+    $conn = null;
+
+    $sql_delete = "DELETE FROM temp WHERE temp_id = ?";
+    $del_used = $conn->prepare($sql_delete);
+    $del_used->bindParam(1, $token_id);
+    $del_used->execute();
+    $conn = null;
+    return true;
 }

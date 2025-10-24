@@ -6,6 +6,8 @@ session_start();
 require_once "assets/staff_common.php"; //requires these files to run, if they are not present it will not run
 require_once "assets/db_con.php"; //requires these files to run, if they are not present it will not run
 
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if(!only_user(dbconnect_insert(), $_POST["name"])){
@@ -38,19 +40,22 @@ echo "<h1>Staff registration</h1><br>";
 echo "<h2>Register</h2>";
 
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-echo "<label for='name'>name</label>"; //creates the name text box and what it contains
+echo "<label for='name'>First Name</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='name' id='name' placeholder= 'enter your name' required>"; //creates the name field
 echo "<br>";
-echo "<label for='doc_password'>password</label>"; //creates the name text box and what it contains
+echo "<label for='lname'>Last name</label>"; //creates the name text box and what it contains
+echo "<input type='text' name='name' id='name' placeholder= 'enter your name' required>"; //creates the name field
+echo "<br>";
+echo "<label for='doc_password'>Password</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='doc_password' id='doc_password' placeholder= 'enter your password' required>"; //creates the name field
 echo "<br>";
-echo "<label for='sign'>sign up date</label>"; //creates the name text box and what it contains
+echo "<label for='available'>Are you available</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='available' id='available' placeholder= 'Are you available' required>"; //creates the name field
 echo "<br>";
-echo "<label for='role'>dob</label>"; //creates the name text box and what it contains
+echo "<label for='role'>Role</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='role' id='role' placeholder= 'enter your role' required>"; //creates the name field
 echo "<br>";
-echo "<label for='room_numb'>country</label>"; //creates the name text box and what it contains
+echo "<label for='room_numb'>Room Number</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='room_numb' id='room_numb' placeholder= 'enter your room number'>"; //creates the name field
 echo "<br>";
 echo "<input type='submit' name='submit' value='submit'>";
