@@ -43,7 +43,6 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (12,1764609300,'hjmyum',11,1,1761232464),(13,1762024620,'5678i',11,1,1761232490);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +143,7 @@ CREATE TABLE `doctor` (
   `name` text COLLATE utf8mb4_general_ci NOT NULL,
   `lname` text COLLATE utf8mb4_general_ci NOT NULL,
   `doc_password` text COLLATE utf8mb4_general_ci NOT NULL,
-  `available` text COLLATE utf8mb4_general_ci NOT NULL,
+  `active` tinyint NOT NULL,
   `role` text COLLATE utf8mb4_general_ci NOT NULL,
   `room_numb` int NOT NULL,
   PRIMARY KEY (`doc_id`)
@@ -157,7 +156,6 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'James','Racker','JamesRacker123','yes','doctor',21);
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,11 +170,11 @@ CREATE TABLE `temp` (
   `temp_id` int NOT NULL AUTO_INCREMENT,
   `doc_id` int NOT NULL,
   `code` bigint NOT NULL,
-  `time` datetime NOT NULL,
+  `time` int NOT NULL,
   `used` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`temp_id`),
   KEY `doc_id` (`doc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-24 13:59:13
+-- Dump completed on 2025-10-24 14:48:27
