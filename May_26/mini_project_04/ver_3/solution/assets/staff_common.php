@@ -26,7 +26,7 @@ function reg_doc($conn,$post)
 {
     try{
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO doctor (name,lname,doc_password,active, role,room_numb ) VALUES(?,?,?,?,?,?)";
+        $sql = "INSERT INTO doctor (name,lname,doc_password, role,room_numb ) VALUES(?,?,?,?,?)";
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
         $stmt->bindParam(1, $post["name"]);
@@ -36,13 +36,15 @@ function reg_doc($conn,$post)
             I have to use the default encryption because my dev environment doesn't have access to any other libraries.
             If this was a real situation in a real production environment I would use are PASSWORD_BCRYPT OR PASSWORD_ARGON2I/2ID to make encryption even more secure*/
         $stmt->bindParam(3, $hpswd);
-        $stmt->bindParam(4, $post["active"]);
-        $stmt->bindParam(5, $post["role"]);
-        $stmt->bindParam(6, $post["room_numb"]);
+        $stmt->bindParam(4, $post["role"]);
+        $stmt->bindParam(5, $post["room_numb"]);
 
         $stmt->execute();
-        $conn = null;//closes the connection so it can't be abused by packet sniffers
-        return true;}
+
+        $new_doc_id = $conn->lastInsertId(); //checks the last id that was inserted
+
+        return $new_doc_id;
+    }
 
     catch (PDOException $e){
         //handle database errors
@@ -88,7 +90,7 @@ function getnewdocid($conn, $name){
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $conn = null;
-    return $result["patient_id"];
+    return $result["doc_id"];
 }
 
 function code_request($conn,$doc_id){
@@ -112,14 +114,13 @@ function code_request($conn,$doc_id){
 
 }
 
-function auth($conn, $doc_id, $code){
+function auth($conn, $code){
     $sql = "SELECT * FROM temp WHERE code = ?  ";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $code);
     $stmt->execute();
 
     $token_data = $stmt->fetch(PDO::FETCH_ASSOC);
-    $conn = null;
     //check if a result comes back at all
     //compare the current time hasn't passed the stored time
     //create an active field in doctor that registers as active when the doctor successfully verifies using the auth code and gives them access to the system. Use tinyint 1/0
@@ -127,19 +128,50 @@ function auth($conn, $doc_id, $code){
         return false;
     }
 
+    $curr_time = time();
+    $exp = (int)$token_data['time'];
+
+    if ($curr_time > $exp) {
+        $sql = "DELETE FROM temp WHERE temp_id = ?  ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $token_data['temp_id']);
+        $stmt->execute();
+        return false;
+    }
+
     $token_id = $token_data["temp_id"];
-    $stmt = null;
 
-    $sql_update = "UPDATE temp SET used = 1 WHERE temp_id = ?";
-    $mark_used = $conn->prepare($sql_update);
-    $mark_used->bindParam(1, $token_id);
-    $mark_used->execute();
-    $conn = null;
-
-    $sql_delete = "DELETE FROM temp WHERE temp_id = ?";
+    $sql_delete = "DELETE  FROM temp WHERE temp_id = ?";
     $del_used = $conn->prepare($sql_delete);
     $del_used->bindParam(1, $token_id);
     $del_used->execute();
     $conn = null;
     return true;
+}
+
+
+function activate_doc($conn,$doc_id)
+{
+    $sql = "UPDATE doctor SET active = 1 WHERE doc_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $doc_id);
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
+
+function check_active($conn, $doc_id, $active){
+    $sql = "SELECT * FROM doctor WHERE doc_id = ? AND active = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $doc_id);
+    $stmt->bindParam(2, $active);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    if ($result) {
+        return true;
+
+    } else {
+        return false;
+    }
 }

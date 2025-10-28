@@ -12,9 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if(!only_user(dbconnect_insert(), $_POST["name"])){
 
-        if (reg_doc(dbconnect_insert(),$_POST)){
-            doc_auditor(dbconnect_insert(), getnewdocid(dbconnect_insert(),$_POST["username"]),"reg", "User has registered");
-            $_SESSION["usermessage"] = "user created successfully";
+        $new_doc_id = reg_doc(dbconnect_insert(), $_POST); // attempts to register and returns the new doctors id to be used in the verify page if anything fails it will return 0
+
+        if (is_numeric($new_doc_id) && $new_doc_id > 0) { // checks if the returned id is a numeric and greater than 0
+
+            // Registration and ID retrieval successful:
+            doc_auditor(dbconnect_insert(), $new_doc_id,"reg", "doctor has registered");
+
+            // Store the valid ID for the verification page
+            $_SESSION["doc_id"] = $new_doc_id;
+
+            $_SESSION["usermessage"] = "Registration successful! Please verify your account. Redirecting.";
+            header("location: verify.php");
+            exit;
         } else{
             $_SESSION["usermessage"] = "user creation failed";
         }
@@ -44,13 +54,10 @@ echo "<label for='name'>First Name</label>"; //creates the name text box and wha
 echo "<input type='text' name='name' id='name' placeholder= 'enter your name' required>"; //creates the name field
 echo "<br>";
 echo "<label for='lname'>Last name</label>"; //creates the name text box and what it contains
-echo "<input type='text' name='name' id='name' placeholder= 'enter your name' required>"; //creates the name field
+echo "<input type='text' name='lname' id='lname' placeholder= 'enter your name' required>"; //creates the name field
 echo "<br>";
 echo "<label for='doc_password'>Password</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='doc_password' id='doc_password' placeholder= 'enter your password' required>"; //creates the name field
-echo "<br>";
-echo "<label for='available'>Are you available</label>"; //creates the name text box and what it contains
-echo "<input type='text' name='available' id='available' placeholder= 'Are you available' required>"; //creates the name field
 echo "<br>";
 echo "<label for='role'>Role</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='role' id='role' placeholder= 'enter your role' required>"; //creates the name field
