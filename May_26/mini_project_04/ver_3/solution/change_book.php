@@ -20,6 +20,7 @@ if (!isset($_SESSION['userid'])) {
 
         if (appt_update(dbconnect_insert(), $_SESSION['apptid'], $epoch_time)) {
             $_SESSION['usermessage'] = "SUCCESS: YOUR BOOKING HAS BEEN CHANGED!";
+            appt_audit(dbconnect_insert(), $_SESSION['userid'], "log", "User has changed a booking");
             unset($_SESSION['apptid']);
             header("Location: bookings.php");
             exit;
