@@ -297,7 +297,20 @@ function change_pass()
 
 }
 
-function change_details()
+function change_details($conn, $f_name, $last_name, $username, $dob, $postcode, $nhs_numb, $allergies)
 {
 
+    $sql = "UPDATE user SET f_name = ? , last_name = ?, username = ?, dob = ?, postcode = ?, nhs_numb = ? , allergies = ? WHERE patient_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $f_name);
+    $stmt->bindParam(2, $last_name);
+    $stmt->bindParam(3, $username);
+    $stmt->bindParam(4, $dob);
+    $stmt->bindParam(5, $postcode);
+    $stmt->bindParam(6, $nhs_numb);
+    $stmt->bindParam(7, $allergies);
+
+    $stmt-> execute();
+    $conn = null;
+    return true;
 }
