@@ -279,3 +279,25 @@ function appt_audit($conn, $app_id,$code, $long){
     return true;
 }
 
+function log_fetch($conn, $patient_id){
+    $sql = "SELECT * FROM audit WHERE patient_id = ?";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(1, $patient_id);
+
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+}
+
+function change_pass()
+{
+
+}
+
+function change_details()
+{
+
+}

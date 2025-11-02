@@ -84,8 +84,6 @@ if (!$appts){
     }
 
 }
-
-
 echo "</div>";
 echo "</div>";
 echo "</body>";
