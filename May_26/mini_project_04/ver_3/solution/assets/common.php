@@ -292,9 +292,15 @@ function log_fetch($conn, $patient_id){
     return $result;
 }
 
-function change_pass()
+function change_pass($conn, $post)
 {
-
+    $sql = "UPDATE user SET password = ? WHERE patient_id = ?";
+    $stmt = $conn->prepare($sql);
+    $hpswd = password_hash($post["password"], PASSWORD_DEFAULT);
+    $stmt->bindParam(1, $hpswd);
+    $stmt-> execute();
+    $conn = null;
+    return true;
 }
 
 function change_details($conn, $f_name, $last_name, $username, $dob, $postcode, $nhs_numb, $allergies)
