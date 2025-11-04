@@ -58,8 +58,8 @@ if (!$logs){
 
         echo "<tr>";
         echo "<td> Date : "  . $log['date'] . "</td>";
-        echo "<td>  : "  . $log['app_reason'] . "</td>";
-        echo "<td><input type='hidden' name='audtid' value=".$log['app_id'] . ">
+        echo "<td> Description : "  . $log['longdesc'] . "</td>";
+        echo "<td><input type='hidden' name='audtid' value=".$log['patient_id'] . ">
             <input type='submit' name='detchange' value='Change details' />
             <input type='submit' name='passchange' value='Change Password' /></td>";
         echo "</tr>";

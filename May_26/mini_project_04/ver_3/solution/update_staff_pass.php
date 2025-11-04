@@ -1,4 +1,5 @@
 <?php
+
 //OPENS php
 session_start();
 
@@ -10,15 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password_check = check_pass_strength($_POST["password"]);
 
     if ($password_check['success']) {
-            if (change_pass(dbconnect_insert(), $_POST)) {
-                auditor(dbconnect_insert(),$_SESSION['userid'] ,"Update", "User has updated their password.");
-                $_SESSION["usermessage"] = "password updated successfully." . $password_check['message'];
-            } else {
-                $_SESSION["usermessage"] = "user creation failed";
-                $_SESSION["usermessage"] = $password_check['message'];
+        if (change_staff_pass(dbconnect_insert(), $_POST)) {
+            doc_auditor(dbconnect_insert(), $_SESSION['doc_id'],"Update", "User has updated their password.");
+            $_SESSION["usermessage"] = "password updated successfully." . $password_check['message'];
+        } else {
+            $_SESSION["usermessage"] = "user creation failed";
+            $_SESSION["usermessage"] = $password_check['message'];
+        }
     }
-}
-
 }
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure

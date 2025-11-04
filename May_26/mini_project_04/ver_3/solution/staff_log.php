@@ -8,6 +8,16 @@ if (!isset($_SESSION['userid'])) {
     $_SESSION['usermessage'] = "ERROR: You are not logged in.";
     header("location: login.php");
     exit;
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['detchange'])) {
+        $_SESSION['userid'] = $_POST['userid'];
+        header("location: update_staff_details.php");
+        exit;
+    } elseif (isset($_POST['passchange'])) {
+        $_SESSION['userid'] = $_POST['userid'];
+        header("location: change_staff_pass.php");
+        exit;
+    }
 }
 
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
@@ -48,9 +58,9 @@ if (!$logs){
         echo "<tr>";
         echo "<td> Date : "  . $log['date'] . "</td>";
         echo "<td>  Description : "  . $log['longdesc'] . "</td>";
-        echo "<td><input type='hidden' name='audtid' value=".$log['app_id'] . ">
-            <input type='submit' name='appdelete' value='Change details' />
-            <input type='submit' name='appchange' value='Change Password' /></td>";
+        echo "<td><input type='hidden' name='audtid' value=".$log['doc_id'] . ">
+            <input type='submit' name='detchange' value='Change details' />
+            <input type='submit' name='passchange' value='Change Password' /></td>";
         echo "</tr>";
         echo "</form>";
     }

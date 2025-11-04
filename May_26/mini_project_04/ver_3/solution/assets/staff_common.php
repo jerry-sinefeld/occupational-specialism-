@@ -202,3 +202,30 @@ function change_details($conn, $name, $lname, $active, $role, $room_numb,)
     $conn = null;
     return true;
 }
+
+function change_staff_details($conn, $name, $lname, $active, $role, $room_numb,)
+{
+
+    $sql = "UPDATE doctor SET name = ? , lname = ?, active = ?, role = ?, room_numb = ? WHERE doc_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $name);
+    $stmt->bindParam(2, $lname);
+    $stmt->bindParam(3, $active);
+    $stmt->bindParam(4, $role);
+    $stmt->bindParam(5, $room_numb);
+
+    $stmt-> execute();
+    $conn = null;
+    return true;
+}
+
+function change_staff_pass($conn, $post)
+{
+    $sql = "UPDATE doctor SET doc_password = ? WHERE doc_id = ?";
+    $stmt = $conn->prepare($sql);
+    $hpswd = password_hash($post["doc_password"], PASSWORD_DEFAULT);
+    $stmt->bindParam(1, $hpswd);
+    $stmt-> execute();
+    $conn = null;
+    return true;
+}

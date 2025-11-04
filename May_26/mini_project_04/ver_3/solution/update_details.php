@@ -6,13 +6,13 @@ require_once "assets/common.php"; //requires these files to run, if they are not
 require_once "assets/db_con.php"; //requires these files to run, if they are not present it will not run
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (change_details(dbconnect_insert(), $_POST)) {
-                auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST["username"]), "update", "User has updated details");
-                $_SESSION["usermessage"] = "Updated details.";
-            } else {
-                $_SESSION["usermessage"] = "Update failed";
-            }
-        }
+    if (change_details(dbconnect_insert(), $_POST)) {
+        doc_auditor(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST["username"]), "update", "User has updated details");
+        $_SESSION["usermessage"] = "Updated details.";
+    } else {
+        $_SESSION["usermessage"] = "Update failed";
+    }
+}
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 
 echo "<html>"; //opens html
