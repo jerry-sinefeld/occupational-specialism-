@@ -8,7 +8,7 @@ require_once "assets/db_con.php"; //requires these files to run, if they are not
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (change_staff_details(dbconnect_insert(), $_POST)) {
-        auditor(dbconnect_insert(), getnewdocid(dbconnect_insert(), $_POST["name"]), "update", "Doctor has updated details");
+        auditor(dbconnect_insert(), getnewdocid(dbconnect_insert(), $_POST["doc_id"]), "update", "Doctor has updated details");
         $_SESSION["usermessage"] = "Updated details.";
     } else {
         $_SESSION["usermessage"] = "Update failed";
