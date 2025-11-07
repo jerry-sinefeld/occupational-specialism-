@@ -11,7 +11,7 @@ echo "<div class='navi'/>";
                 echo "<li> <a href='staff_reg.php'>Register staff</a></li>";
                 echo "<li> <a href='staff_login.php'>Staff login</a></li>";
             }
-            elseif (isset($_SESSION['docid']) AND $_SESSION['active'] == 1) {
+            elseif (isset($_SESSION['docid'])) {
                 echo "<li> <a href='staff_bookings.php'>View appointments</a></li>";
                 echo "<li> <a href='staff_change.php'>Change details</a></li>";
                 echo "<li> <a href='staff_log.php'>Activity log</a></li>";

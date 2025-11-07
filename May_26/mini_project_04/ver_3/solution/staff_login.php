@@ -6,7 +6,7 @@ session_start();
 require_once "assets/db_con.php";
 require_once "assets/staff_common.php";
 
-if (isset($_SESSION['docid'])) {//checks if user is already logged in if so it directs you to the index page
+if (isset($_SESSION['doc'])) {//checks if user is already logged in if so it directs you to the index page
     $_SESSION['usermessage'] = "You are already logged in";
     header('Location: index.php'); //headers only work if no content has loaded on the page
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
