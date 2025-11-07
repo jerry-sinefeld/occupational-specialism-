@@ -5,7 +5,7 @@ echo "<div class='navi'/>";
         echo "<ul>";
             echo "<li> <a href='index.php'>Home</a></li>";
 
-            if(!isset($_SESSION['user'])) {
+            if(!isset($_SESSION['userid'])) {
                 echo "<li> <a href='login.php'>Login</a></li>";
                 echo "<li> <a href='register.php'>Register</a></li>";
                 echo "<li> <a href='staff_reg.php'>Register staff</a></li>";

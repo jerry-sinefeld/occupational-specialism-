@@ -32,11 +32,8 @@ if (!isset($_SESSION['userid'])) {
         }
     } catch (PDOException $e) {
         $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
-    } catch (PDOException $e) {
-        $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
     }
 }
-
 echo "<!DOCTYPE html>";
 
 echo "<html>";
@@ -75,9 +72,9 @@ echo "<select name='staff'>";
 
 foreach ($staff as $staf) {//dropdown menu
 
-    if ($staf ['role'] = 'doc') {
+    if ($staf ['role'] == 'doc') {
         $role = 'Doctor';
-    } else if ($staf ['role'] = 'nur') {
+    } else if ($staf ['role'] == 'nur') {
         $role = 'Nurse';
     }
     if ($appt ['doc_id'] == $staf ['doc_id']) {

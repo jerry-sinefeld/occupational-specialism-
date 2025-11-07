@@ -67,9 +67,9 @@ echo "<html>";
 
     foreach ($staff as $staf) {//dropdown menu
 
-        if ($staf ['role'] = 'doc') {
+        if ($staf ['role'] == 'doc') {
             $role = 'Doctor';
-        } else if ($staf ['role'] = 'nur') {
+        } else if ($staf ['role'] == 'nur') {
             $role = 'Nurse';
         }
         echo "<option value ='" . $staf ['doc_id'] . "'>" . $role . " ". $staf['name']." ".

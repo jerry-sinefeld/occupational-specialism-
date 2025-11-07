@@ -61,9 +61,9 @@ if (!$appts){
     echo "<table id='bookings'>";
 
     foreach ($appts as $appt) {
-        if ($appt['role'] = "doc") {
+        if ($appt['role'] == "doc") {
             $role = "Doctor";
-        }elseif ($appt['role'] = "nur") {
+        }elseif ($appt['role'] == "nur") {
             $role = "Nurse";
         }
 

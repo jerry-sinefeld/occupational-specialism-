@@ -287,7 +287,7 @@ function log_fetch($conn, $patient_id){
     $stmt->bindParam(1, $patient_id);
 
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchall(PDO::FETCH_ASSOC);
     $conn = null;
     return $result;
 }
