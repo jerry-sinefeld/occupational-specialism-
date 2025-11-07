@@ -1,6 +1,6 @@
 <?php
 
-function only_user($conn, $name)
+function only_staff($conn, $name)
 {
     try {
         $sql = "SELECT name FROM doctor WHERE name = ?"; //set up sql statement
@@ -57,7 +57,7 @@ function reg_doc($conn,$post)
     }
 }
 
-function user_message()
+function usermessage()
 {
     if (isset($_SESSION['usermessage'])) {
         $message = "<p>" . $_SESSION['usermessage'] . "</p>";
@@ -69,7 +69,7 @@ function user_message()
     }
 }
 
-function doc_auditor($conn, $doc_id, $code, $long){
+function auditor($conn, $doc_id, $code, $long){
     $sql= "INSERT INTO docaudit (doc_id,date,code,longdesc) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
@@ -160,22 +160,6 @@ function activate_doc($conn,$doc_id)
     return true;
 }
 
-function check_active($conn, $doc_id, $active){
-    $sql = "SELECT * FROM doctor WHERE doc_id = ? AND active = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $doc_id);
-    $stmt->bindParam(2, $active);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $conn = null;
-    if ($result) {
-        return true;
-
-    } else {
-        return false;
-    }
-}
-
 function change_pass($conn, $post)
 {
     $sql = "UPDATE doctor SET doc_password = ? WHERE doc_id = ?";
@@ -187,7 +171,7 @@ function change_pass($conn, $post)
     return true;
 }
 
-function change_staff_details($conn, $name, $lname, $active, $role, $room_numb,)
+function change_staff_details($conn, $name, $lname, $active, $role, $room_numb)
 {
 
     $sql = "UPDATE doctor SET name = ? , lname = ?, active = ?, role = ?, room_numb = ? WHERE doc_id = ?";
@@ -212,4 +196,28 @@ function change_staff_pass($conn, $post)
     $stmt-> execute();
     $conn = null;
     return true;
+}
+
+function staff_login ($conn, $post){
+try{
+    $sql = "SELECT * FROM doctor WHERE name = ?"; //select everything from the user table where username = the entered username
+    $stmt = $conn->prepare($sql);//prepare the sql for data
+    $stmt->bindParam(1,$post); /*now that the database is prepped to receive data you are now binding the data with the previous sql statement.
+        This prevents it from ever being modified, increasing security */
+    $stmt->execute(); //execute sql
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;//closes the connection so it can't be abused by packet sniffers
+
+    if ($result) { //result= user found
+        return $result;
+    } else { //if user isn't found send back to login page (resets page)
+        $_SESSION['ERROR'] = "Doctor not found";
+        header("location: staff_login.php");
+        exit;
+    }
+} catch (Exception $e){
+    $_SESSION['ERROR'] ="User login" . $e->getMessage();
+    header("location: staff_login.php");
+    exit;
+}
 }

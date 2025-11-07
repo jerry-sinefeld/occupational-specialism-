@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (is_numeric($new_doc_id) && $new_doc_id > 0) { // checks if the returned id is a numeric and greater than 0
 
             // Registration and ID retrieval successful:
-            doc_auditor(dbconnect_insert(), $new_doc_id,"reg", "doctor has registered");
+            auditor(dbconnect_insert(), $new_doc_id,"reg", "doctor has registered");
 
             // Store the valid ID for the verification page
             $_SESSION["doc_id"] = $new_doc_id;

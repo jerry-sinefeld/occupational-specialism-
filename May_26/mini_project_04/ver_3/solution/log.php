@@ -48,9 +48,9 @@ if (!$logs){
     echo "<table id='user_logs'>";
 
     foreach ($logs as $log) {
-        if ($log['role'] = "doc") {
+        if ($log['role'] == "doc") {
             $role = "Doctor";
-        }elseif ($log['role'] = "nur") {
+        }elseif ($log['role'] =="nur") {
             $role = "Nurse";
         }
 

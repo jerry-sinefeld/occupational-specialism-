@@ -1,0 +1,59 @@
+<?php
+
+//OPENS php
+session_start();
+
+require_once "assets/db_con.php";
+require_once "assets/staff_common.php";
+
+if (isset($_SESSION['doc'])) {//checks if user is already logged in if so it directs you to the index page
+    $_SESSION['usermessage'] = "You are already logged in";
+    header('Location: index.php'); //headers only work if no content has loaded on the page
+    exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $staff = staff_login(dbconnect_insert(), $_POST["name"]);
+
+    if ($staff && password_verify($_POST['password'], $staff['doc_password'])) {
+        $_SESSION['doc'] = true;
+        $_SESSION['docid'] = $staff['doc_id'];
+        $_SESSION['usermessage'] = "You are logged in";
+        auditor(dbconnect_insert(), $_SESSION['docid'], "log", "User has logged in");
+        header('Location: index.php');
+        exit;
+    } else {
+        $_SESSION['usermessage'] = "Incorrect password";
+        header('Location: staff_login.php');
+        exit;
+    }
+}
+echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
+
+echo "<html>"; //opens html
+echo "<head>"; //opens head
+echo "<title>Home</title>"; //opens and writes title
+echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
+echo "</head>"; //closes head
+
+echo "<body>"; //opens body
+echo "<div class='container'>";
+require_once "assets/topbar.php";
+require_once "assets/nav.php";
+echo "<div id='main'>";
+echo "<h1>Welcome to Oaks Primary Surgery</h1><br>";
+echo "<h2>Staff Login</h2>";
+echo usermessage();
+echo "<form action='' method='post'>"; //creates the form and tells the form what to do
+echo "<label for='name'>Name:</label>"; //creates the name text box and what it contains
+echo "<input type='text' name='name' id='name' placeholder= 'enter your name' required>"; //creates the name field
+echo "<br>";
+echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains
+echo "<input type='text' name='password' id='password' placeholder= 'enter your password' required>"; //creates the name field
+echo "<br>";
+echo "<input type='submit' name='submit' value='submit'>";
+echo "</form>";
+
+
+echo "</div>";
+echo "</div>";
+echo "</body>";
+echo "</html>"; //closes html

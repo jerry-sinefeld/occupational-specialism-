@@ -49,9 +49,9 @@ if (!$logs){
     echo "<table id='user_logs'>";
 
     foreach ($logs as $log) {
-        if ($log['role'] = "doc") {
+        if ($log['role'] == "doc") {
             $role = "Doctor";
-        }elseif ($log['role'] = "nur") {
+        }elseif ($log['role'] == "nur") {
             $role = "Nurse";
         }
         echo "<form action= '' method='post'>"; // creating a form for each entry in the table
