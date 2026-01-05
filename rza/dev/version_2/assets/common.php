@@ -2,7 +2,7 @@
 function reg_user($conn,$post)
 {
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO user (fname,lname,username,password,address) VALUES(?,?,?,?,?)";
+        $sql = "INSERT INTO user (fname,lname,username,password) VALUES(?,?,?,?)";
         $stmt = $conn->prepare($sql);//prepare the sql for data
         $stmt->bindParam(1, $post["fname"]);
         //hash the password
@@ -12,78 +12,10 @@ function reg_user($conn,$post)
             I have to use the default encryption because my dev environment doesn't have access to any other libraries.
             If this was a real situation in a real production environment I would use are PASSWORD_BCRYPT OR PASSWORD_ARGON2I/2ID to make encryption even more secure*/
         $stmt->bindParam(4, $hpswd);
-        $stmt->bindParam(5, $post["address"]);
 
         $stmt->execute();
         $conn = null;//closes the connection so it can't be abused by packet sniffers
         return true;
-}
-
-function check_pass_strength($password) {
-    $errors = [];
-    $_tally = 9; // max score
-
-    // Sanitize the password before validation to prevent manipulation
-    $_password = filter_var($password, FILTER_SANITIZE_STRING);
-    // All common special characters
-    $_spec_char = '/[!@#$"£%^&*()_=+{};:,.<>?]/';
-
-    // Validation Checks
-    if (!preg_match('/[A-Z]/', $_password)) { //must contain uppercase
-        $_tally--;
-        $errors[] = "Your password must contain at least one uppercase character.";
-    }
-    if (!preg_match('/[a-z]/', $_password)) { //must contain lowercase
-        $_tally--;
-        $errors[] = "Your password must contain at least one lowercase character.";
-    }
-    if (!preg_match('/[0-9]/', $_password)) { //// Must contain a number
-        $_tally--;
-        $errors[] = "Your password must contain at least one number.";
-    }
-    if (strlen($_password) < 8) { // must be 8 characters or more
-        $_tally--;
-        $errors[] = "Your password must be at least 8 characters long.";
-    }
-    if (preg_match('/^[0-9]/', $_password)) { //cannot start with a number
-        $_tally--;
-        $errors[] = "Your password should not start with a number.";
-    }
-    // Check if the first character is a special character
-    if (preg_match($_spec_char, $_password[0])) { // cannot start with a special character
-        $_tally--;
-        $errors[] = "Your password should not start with a special character.";
-    }
-    // Check if the last character is a special character
-    if (preg_match($_spec_char, substr($_password, -1))) { //cannot end with a special
-        $_tally--;
-        $errors[] = "Your password should not end with a special character.";
-    }
-    if (!preg_match($_spec_char, $_password)) { //must contain a special characters
-        $_tally--;
-        $errors[] = "Your password must contain at least one special character.";
-    }
-    if (strtolower($_password) === 'password') { //cannot be the word password
-        $_tally--;
-        $errors[] = "Your password cannot be 'password'.";
-    }
-
-    $message = "Password score: " . $_tally . "/9. ";
-    if ($_tally < 9) {
-        $message .= "Password validation failed! Criteria not met:";
-        $message .= "<ul><li>" . implode("</li><li>", $errors) . "</li></ul>"; // list all errors
-    } else {
-        $message = "Password validation passed! Score: " . $_tally . "/9."; //success message
-    }
-
-    $message .= "Note: If characters were removed from your input, it is due to security sanitization (&lt; or &gt;).";
-
-
-    return [ //returns the result and the final message
-        'success' => $_tally === 9,
-        'tally' => $_tally,
-        'message' => $message
-    ];
 }
 
 function login($conn,$post){
@@ -143,25 +75,22 @@ function getnewuserid($conn, $username){
 
 function commit_booking($conn, $epoch)
 {
-    $sql = "INSERT INTO bookings (book_time, book_reason, userid, enginid, book_date) VALUES(?,?,?,?,?)";
+    $sql = "INSERT INTO bookings (book_time, userid, employ_id, book_date) VALUES(?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $epoch);
-    $stmt->bindParam(2, $_POST['book_reason']);
-    $stmt->bindParam(3, $_SESSION['userid']);
-    $stmt->bindParam(4, $_POST['staff']);
+    $stmt->bindParam(2, $_SESSION['userid']);
+    $stmt->bindParam(3, $_POST['staff']);
     $tmp = time();
-    $stmt->bindParam(5, $tmp);
+    $stmt->bindParam(4, $tmp);
     $stmt->execute();
     $conn = null;
     return true;
-    }
-
-
+}
 
 function staff_getter($conn)
 {
-    $sql = "SELECT enginid,username,fname,lname,active FROM engineer WHERE active != ? ORDER BY fname DESC";
+    $sql = "SELECT employ_id,username,fname,lname,active FROM employees WHERE active != ? ORDER BY fname DESC";
     //get all staff from database where active = 1
     $stmt = $conn->prepare($sql);
     $exclude_staff = "0";
@@ -174,9 +103,9 @@ function staff_getter($conn)
     return $result;
 }
 
-function product_getter($conn)
+function ticket_getter($conn)
 {
-    $sql = "SELECT * FROM product ORDER BY name DESC";
+    $sql = "SELECT * FROM ticket ORDER BY name DESC";
     //get all staff from database where active = 1
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -187,7 +116,7 @@ function product_getter($conn)
 
 function book_getter($conn){
 
-    $sql = "SELECT book.book_id, book.book_time,book.book_reason,book.book_date,e.fname,e.lname FROM bookings book JOIN engineer e ON book.enginid = e.enginid WHERE book.userid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
+    $sql = "SELECT book.book_id, book.book_time,book.userid,book.ticket_id,t.type,t.quantity FROM bookings book JOIN ticket t ON book.ticket_id = t.ticket_id WHERE book.userid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $_SESSION['userid']);
     $stmt->execute();
@@ -202,7 +131,7 @@ function book_getter($conn){
 }
 
 function cancel_book($conn, $book_id){
-    $sql = "DELETE FROM bookings WHERE book_id = ?"; //deletes the appointment entry from the database
+    $sql = "DELETE FROM booking WHERE book_id = ?"; //deletes the appointment entry from the database
     $stmt = $conn->prepare($sql);//prepares the sql
     $stmt->bindParam(1, $book_id); //binds the parameter to the variable
     $stmt->execute();//executes the sql
@@ -212,7 +141,7 @@ function cancel_book($conn, $book_id){
 
 function book_update($conn, $book_id, $book_time)
 {
-    $sql = "UPDATE bookings SET book_time = ?, book_reason = ? WHERE book_id = ?";
+    $sql = "UPDATE booking SET book_time = ?, book_reason = ? WHERE book_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $book_time);
     $stmt->bindParam(2, $_POST['book_reason']);
@@ -224,7 +153,7 @@ function book_update($conn, $book_id, $book_time)
 
 function book_fetch($conn, $book_id)
 {
-    $sql = "SELECT * FROM bookings WHERE book_id = ?"; //select everything in the appointment where app ID
+    $sql = "SELECT * FROM booking WHERE book_id = ?"; //select everything in the appointment where app ID
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $book_id);
@@ -233,18 +162,4 @@ function book_fetch($conn, $book_id)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $conn = null;
     return $result;
-}
-
-function auditor($conn, $userid, $code, $long){
-    $sql= "INSERT INTO useraudit (userid,date,code,longdesc) VALUES(?,?,?,?)";
-    $stmt = $conn->prepare($sql);
-    $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
-    $stmt->bindParam(1, $userid); //bind parameters for security
-    $stmt->bindParam(2, $date);
-    $stmt->bindParam(3, $code);
-    $stmt->bindParam(4, $long);
-
-    $stmt->execute();
-    $conn = null;
-    return true;
 }
