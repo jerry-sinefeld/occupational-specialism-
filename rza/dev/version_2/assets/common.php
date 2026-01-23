@@ -75,7 +75,7 @@ function getnewuserid($conn, $username){
 
 function commit_booking($conn, $epoch)
 {
-    $sql = "INSERT INTO bookings (book_time, userid, employ_id, book_date) VALUES(?,?,?,?,?)";
+    $sql = "INSERT INTO booking (book_time, userid, employ_id, book_date) VALUES(?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $epoch);
@@ -105,7 +105,7 @@ function staff_getter($conn)
 
 function ticket_getter($conn)
 {
-    $sql = "SELECT * FROM ticket ORDER BY name DESC";
+    $sql = "SELECT * FROM ticket ORDER BY type DESC";
     //get all staff from database where active = 1
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -116,7 +116,7 @@ function ticket_getter($conn)
 
 function book_getter($conn){
 
-    $sql = "SELECT book.book_id, book.book_time,book.userid,book.ticket_id,t.type,t.quantity FROM bookings book JOIN ticket t ON book.ticket_id = t.ticket_id WHERE book.userid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
+    $sql = "SELECT book.book_id, book.book_time,book.userid,book.ticket_id,t.type,t.quantity FROM booking book JOIN ticket t ON book.ticket_id = t.ticket_id WHERE book.userid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $_SESSION['userid']);
     $stmt->execute();

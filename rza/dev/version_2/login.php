@@ -15,7 +15,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($usr) {
         $_SESSION['user'] = true;
-        $_SESSION['userid'] = $usr['patient_id'];
+        $_SESSION['userid'] = $usr['userid'];
         $_SESSION['usermessage'] = "You are logged in";
         header('Location: index.php');
         exit;
@@ -38,7 +38,7 @@ echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
-echo "<h1>Welcome to Rolsa Technologies</h1><br>";
+echo "<h1>Welcome to RZA</h1><br>";
 echo "<h2>Login</h2>";
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
 echo "<label for='username'>Username:</label>"; //creates the name text box and what it contains
