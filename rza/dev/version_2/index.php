@@ -24,23 +24,37 @@ echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
-echo "<h1>Rolsa Technologies – Powering a Cleaner Tomorrow</h1>";
-echo "<p> At Rolsa Technologies, we believe a sustainable future starts at home. As specialists in eco-friendly engineering,
- we help homeowners reduce their carbon footprint through smart, clean, and efficient energy solutions.
-  From high-performance solar panel installations to reliable EV charging systems,
-  our mission is to make renewable energy simple, accessible, and cost-effective for everyone. 
+echo "<h1>Where the Wild Meets the Wonderful!</h1>";
+echo "<p>Experience an unforgettable safari, stay in luxury amongst the animals,
+ and discover the secrets of the natural world—all at Ridget Zoo Adventures.
   </p>";
 echo "<br>";
-echo "<h1> Clean Energy Made Easy </h1>";
-echo "<p> Our expert engineers design and install systems tailored to your home’s needs—ensuring maximum efficiency, long-term savings, and minimal environmental impact.
-Whether you're looking to transition to solar power, charge your electric vehicle at home, or better understand your energy usage,
-we provide step-by-step guidance throughout the entire process. 
-</p>";
+echo "<h1> Three Worlds, One Adventure! </h1>";
+echo "<h1> The Safari Trek</h1>";
+echo "<p> Get closer than ever to the world's most majestic creatures. Our safari-style wildlife park allows you to roam through expansive habitats where lions,
+ giraffes, and rhinos live in harmony.</p>";
 echo "<br>";
-echo "<h1> Committed to a Greener Future </h1>";
-echo "<p> We don’t just install technology—we empower you with knowledge.
-Our team helps you understand your energy consumption, the effects of global warming, and the positive impact your choices can have on the planet.
-Every installation moves us all one step closer to a cleaner, brighter future.</p>";
+echo"<p> Self-Drive or Guided Tours: Choose your own pace or learn from our expert rangers.</p>";
+echo "<br>";
+echo "<p> Up-Close Encounters: Feed the giants and learn about our conservation efforts.</p>";
+echo "<br>";
+echo "<h1>The Overlook Hotel </h1>";
+echo "<p>Why leave when the sun goes down? Wake up to the sound of the savanna in our premium on-site accommodations.</p>";
+echo "<br>";
+echo "<p>Balcony Views: Watch the zebras graze while you enjoy your morning coffee. </p>";
+echo "<br>";
+echo "<p>Family Suites: Spacious, themed rooms designed for explorers of all ages. </p>";
+echo "<br>";
+echo "<p>Fine Dining: Enjoy world-class cuisine at the 'Horizon Grill' overlooking the reserve. </p>";
+
+echo "<h1>Wild Learning </h1>";
+echo "<p>Education is at the heart of everything we do. We offer immersive programs designed to inspire the next generation of conservationists.</p>";
+echo "<br>";
+echo "<p>School Field Trips: Curriculum-aligned tours that bring biology to life. </p>";
+echo "<br>";
+echo "<p>Junior Ranger Programs: Hands-on weekend workshops for kids. </p>";
+echo "<br>";
+echo "<p>Conservation Talks: Daily presentations from our resident wildlife experts. </p>";
 
 if (!$message) {
     echo user_message();
@@ -54,7 +68,6 @@ try {
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
-
 
 echo "</div>";
 echo "</div>";
