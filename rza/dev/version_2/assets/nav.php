@@ -13,7 +13,7 @@ elseif (!isset($_SESSION['userid'])) {
     echo "<li> <a href='reg.php'>Register</a></li>"; //link to user register page
     echo "<li> <a href='staff_reg.php'>Register staff</a></li>";//only present for testing purposes, the final product would not have either of these in it
     echo "<li> <a href='staff_login.php'>Staff login</a></li>"; //only present for testing purposes, the final product would not have either of these in it
-    echo "<li> <a href='logout.php'>Logout</a></li>";
+
 
 }else {
     echo "<li> <a href='logout.php'>Logout</a></li>"; //by hiding the tabs you add an extra layer of protection by removing them from an unlogged in user
