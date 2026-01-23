@@ -5,7 +5,7 @@
     flex-direction: column;
     font-size: x-large;
     font-family: Arial,sans-serif;
-    background-color: #7B4425;
+    background-color: #6b9134;
 }
 
 nav ul {
@@ -17,7 +17,7 @@ nav ul {
     display: flex; /*makes it into a flexbox*/
     flex-direction: row;
     justify-content: center;
-    background-color: #097803; /*sets background color*/
+    background-color: #6b9134; /*sets background color*/
 }
 
 nav a{
@@ -29,7 +29,7 @@ nav a{
 }
 
 nav a:hover{ /*changes how the item looks when hovering over it*/
-    background-color:#7B4425 ; /*changes background color*/
+    background-color:#dba80d ; /*changes background color*/
 }
 
 nav{
@@ -41,12 +41,12 @@ nav a{
 }
 
 .topbar{
-    background-color: #0DAE05;
+    background-color: #fada0a;
     color: white;
 }
 
 #main{
-    background-color: #D9D9D9;
+    background-color: white;
     text-align: center;/*aligns the text to the center of the screen*/
     color: #1c1c1c;/*sets the text color to white*/
     display: flex;/*declares the box main is contained in as a flexbox*/
@@ -65,7 +65,7 @@ nav a{
 }
 
 .bottombar{
-    background-color:rgba(30, 33, 38, 0.54);
+    background-color: #D9D9D9;
     margin: 0 auto;
     padding: 0;/*removes padding*/
     border-width: 0;
