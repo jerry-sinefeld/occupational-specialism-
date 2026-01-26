@@ -5,7 +5,7 @@ echo "<nav>";
 echo "<ul>";
 echo "<li> <a href='index.php'>Home</a></li>";
 
-if(isset($_SESSION['enginid']) AND $_SESSION['active'] == 1) { //checks if the session has an active engineer in it, active meaning they have been through the 2fa process
+if(isset($_SESSION['employid']) AND $_SESSION['active'] == 1) { //checks if the session has an active engineer in it, active meaning they have been through the 2fa process
     echo "<li> <a href='logout.php'>Logout</a></li>";
 }
 elseif (!isset($_SESSION['userid'])) {

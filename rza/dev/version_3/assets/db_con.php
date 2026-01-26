@@ -8,7 +8,7 @@ function dbconnect_insert()
 
     $dbpassword = "";//sets password
 
-    $dbname = "[name of database]";//sets name to connect to// TODO: POTENTIAL CHANGE NEEDED
+    $dbname = "[name of database]";//sets name to connect to
 
     //the items above should not be stored here at all, all it takes is one person to figure out that if they download this file they know how to access your database
     //these credentials should be stored in a file outside the folder structure of the webserver

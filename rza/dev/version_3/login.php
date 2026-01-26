@@ -3,24 +3,26 @@
 session_start();
 
 require_once "assets/db_con.php";
-require_once "assets/staff_common.php";
+require_once "assets/common.php";
 
-if (isset($_SESSION['employid'])) {//checks if user is already logged in if so it directs you to the index page
+if (isset($_SESSION['userid'])) {//checks if user is already logged in if so it directs you to the index page
     $_SESSION['usermessage'] = "You are already logged in";
     header('Location: index.php'); //headers only work if no content has loaded on the page
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $staff = staff_login(dbconnect_insert(), $_POST["username"]);
+}
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usr = login(dbconnect_insert(), $_POST["username"]);
 
-    if ($staff ) {
-        $_SESSION['employid'] = true;
-        $_SESSION['employid'] = $staff['employid'];
+    if ($usr) {
+        $_SESSION['user'] = true;
+        $_SESSION['userid'] = $usr['userid'];
         $_SESSION['usermessage'] = "You are logged in";
+        auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has logged in");
         header('Location: index.php');
         exit;
     } else {
         $_SESSION['usermessage'] = "Incorrect password";
-        header('Location: staff_login.php');
+        header('Location: login.php');
         exit;
     }
 }
@@ -37,11 +39,10 @@ echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
-echo "<h1>Welcome to Rolsa technologies</h1><br>";
-echo "<h2>Staff Login</h2>";
-echo usermessage();
+echo "<h1>Welcome to Rolsa Technologies</h1><br>";
+echo "<h2>Login</h2>";
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-echo "<label for='username'>User name:</label>"; //creates the name text box and what it contains
+echo "<label for='username'>Username:</label>"; //creates the name text box and what it contains
 echo "<input type='text' name='username' id='username' placeholder= 'enter your username' required>"; //creates the name field
 echo "<br>";
 echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains

@@ -5,7 +5,7 @@ session_start();
 require_once "assets/db_con.php";
 require_once "assets/staff_common.php";
 
-if (isset($_SESSION['[staff session name]'])) {//checks if staff is already logged in if so it directs you to the index page // TODO: POTENTIAL CHANGE NEEDED
+if (isset($_SESSION[''])) {//checks if user is already logged in if so it directs you to the index page
     $_SESSION['usermessage'] = "You are already logged in";
     header('Location: index.php'); //headers only work if no content has loaded on the page
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
@@ -13,10 +13,10 @@ if (isset($_SESSION['[staff session name]'])) {//checks if staff is already logg
     $staff = staff_login(dbconnect_insert(), $_POST["username"]);
 
     if ($staff ) {
-        $_SESSION['[staff session name]'] = true;// TODO: POTENTIAL CHANGE NEEDED
-        $_SESSION['[staff session name]'] = $staff['[staff session name]'];// TODO: POTENTIAL CHANGE NEEDED
+        $_SESSION['[staff session name]'] = true;
+        $_SESSION['[staff session name]'] = $staff['[staff session name]'];
         $_SESSION['usermessage'] = "You are logged in";
-        auditor(dbconnect_insert(), $_SESSION['[staff session name]'], "log", "Engineer has logged in");// TODO: POTENTIAL CHANGE NEEDED
+        auditor(dbconnect_insert(), $_SESSION['[staff session name]'], "log", "Engineer has logged in");
         header('Location: index.php');
         exit;
     } else {
@@ -29,7 +29,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 
 echo "<html>"; //opens html
 echo "<head>"; //opens head
-echo "<title>Home</title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
+echo "<title>Home</title>"; //opens and writes title
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 
@@ -38,15 +38,15 @@ echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
-echo "<h1>Welcome to Rolsa technologies</h1><br>";// TODO: POTENTIAL CHANGE NEEDED
+echo "<h1>Welcome to Rolsa technologies</h1><br>";
 echo "<h2>Staff Login</h2>";
 echo usermessage();
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
-echo "<label for='username'>Username:</label>"; //creates the name text box and what it contains// TODO: POTENTIAL CHANGE NEEDED
-echo "<input type='text' name='username' id='username' placeholder= 'enter your username' required>"; //creates the name field// TODO: POTENTIAL CHANGE NEEDED
+echo "<label for='username'>User name:</label>"; //creates the name text box and what it contains
+echo "<input type='text' name='username' id='username' placeholder= 'enter your username' required>"; //creates the name field
 echo "<br>";
-echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains// TODO: POTENTIAL CHANGE NEEDED
-echo "<input type='text' name='password' id='password' placeholder= 'enter your password' required>"; //creates the name field// TODO: POTENTIAL CHANGE NEEDED
+echo "<label for='password'>Password:</label>"; //creates the name text box and what it contains
+echo "<input type='text' name='password' id='password' placeholder= 'enter your password' required>"; //creates the name field
 echo "<br>";
 echo "<input type='submit' name='submit' value='submit'>";
 echo "</form>";

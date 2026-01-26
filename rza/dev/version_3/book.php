@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {//this block must always be at the t
      the string before beginning the transfer to a time */
         if (commit_booking(dbconnect_insert(), $epoch_time)) {
             $_SESSION['usermessage'] = "SUCCESS: YOUR BOOKING HAS BEEN CREATED!";
-            auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has created a booking");// // TODO: POTENTIAL CHANGE NEEDED
+            auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has created a booking");
             header("Location: bookings.php");
             exit;
         } else {
@@ -34,7 +34,7 @@ echo "<!DOCTYPE html>";
 echo "<html>";
 
 echo "<head>"; //opens head
-echo "<title></title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
+echo "<title></title>"; //opens and writes title
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 
@@ -63,7 +63,7 @@ echo "<input type='time' name='atime' value='" . date("H:i") . "'>";
 echo "<br>";
 echo "<br>";
 
-echo "<label for = 'staff'> [staff role] </label>"; // // TODO: POTENTIAL CHANGE NEEDED
+echo "<label for = 'staff'> [staff role] </label>";
 echo "<select name='staff'>";
 
 foreach ($staff as $staf) {//dropdown menu
@@ -73,7 +73,7 @@ foreach ($staff as $staf) {//dropdown menu
     } else if ($staf ['active'] == '0') {
         $state = 'inactive';
     }
-    echo "<option value ='" . $staf ['[staff session name]'] . "'>" . " " . $staf['fname'] . " " . // // TODO: POTENTIAL CHANGE NEEDED
+    echo "<option value ='" . $staf ['[staff session name]'] . "'>" . " " . $staf['fname'] . " " .
         $staf['lname']."(". $state .")" ." " . "</option>";
 }
 
@@ -82,13 +82,13 @@ echo "</select>";
 echo "<br>";
 echo "<br>";
 
-echo "<label for = 'product'> Product </label>";// // TODO: POTENTIAL CHANGE NEEDED
+echo "<label for = 'product'> Product </label>";
 
-echo "<select name='products'>";// // TODO: POTENTIAL CHANGE NEEDED
+echo "<select name='products'>";
 
 foreach ($products as $product) {//dropdown menu
-    echo "<option value ='" . $product ['productid'] . "'>" . " " . $product['name'] . " " .// // TODO: POTENTIAL CHANGE NEEDED
-        $product['price']."£". " " . $product['tti']."hrs". "</option>";// // TODO: POTENTIAL CHANGE NEEDED
+    echo "<option value ='" . $product ['productid'] . "'>" . " " . $product['name'] . " " .
+        $product['price']."£". " " . $product['tti']."hrs". "</option>";
 }
 
 echo "</select>";
