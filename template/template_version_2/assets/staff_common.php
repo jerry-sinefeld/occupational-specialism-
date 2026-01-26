@@ -1,6 +1,6 @@
 <?php
 
-function reg_engin($conn,$post)
+function reg_staff($conn,$post)
 {
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
         $sql = "INSERT INTO engineer (username,fname,lname,password) VALUES(?,?,?,?)";

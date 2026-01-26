@@ -33,7 +33,7 @@ echo "<!DOCTYPE html>";
 echo "<html>";
 
 echo "<head>"; //opens head
-echo "<title></title>"; //opens and writes title
+echo "<title></title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 
@@ -62,7 +62,7 @@ echo "<input type='time' name='atime' value='" . date("H:i") . "'>";
 echo "<br>";
 echo "<br>";
 
-echo "<label for = 'staff'> Engineer </label>";
+echo "<label for = 'staff'> Engineer </label>";// TODO: POTENTIAL CHANGE NEEDED
 echo "<select name='staff'>";
 
 foreach ($staff as $staf) {//dropdown menu
@@ -72,7 +72,7 @@ foreach ($staff as $staf) {//dropdown menu
     } else if ($staf ['active'] == '0') {
         $state = 'inactive';
     }
-    echo "<option value ='" . $staf ['[staff session name]'] . "'>" . " " . $staf['fname'] . " " .
+    echo "<option value ='" . $staf ['[staff session name]'] . "'>" . " " . $staf['fname'] . " " .// TODO: POTENTIAL CHANGE NEEDED
         $staf['lname']."(". $state .")" ." " . "</option>";
 }
 
@@ -81,13 +81,13 @@ echo "</select>";
 echo "<br>";
 echo "<br>";
 
-echo "<label for = 'product'> Product </label>";
+echo "<label for = 'product'> Product </label>";// TODO: POTENTIAL CHANGE NEEDED
 
-echo "<select name='products'>";
+echo "<select name='products'>";// TODO: POTENTIAL CHANGE NEEDED
 
-foreach ($products as $product) {//dropdown menu
-    echo "<option value ='" . $product ['productid'] . "'>" . " " . $product['name'] . " " .
-        $product['price']."£". " " . $product['tti']."hrs". "</option>";
+foreach ($products as $product) {//dropdown menu// TODO: POTENTIAL CHANGE NEEDED
+    echo "<option value ='" . $product ['productid'] . "'>" . " " . $product['name'] . " " .// TODO: POTENTIAL CHANGE NEEDED
+        $product['price']."£". " " . $product['tti']."hrs". "</option>";// TODO: POTENTIAL CHANGE NEEDED
 }
 
 echo "</select>";

@@ -4,7 +4,7 @@ require_once "assets/common.php";
 require_once "assets/db_con.php";
 
 
-if (!isset($_SESSION['userid'])) {
+if (!isset($_SESSION['userid'])) {// TODO: POTENTIAL CHANGE NEEDED
     $_SESSION['usermessage'] = "ERROR: You are not logged in.";
     header("location: login.php");
     exit;
@@ -16,14 +16,14 @@ if (!isset($_SESSION['userid'])) {
         /* then the processing to do this can cause issues due to it receiving the request to transfer a string to a time that has not been created yet so we create
      the string before beginning the transfer to a time */
 
-        if (book_update(dbconnect_insert(), $_SESSION['book_id'], $epoch_time)) {
+        if (book_update(dbconnect_insert(), $_SESSION['book_id'], $epoch_time)) {// TODO: POTENTIAL CHANGE NEEDED
             $_SESSION['usermessage'] = "SUCCESS: YOUR BOOKING HAS BEEN CHANGED!";
-            unset($_SESSION['book_id']);
+            unset($_SESSION['book_id']);// TODO: POTENTIAL CHANGE NEEDED
             header("Location: bookings.php");
             exit;
         } else {
             $_SESSION['usermessage'] = "ERROR: YOUR BOOKING HAS FAILED TO UPDATE!";
-            unset($_SESSION['book_id']);
+            unset($_SESSION['book_id']);// TODO: POTENTIAL CHANGE NEEDED
             header("Location: bookings.php");
             exit;
         }
@@ -36,7 +36,7 @@ echo "<!DOCTYPE html>";
 echo "<html>";
 
 echo "<head>"; //opens head
-echo "<title></title>"; //opens and writes title
+echo "<title></title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 
@@ -47,14 +47,14 @@ require_once "assets/nav.php";
 echo "<div id='main'>";
 
 
-$booking = book_fetch(dbconnect_insert(), $_SESSION['book_id']); //should be a try catch around this as we are calling to a subroutine that might fail
+$booking = book_fetch(dbconnect_insert(), $_SESSION['book_id']);// TODO: POTENTIAL CHANGE NEEDED //should be a try catch around this as we are calling to a subroutine that might fail
 
 echo "<form method='post' action=''>";
 
 $staff = staff_getter(dbconnect_insert());
 
-$book_time = date("H:i:s", $booking['book_time']);
-$book_date = date("Y-m-d", $booking['book_time']);
+$book_time = date("H:i:s", $booking['book_time']);// TODO: POTENTIAL CHANGE NEEDED
+$book_date = date("Y-m-d", $booking['book_time']);// TODO: POTENTIAL CHANGE NEEDED
 
 
 echo "<label for ='atime'>Appointment time</label>";
@@ -74,12 +74,12 @@ foreach ($staff as $staf) {//dropdown menu
     } else if ($staf ['active'] == '0') {
         $state = 'inactive';
     }
-    if ($booking ['[staff session name]'] == $staf ['[staff session name]']) {
+    if ($booking ['[staff session name]'] == $staf ['[staff session name]']) {// TODO: POTENTIAL CHANGE NEEDED
         $selected = "selected";
     } else {
         $selected = "";
     }
-    echo "<option value =" . $staf ['[staff session name]'] . " " . $selected . ">" . $state . " " . $staf['fname'] . " " .
+    echo "<option value =" . $staf ['[staff session name]'] . " " . $selected . ">" . $state . " " . $staf['fname'] . " " .// TODO: POTENTIAL CHANGE NEEDED
         $staf['lname'] . " " . "</option>";
 }
 
@@ -87,8 +87,8 @@ echo "</select>";
 
 echo "<br>";
 
-echo "<label for='book_reason'>Appointment Reason </label>";
-echo "<input type='text' name='book_reason' value='" . $booking['book_reason'] . "'>";
+echo "<label for='book_reason'>Appointment Reason </label>";// TODO: POTENTIAL CHANGE NEEDED
+echo "<input type='text' name='book_reason' value='" . $booking['book_reason'] . "'>";// TODO: POTENTIAL CHANGE NEEDED
 
 echo "<br>";
 

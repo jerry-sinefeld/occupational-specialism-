@@ -32,7 +32,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 
 echo "<html>"; //opens html
 echo "<head>"; //opens head
-echo "<title></title>"; //opens and writes title
+echo "<title></title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 
