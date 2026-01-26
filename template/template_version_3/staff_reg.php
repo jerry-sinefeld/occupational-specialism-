@@ -10,15 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!only_staff(dbconnect_insert(), $_POST["username"])) {// TODO: POTENTIAL CHANGE NEEDED
 
-        $new_engin_id = reg_engin(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0// TODO: POTENTIAL CHANGE NEEDED
+        $new_staff_id = reg_staff(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0// TODO: POTENTIAL CHANGE NEEDED
 
-        if (is_numeric($new_engin_id) && $new_engin_id > 0) { // checks if the returned id is a numeric and greater than 0// TODO: POTENTIAL CHANGE NEEDED
+        if (is_numeric($new_staff_id) && $new_staff_id > 0) { // checks if the returned id is a numeric and greater than 0// TODO: POTENTIAL CHANGE NEEDED
 
             // Registration and ID retrieval successful:
-            auditor(dbconnect_insert(), $new_engin_id,"reg", "Engineer has registered");// TODO: POTENTIAL CHANGE NEEDED
+            auditor(dbconnect_insert(), $new_staff_id,"reg", "Staff has registered");// TODO: POTENTIAL CHANGE NEEDED
 
             // Store the valid ID for the verification page
-            $_SESSION["[staff session name]"] = $new_engin_id;// TODO: POTENTIAL CHANGE NEEDED
+            $_SESSION["[staff session name]"] = $new_staff_id;// TODO: POTENTIAL CHANGE NEEDED
 
             $_SESSION["usermessage"] = "Registration successful! Please verify your account. Redirecting.";
             header("location: verify_staff.php");

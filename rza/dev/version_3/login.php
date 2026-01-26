@@ -30,7 +30,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 
 echo "<html>"; //opens html
 echo "<head>"; //opens head
-echo "<title>Home</title>"; //opens and writes title
+echo "<title>Login</title>"; //opens and writes title
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 
@@ -39,7 +39,7 @@ echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
-echo "<h1>Welcome to Rolsa Technologies</h1><br>";
+echo "<h1>Welcome to RZA</h1><br>";
 echo "<h2>Login</h2>";
 echo "<form action='' method='post'>"; //creates the form and tells the form what to do
 echo "<label for='username'>Username:</label>"; //creates the name text box and what it contains

@@ -5,8 +5,8 @@ session_start();
 require_once "assets/staff_common.php";
 require_once "assets/db_con.php";
 
-$[staff session name] = $_SESSION["[staff session name]"] ?? null; // if this value exists use it otherwise null
-if (!$[staff session name]) {
+$employid = $_SESSION["employid"] ?? null; // if this value exists use it otherwise null// TODO: POTENTIAL CHANGE NEEDED
+if (!$employid) {// TODO: POTENTIAL CHANGE NEEDED
     $_SESSION["usermessage"] = "Verification error: Please register first.";
     header("location: staff_reg.php"); //checks if there is a doc ID in the session and if there isn't it redirects you to the regsiter page
     exit;
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (isset($_POST["request_code"])) {
-        $auth_code = code_request($conn, $[staff session name]);
+        $auth_code = code_request($conn, $employid);// TODO: POTENTIAL CHANGE NEEDED
         if ($auth_code) {
             $_SESSION["usermessage"] = "Verification code generated and sent (Code: {$auth_code}). Please enter it below.";
         } else {
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (auth($conn, $submitted_code)) {//authenticates
-            if (activate_engin($conn, $[staff session name])) {//sets engineer as active
+            if (activate_engin($conn, $employid)) {//sets employee as active// TODO: POTENTIAL CHANGE NEEDED
                 $_SESSION["usermessage"] = "Verification successful! You are now active.";
                 header("location: index.php");
                 exit;
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 echo "<html>"; //opens html
 echo "<head>"; //opens head
-echo "<title></title>"; //opens and writes title
+echo "<title>Staff verify</title>"; //opens and writes title
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 echo "<body>"; //opens body
