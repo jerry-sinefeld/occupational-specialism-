@@ -8,6 +8,8 @@ require_once "assets/db_con.php"; //requires these files to run, if they are not
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    try{
+
     if (!only_staff(dbconnect_insert(), $_POST["username"])) {// TODO: POTENTIAL CHANGE NEEDED
 
         $new_staff_id = reg_staff(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0// TODO: POTENTIAL CHANGE NEEDED
@@ -28,6 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } else {
         $_SESSION["usermessage"] = "staff already exists";
+    }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: staff_reg.php');
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: staff_reg.php');
     }
 }
 

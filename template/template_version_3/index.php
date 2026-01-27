@@ -39,12 +39,12 @@ if (!$message) {
     echo $message;
 }
 
-try {
-    $conn = dbconnect_insert();
-    echo "success";
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
+//try {
+//    $conn = dbconnect_insert();
+//    echo "success";
+//} catch (PDOException $e) {
+//    echo $e->getMessage();
+//}
 
 
 echo "</div>";

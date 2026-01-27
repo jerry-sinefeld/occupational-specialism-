@@ -7,6 +7,8 @@ require_once "assets/db_con.php"; //requires these files to run, if they are not
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    try{
+
     $password_check = check_pass_strength($_POST["password"]);// TODO: POTENTIAL CHANGE NEEDED
 
     if ($password_check['success']) {
@@ -24,6 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } else {
         $_SESSION["usermessage"] = $password_check['message'];
+    }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: reg.php');
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: reg.php');
     }
 }
 

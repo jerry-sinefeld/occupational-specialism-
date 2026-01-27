@@ -11,20 +11,28 @@ if (isset($_SESSION['userid'])) {//checks if user is already logged in if so it 
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
 }
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usr = login(dbconnect_insert(), $_POST["username"]);
+    try {
+        $usr = login(dbconnect_insert(), $_POST["username"]);
 
-    if ($usr) {
-        $_SESSION['user'] = true;
-        $_SESSION['userid'] = $usr['userid'];// TODO: POTENTIAL CHANGE NEEDED
-        $_SESSION['usermessage'] = "You are logged in";
-        auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has logged in");// TODO: POTENTIAL CHANGE NEEDED
-        header('Location: index.php');
-        exit;
-    } else {
-        $_SESSION['usermessage'] = "Incorrect password";
-        header('Location: login.php');
-        exit;
-    }
+        if ($usr) {
+            $_SESSION['user'] = true;
+            $_SESSION['userid'] = $usr['userid'];// TODO: POTENTIAL CHANGE NEEDED
+            $_SESSION['usermessage'] = "You are logged in";
+            auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has logged in");// TODO: POTENTIAL CHANGE NEEDED
+            header('Location: index.php');
+            exit;
+        } else {
+            $_SESSION['usermessage'] = "Incorrect password";
+            header('Location: login.php');
+            exit;
+        }
+        } catch (PDOException $e) {
+            $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+            header('Location: login.php');
+        } catch (Exception $e) {
+            $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+            header('Location: login.php');
+        }
 }
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
 

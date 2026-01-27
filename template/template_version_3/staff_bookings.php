@@ -10,6 +10,7 @@ if (!isset($_SESSION['[STAFF ID]'])) {// TODO: POTENTIAL CHANGE NEEDED
     header("location: staff_login.php");
     exit;
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try{
     if (isset($_POST['bookdelete'])) {
         try {
             if (cancel_book(dbconnect_insert(), $_POST['book_id'])) {// TODO: POTENTIAL CHANGE NEEDED
@@ -23,6 +24,13 @@ if (!isset($_SESSION['[STAFF ID]'])) {// TODO: POTENTIAL CHANGE NEEDED
         } catch (Exception $e) {
             $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
         }
+    }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: staff_bookings.php');
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: staff_bookings.php');
     }
 }
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
@@ -46,7 +54,18 @@ echo "<br>";
 echo "<h2>Rolsa Technologies - Your Bookings</h2>";// TODO: POTENTIAL CHANGE NEEDED
 
 echo "<p class='content'> Below are your bookings </p>";
+
+try{
 $books = book_getter(dbconnect_insert());
+} catch (PDOException $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+} catch (Exception $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+}
 
 if (!$books) {
     echo "no bookings found";

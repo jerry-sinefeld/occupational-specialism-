@@ -21,12 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {//this block must always be at the t
         }
     } catch (PDOException $e) {
         $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
+        header('Location: bookings.php');
     } catch (Exception $e) {
         $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
+        header('Location: bookings.php');
     }
-    echo $epoch_time;
-    echo "<br>";
-    echo time();
 }
 
 echo "<!DOCTYPE html>";
@@ -46,9 +45,21 @@ echo "<div id='main'>";
 
 echo "<form method='post' action=''>";
 
+try{
+
 $staff = staff_getter(dbconnect_insert());
 
 $products = product_getter(dbconnect_insert());
+} catch (PDOException $e) {
+    $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+} catch (Exception $e) {
+    $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+}
+
 
 echo "<label for ='adate'>Booking date </label>";
 echo "<input type='date' name='adate' value='" . date("Y-m-d") . "'>";

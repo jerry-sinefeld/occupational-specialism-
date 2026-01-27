@@ -30,6 +30,7 @@ if (!isset($_SESSION['userid'])) {// TODO: POTENTIAL CHANGE NEEDED
         }
     } catch (PDOException $e) {
         $_SESSION['usermessage'] = "ERROR:" . $e->getMessage();
+        header ("location: change_booking.php");
     }
 }
 echo "<!DOCTYPE html>";
@@ -47,12 +48,29 @@ require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
 
-
+try{
 $booking = book_fetch(dbconnect_insert(), $_SESSION['book_id']); // TODO: POTENTIAL CHANGE NEEDED should be a try catch around this as we are calling to a subroutine that might fail
+} catch (PDOException $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+} catch (Exception $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');
+}/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
 
 echo "<form method='post' action=''>";
 
+try{
 $staff = staff_getter(dbconnect_insert());
+} catch (PDOException $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');
+} catch (Exception $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');
+}
 
 $book_time = date("H:i:s", $booking['book_time']);// TODO: POTENTIAL CHANGE NEEDED
 $book_date = date("Y-m-d", $booking['book_time']);// TODO: POTENTIAL CHANGE NEEDED

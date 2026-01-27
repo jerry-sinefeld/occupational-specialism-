@@ -10,6 +10,7 @@ if (isset($_SESSION['[STAFF ID]'])) {//checks if staff is already logged in if s
     header('Location: index.php'); //headers only work if no content has loaded on the page
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try{
     $staff = staff_login(dbconnect_insert(), $_POST["username"]);
 
     if ($staff ) {
@@ -23,6 +24,13 @@ if (isset($_SESSION['[STAFF ID]'])) {//checks if staff is already logged in if s
         $_SESSION['usermessage'] = "Incorrect password";
         header('Location: staff_login.php');
         exit;
+    }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: staff_login.php');
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: staff_login.php');
     }
 }
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure

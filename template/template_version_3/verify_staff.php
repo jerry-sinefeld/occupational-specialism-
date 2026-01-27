@@ -13,6 +13,7 @@ if (!$[STAFF ID]) {// TODO: POTENTIAL CHANGE NEEDED
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    try{
     $conn = dbconnect_insert();
     if (!$conn) {
         $_SESSION["usermessage"] = "Database connection error. Please try again.";
@@ -55,6 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Connection management for Submission Failure:
         header("location: verify_staff.php");
         exit;
+    }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: verify_staff.php');
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: verify_staff.php');
     }
 
 }

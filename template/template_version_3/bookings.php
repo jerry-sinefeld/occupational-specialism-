@@ -9,24 +9,25 @@ if (!isset($_SESSION['userid'])) {// TODO: POTENTIAL CHANGE NEEDED
     header("location: login.php");
     exit;
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
     if (isset($_POST['bookdelete'])) {
-        try {
             if (cancel_book(dbconnect_insert(), $_POST['book_id'])) {// TODO: POTENTIAL CHANGE NEEDED
                 $_SESSION['usermessage'] = "Appointment cancelled.";
                 auditor(dbconnect_insert(), $_SESSION['userid'], "log", "User has cancelled appointment");// TODO: POTENTIAL CHANGE NEEDED
             } else {
                 $_SESSION['usermessage'] = "Appointment could not be cancelled.";
             }
-
-        } catch (PDOException $e) {
-            $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
-        } catch (Exception $e) {
-            $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
-        }
     } elseif (isset($_POST['bookchange'])) {
         $_SESSION['book_id'] = $_POST['book_id'];// TODO: POTENTIAL CHANGE NEEDED
         header("location: change_booking.php");
         exit;
+    }
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: bookings.php');
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+        header('Location: bookings.php');
     }
 }
 echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct structure
@@ -43,14 +44,33 @@ require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div id='main'>";
 
+try{
 echo user_message();
+} catch (PDOException $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+} catch (Exception $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');/* sending back to index because if we just reloaded the page the user would be put in an infinite loop with no way of
+seeing the error*/
+}
 
 echo "<br>";
 
 echo "<h2>Rolsa Technologies - Your Bookings</h2>";// TODO: POTENTIAL CHANGE NEEDED
 
 echo "<p class='content'> Below are your bookings </p>";
+
+try{
 $books = book_getter(dbconnect_insert());
+} catch (PDOException $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');
+} catch (Exception $e) {
+    $_SESSION['usermessage'] = "ERROR" . $e->getMessage();
+    header('Location: index.php');
+}
 
 if (!$books) {
     echo "no bookings found";
