@@ -5,7 +5,7 @@ session_start();
 require_once "assets/db_con.php";
 require_once "assets/staff_common.php";
 
-if (isset($_SESSION['[staff session name]'])) {//checks if user is already logged in if so it directs you to the index page
+if (isset($_SESSION['[STAFF ID]'])) {//checks if user is already logged in if so it directs you to the index page
     $_SESSION['usermessage'] = "You are already logged in";
     header('Location: index.php'); //headers only work if no content has loaded on the page
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
@@ -13,8 +13,8 @@ if (isset($_SESSION['[staff session name]'])) {//checks if user is already logge
     $staff = staff_login(dbconnect_insert(), $_POST["username"]);
 
     if ($staff ) {
-        $_SESSION['[staff session name]'] = true;
-        $_SESSION['[staff session name]'] = $staff['[staff session name]'];
+        $_SESSION['[STAFF ID]'] = true;
+        $_SESSION['[STAFF ID]'] = $staff['[STAFF ID]'];
         $_SESSION['usermessage'] = "You are logged in";
         header('Location: index.php');
         exit;

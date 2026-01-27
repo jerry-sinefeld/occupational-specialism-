@@ -157,7 +157,7 @@ function getnewuserid($conn, $username){
 
 function commit_booking($conn, $epoch)
 {
-    $sql = "INSERT INTO bookings (book_time, book_reason, userid, enginid, book_date) VALUES(?,?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
+    $sql = "INSERT INTO bookings (book_time, book_reason, userid, [STAFF ID], book_date) VALUES(?,?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $epoch);
@@ -175,7 +175,7 @@ function commit_booking($conn, $epoch)
 
 function staff_getter($conn)
 {
-    $sql = "SELECT enginid,username,fname,lname,active FROM engineer WHERE active != ? ORDER BY fname DESC";// TODO: POTENTIAL CHANGE NEEDED
+    $sql = "SELECT [STAFF ID],username,fname,lname,active FROM [staff table name] WHERE active != ? ORDER BY fname DESC";// TODO: POTENTIAL CHANGE NEEDED
     //get all staff from database where active = 1
     $stmt = $conn->prepare($sql);
     $exclude_staff = "0";
@@ -201,7 +201,7 @@ function product_getter($conn)
 
 function book_getter($conn){
     // TODO: POTENTIAL CHANGE NEEDED BELOW
-    $sql = "SELECT book.book_id, book.book_time,book.book_reason,book.book_date,e.fname,e.lname FROM bookings book JOIN engineer e ON book.enginid = e.enginid WHERE book.userid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
+    $sql = "SELECT book.book_id, book.book_time,book.book_reason,book.book_date,e.fname,e.lname FROM bookings book JOIN [staff table name] e ON book.[STAFF ID] = e.[STAFF ID] WHERE book.userid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $_SESSION['userid']);// TODO: POTENTIAL CHANGE NEEDED
     $stmt->execute();

@@ -5,14 +5,13 @@ echo "<nav>";
 echo "<ul>";
 echo "<li> <a href='index.php'>Home</a></li>";
 
-if(isset($_SESSION['enginid']) AND $_SESSION['active'] == 1) { //checks if the session has an active engineer in it, active meaning they have been through the 2fa process
+if(isset($_SESSION['[STAFF ID]']) AND $_SESSION['active'] == 1) { //checks if the session has an active engineer in it, active meaning they have been through the 2fa process
     echo "<li> <a href='logout.php'>Logout</a></li>";
 }
 elseif (isset($_SESSION['userid'])){
     echo "<li> <a href='logout.php'>Logout</a></li>"; //by hiding the tabs you add an extra layer of protection by removing them from an unlogged in user
     echo "<li> <a href='book.php'>Make a booking</a></li>";
     echo "<li> <a href='bookings.php'>View a booking</a></li>";
-    echo "<li> <a href='cfc.php'>calculate your carbon footprint</a></li>";
 }
 else{
     echo "<li> <a href='login.php'>Login</a></li>"; //link to login page

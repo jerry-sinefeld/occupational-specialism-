@@ -3,7 +3,7 @@
 function reg_staff($conn,$post)
 {
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO engineer (username,fname,lname,password) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
+        $sql = "INSERT INTO [staff table name] (username,fname,lname,password) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
         $stmt->bindParam(1, $post["username"]);// TODO: POTENTIAL CHANGE NEEDED
@@ -17,14 +17,14 @@ function reg_staff($conn,$post)
 
         $stmt->execute();
 
-        $new_engin_id = $conn->lastInsertId(); //checks the last id that was inserted// TODO: POTENTIAL CHANGE NEEDED
+        $new_staff_id = $conn->lastInsertId(); //checks the last id that was inserted
 
-        return $new_engin_id;// TODO: POTENTIAL CHANGE NEEDED
+        return $new_staff_id;
 }
 
 function staff_login ($conn, $post){
 
-        $sql = "SELECT * FROM engineer WHERE username = ?"; //select everything from the user table where username = the entered username// TODO: POTENTIAL CHANGE NEEDED
+        $sql = "SELECT * FROM [staff table name] WHERE username = ?"; //select everything from the user table where username = the entered username// TODO: POTENTIAL CHANGE NEEDED
         $stmt = $conn->prepare($sql);//prepare the sql for data
         $stmt->bindParam(1,$post); /*now that the database is prepped to receive data you are now binding the data with the previous sql statement.
         This prevents it from ever being modified, increasing security */
@@ -36,7 +36,7 @@ function staff_login ($conn, $post){
             $_SESSION['active'] = 1;
             return $result;
         } else { //if user isn't found send back to login page (resets page)
-            $_SESSION['ERROR'] = "Engineer not found";
+            $_SESSION['ERROR'] = "Staff not found";
             header("location: staff_login.php");
             exit;
         }
@@ -44,7 +44,7 @@ function staff_login ($conn, $post){
 
 function only_staff($conn, $name)
 {
-    $sql = "SELECT username FROM engineer WHERE username = ?"; //set up sql statement// TODO: POTENTIAL CHANGE NEEDED
+    $sql = "SELECT username FROM [staff table name] WHERE username = ?"; //set up sql statement// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql); //prepares
     $stmt->bindParam(1, $name);// TODO: POTENTIAL CHANGE NEEDED//we are binding the data from our form to a sql statement this makes it more secure from an sql attack and makes it unlikely for people to hijack an sql statement
     $stmt->execute();//run the sql code
@@ -69,7 +69,7 @@ function usermessage()
     }
 }
 
-function code_request($conn,$enginid){// TODO: POTENTIAL CHANGE NEEDED
+function code_request($conn,$[STAFF ID]){// TODO: POTENTIAL CHANGE NEEDED
     $auth_code = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT); /*this creates the authentication code for the docs to use
     str_pad pads the string to a specific length using another string this makes sure the generated code is always 8 digits long mt_rand is a built in
     php function that returns a randomly generated number between a set amount of numbers I used this over rand as it is typically faster and
@@ -78,9 +78,9 @@ function code_request($conn,$enginid){// TODO: POTENTIAL CHANGE NEEDED
     $exp = time();
     $exp = $exp + 900;
 
-    $sql = "INSERT INTO temp (enginid,code,time) VALUES(?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
+    $sql = "INSERT INTO temp ([staff session name],code,time) VALUES(?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $enginid);// TODO: POTENTIAL CHANGE NEEDED
+    $stmt->bindParam(1, $[STAFF ID]);// TODO: POTENTIAL CHANGE NEEDED
     $stmt->bindParam(2, $auth_code);
     $stmt->bindParam(3, $exp);
     $stmt->execute();
@@ -125,11 +125,11 @@ function auth($conn, $code){
     return true;
 }
 
-function activate_engin($conn,$enginid)// TODO: POTENTIAL CHANGE NEEDED
+function activate_staff($conn,$[STAFF ID])// TODO: POTENTIAL CHANGE NEEDED
 {
-    $sql = "UPDATE engineer SET active = 1 WHERE enginid = ?";// TODO: POTENTIAL CHANGE NEEDED
+    $sql = "UPDATE [staff table name] SET active = 1 WHERE [STAFF ID] = ?";// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1,$enginid);// TODO: POTENTIAL CHANGE NEEDED
+    $stmt->bindParam(1,$[STAFF ID]);// TODO: POTENTIAL CHANGE NEEDED
     $stmt->execute();
     $conn = null;
     $_SESSION['active'] = 1;
@@ -138,9 +138,9 @@ function activate_engin($conn,$enginid)// TODO: POTENTIAL CHANGE NEEDED
 
 function book_getter($conn){
     // TODO: POTENTIAL CHANGE NEEDED BELOW
-    $sql = "SELECT book.book_id, book.book_time,book.book_reason,book.book_date,e.fname,e.lname FROM bookings book JOIN engineer e ON book.enginid = e.enginid WHERE book.enginid = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
+    $sql = "SELECT book.book_id, book.book_time,book.book_reason,book.book_date,e.fname,e.lname FROM bookings book JOIN [STAFF ID] [ABBREV OF STAFF ID] ON book.[STAFF ID] = e.[STAFF ID] WHERE book.[STAFF ID] = ? ORDER BY book.book_time ASC"; // it takes the data from doctor and appointment that we want specifically and joins them together based off the entries id. the app and d are shorthand for the appointment and doctor table respectively
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $_SESSION['enginid']);// TODO: POTENTIAL CHANGE NEEDED
+    $stmt->bindParam(1, $_SESSION['[STAFF ID]']);// TODO: POTENTIAL CHANGE NEEDED
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $conn = null;
@@ -159,11 +159,11 @@ function cancel_book($conn, $book_id){
     return true;
 }
 
-function auditor($conn, $enginid, $code, $long){
-    $sql= "INSERT INTO enginaudit (enginid,date,code,longdesc) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
+function auditor($conn, $[STAFF ID], $code, $long){
+    $sql= "INSERT INTO enginaudit ([STAFF ID],date,code,longdesc) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql);
     $date = date("Y-m-d"); // this is the exact structure the mysql date field accepts only
-    $stmt->bindParam(1, $enginid); //bind parameters for security// TODO: POTENTIAL CHANGE NEEDED
+    $stmt->bindParam(1, $[STAFF ID]); //bind parameters for security// TODO: POTENTIAL CHANGE NEEDED
     $stmt->bindParam(2, $date);
     $stmt->bindParam(3, $code);
     $stmt->bindParam(4, $long);

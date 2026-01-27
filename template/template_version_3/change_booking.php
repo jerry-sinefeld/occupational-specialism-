@@ -75,12 +75,12 @@ foreach ($staff as $staf) {//dropdown menu
     } else if ($staf ['active'] == '0') {
         $state = 'inactive';
     }
-    if ($booking ['[staff session name]'] == $staf ['[staff session name]']) {// TODO: POTENTIAL CHANGE NEEDED
+    if ($booking ['[STAFF ID]'] == $staf ['[STAFF ID]']) {// TODO: POTENTIAL CHANGE NEEDED
         $selected = "selected";
     } else {
         $selected = "";
     }
-    echo "<option value =" . $staf ['[staff session name]'] . " " . $selected . ">" . $state . " " . $staf['fname'] . " " .// TODO: POTENTIAL CHANGE NEEDED
+    echo "<option value =" . $staf ['[STAFF ID]'] . " " . $selected . ">" . $state . " " . $staf['fname'] . " " .// TODO: POTENTIAL CHANGE NEEDED
         $staf['lname'] . " " . "</option>";// TODO: POTENTIAL CHANGE NEEDED
 }
 

@@ -1,9 +1,9 @@
 <?php
 
-function reg_engin($conn,$post)
+function reg_staff($conn,$post)
 {
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO engineer (username,fname,lname,password) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
+        $sql = "INSERT INTO employees (username,fname,lname,password) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
         $stmt->bindParam(1, $post["username"]);// TODO: POTENTIAL CHANGE NEEDED
@@ -17,9 +17,9 @@ function reg_engin($conn,$post)
 
         $stmt->execute();
 
-        $new_engin_id = $conn->lastInsertId(); //checks the last id that was inserted// TODO: POTENTIAL CHANGE NEEDED
+        $new_staff_id = $conn->lastInsertId(); //checks the last id that was inserted// TODO: POTENTIAL CHANGE NEEDED
 
-        return $new_engin_id;// TODO: POTENTIAL CHANGE NEEDED
+        return $new_staff_id;// TODO: POTENTIAL CHANGE NEEDED
 }
 
 function staff_login ($conn, $post){

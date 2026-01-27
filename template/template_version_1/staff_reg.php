@@ -10,12 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!only_staff(dbconnect_insert(), $_POST["name"])) {
 
-        $new_engin_id = reg_engin(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0
+        $new_staff_id = reg_staff(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0
 
-        if (is_numeric($new_engin_id) && $new_engin_id > 0) { // checks if the returned id is a numeric and greater than 0
+        if (is_numeric($new_staff_id) && $new_staff_id > 0) { // checks if the returned id is a numeric and greater than 0
 
             // Store the valid ID for the verification page
-            $_SESSION["[staff session name]"] = $new_engin_id;
+            $_SESSION["[STAFF ID]"] = $new_staff_id;
 
             $_SESSION["usermessage"] = "Registration successful! Please verify your account. Redirecting.";
             header("location: verify_staff.php");

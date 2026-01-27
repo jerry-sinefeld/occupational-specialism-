@@ -5,7 +5,7 @@ session_start();
 require_once "assets/staff_common.php";
 require_once "assets/db_con.php";
 
-if (!isset($_SESSION['[staff session name]'])) {// TODO: POTENTIAL CHANGE NEEDED
+if (!isset($_SESSION['[STAFF ID]'])) {// TODO: POTENTIAL CHANGE NEEDED
     $_SESSION['usermessage'] = "ERROR: You are not logged in.";
     header("location: staff_login.php");
     exit;
@@ -14,7 +14,7 @@ if (!isset($_SESSION['[staff session name]'])) {// TODO: POTENTIAL CHANGE NEEDED
         try {
             if (cancel_book(dbconnect_insert(), $_POST['book_id'])) {// TODO: POTENTIAL CHANGE NEEDED
                 $_SESSION['usermessage'] = "Appointment cancelled.";
-                auditor(dbconnect_insert(), $_SESSION['[staff session name]'], "log", "Staff has cancelled appointment");// TODO: POTENTIAL CHANGE NEEDED
+                auditor(dbconnect_insert(), $_SESSION['[STAFF ID]'], "log", "Staff has cancelled appointment");// TODO: POTENTIAL CHANGE NEEDED
             } else {
                 $_SESSION['usermessage'] = "Appointment could not be cancelled.";
             }

@@ -3,7 +3,7 @@
 function reg_staff($conn,$post)
 {
         //prepare and execute the sql query note:do not include primary key as it is auto-incrementing
-        $sql = "INSERT INTO engineer (username,fname,lname,password) VALUES(?,?,?,?)";
+        $sql = "INSERT INTO [staff table name] (username,fname,lname,password) VALUES(?,?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
         $stmt = $conn->prepare($sql);//prepare the sql for data
 
         $stmt->bindParam(1, $post["username"]);
@@ -24,7 +24,7 @@ function reg_staff($conn,$post)
 
 function staff_login ($conn, $post){
 
-        $sql = "SELECT * FROM engineer WHERE username = ?"; //select everything from the user table where username = the entered username
+        $sql = "SELECT * FROM [staff table name] WHERE username = ?"; //select everything from the user table where username = the entered username// TODO: POTENTIAL CHANGE NEEDED
         $stmt = $conn->prepare($sql);//prepare the sql for data
         $stmt->bindParam(1,$post); /*now that the database is prepped to receive data you are now binding the data with the previous sql statement.
         This prevents it from ever being modified, increasing security */
@@ -44,7 +44,7 @@ function staff_login ($conn, $post){
 
 function only_staff($conn, $name)
 {
-    $sql = "SELECT username FROM engineer WHERE username = ?"; //set up sql statement
+    $sql = "SELECT username FROM [staff table name] WHERE username = ?"; //set up sql statement// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql); //prepares
     $stmt->bindParam(1, $name);//we are binding the data from our form to a sql statement this makes it more secure from an sql attack and makes it unlikely for people to hijack an sql statement
     $stmt->execute();//run the sql code
@@ -69,7 +69,7 @@ function usermessage()
     }
 }
 
-function code_request($conn,$enginid){
+function code_request($conn,$[STAFF ID]){// TODO: POTENTIAL CHANGE NEEDED
     $auth_code = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT); /*this creates the authentication code for the docs to use
     str_pad pads the string to a specific length using another string this makes sure the generated code is always 8 digits long mt_rand is a built in
     php function that returns a randomly generated number between a set amount of numbers I used this over rand as it is typically faster and
@@ -78,9 +78,9 @@ function code_request($conn,$enginid){
     $exp = time();
     $exp = $exp + 900;
 
-    $sql = "INSERT INTO temp (enginid,code,time) VALUES(?,?,?)";
+    $sql = "INSERT INTO temp ([STAFF ID],code,time) VALUES(?,?,?)";// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $enginid);
+    $stmt->bindParam(1, $[STAFF ID]);// TODO: POTENTIAL CHANGE NEEDED
     $stmt->bindParam(2, $auth_code);
     $stmt->bindParam(3, $exp);
     $stmt->execute();
@@ -125,11 +125,11 @@ function auth($conn, $code){
     return true;
 }
 
-function activate_engin($conn,$enginid)
+function activate_engin($conn,$[STAFF ID])
 {
-    $sql = "UPDATE engineer SET active = 1 WHERE enginid = ?";
+    $sql = "UPDATE [staff table name] SET active = 1 WHERE [STAFF ID] = ?";// TODO: POTENTIAL CHANGE NEEDED
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1,$enginid);
+    $stmt->bindParam(1,$[STAFF ID]);// TODO: POTENTIAL CHANGE NEEDED
     $stmt->execute();
     $conn = null;
     $_SESSION['active'] = 1;

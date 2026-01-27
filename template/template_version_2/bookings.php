@@ -4,7 +4,7 @@ session_start();
 require_once "assets/common.php";
 require_once "assets/db_con.php";
 
-if (!isset($_SESSION['userid'])) {// TODO: POTENTIAL CHANGE NEEDED
+if (!isset($_SESSION['userid'])) {
     $_SESSION['usermessage'] = "ERROR: You are not logged in.";
     header("location: login.php");
     exit;

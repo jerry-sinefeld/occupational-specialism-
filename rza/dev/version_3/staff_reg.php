@@ -10,12 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!only_staff(dbconnect_insert(), $_POST["username"])) {
 
-        $new_staff_id = reg_engin(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0// TODO: POTENTIAL CHANGE NEEDED
+        $new_staff_id = reg_staff(dbconnect_insert(), $_POST); // attempts to register and returns the new engineers id to be used in the verify page if anything fails it will return 0// TODO: POTENTIAL CHANGE NEEDED
 
         if (is_numeric($new_staff_id) && $new_staff_id > 0) { // checks if the returned id is a numeric and greater than 0// TODO: POTENTIAL CHANGE NEEDED
 
             // Registration and ID retrieval successful:
-            auditor(dbconnect_insert(), $new_staff_id,"reg", "Engineer has registered");// TODO: POTENTIAL CHANGE NEEDED
+            auditor(dbconnect_insert(), $new_staff_id,"reg", "Staff has registered");// TODO: POTENTIAL CHANGE NEEDED
 
             // Store the valid ID for the verification page
             $_SESSION["employid"] = $new_staff_id;// TODO: POTENTIAL CHANGE NEEDED
@@ -35,7 +35,7 @@ echo "<!DOCTYPE html>"; //declares the doc as a html so it follows the correct s
 
 echo "<html>"; //opens html
 echo "<head>"; //opens head
-echo "<title></title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
+echo "<title>Staff register</title>"; //opens and writes title// TODO: POTENTIAL CHANGE NEEDED
 echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the stylesheet which contains all the css
 echo "</head>"; //closes head
 

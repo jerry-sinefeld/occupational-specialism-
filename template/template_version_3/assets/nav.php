@@ -12,7 +12,7 @@ if(isset($_SESSION['[staff session name]']) AND $_SESSION['active'] == 1) {// TO
     echo "<li> <a href='staff_bookings.php'>Staff Bookings</a></li>";
     echo "<li> <a href='staff_logout.php'>Logout</a></li>";
 }
-elseif (isset($_SESSION['userid'])){// TODO: POTENTIAL CHANGE NEEDED
+elseif (isset($_SESSION['userid'])){//
     echo "<li> <a href='logout.php'>Logout</a></li>"; //by hiding the tabs you add an extra layer of protection by removing them from an unlogged in user
     echo "<li> <a href='book.php'>Make a booking</a></li>";
     echo "<li> <a href='bookings.php'>View a booking</a></li>";

@@ -5,7 +5,7 @@ session_start();
 require_once "assets/db_con.php";
 require_once "assets/staff_common.php";
 
-if (isset($_SESSION['[staff session name]'])) {//checks if staff is already logged in if so it directs you to the index page // TODO: POTENTIAL CHANGE NEEDED
+if (isset($_SESSION['[STAFF ID]'])) {//checks if staff is already logged in if so it directs you to the index page // TODO: POTENTIAL CHANGE NEEDED
     $_SESSION['usermessage'] = "You are already logged in";
     header('Location: index.php'); //headers only work if no content has loaded on the page
     exit; //by forcing the exit it stops anything from being loaded before redirecting, allowing redirection
@@ -13,10 +13,10 @@ if (isset($_SESSION['[staff session name]'])) {//checks if staff is already logg
     $staff = staff_login(dbconnect_insert(), $_POST["username"]);
 
     if ($staff ) {
-        $_SESSION['[staff session name]'] = true;// TODO: POTENTIAL CHANGE NEEDED
-        $_SESSION['[staff session name]'] = $staff['[staff session name]'];// TODO: POTENTIAL CHANGE NEEDED
+        $_SESSION['[STAFF ID]'] = true;// TODO: POTENTIAL CHANGE NEEDED
+        $_SESSION['[STAFF ID]'] = $staff['[STAFF ID]'];// TODO: POTENTIAL CHANGE NEEDED
         $_SESSION['usermessage'] = "You are logged in";
-        auditor(dbconnect_insert(), $_SESSION['[staff session name]'], "log", "Engineer has logged in");// TODO: POTENTIAL CHANGE NEEDED
+        auditor(dbconnect_insert(), $_SESSION['[STAFF ID]'], "log", "Engineer has logged in");// TODO: POTENTIAL CHANGE NEEDED
         header('Location: index.php');
         exit;
     } else {

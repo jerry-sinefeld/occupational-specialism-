@@ -72,7 +72,7 @@ foreach ($staff as $staf) {//dropdown menu
     } else if ($staf ['active'] == '0') {
         $state = 'inactive';
     }
-    echo "<option value ='" . $staf ['[staff session name]'] . "'>" . " " . $staf['fname'] . " " .// TODO: POTENTIAL CHANGE NEEDED
+    echo "<option value ='" . $staf ['[STAFF ID]'] . "'>" . " " . $staf['fname'] . " " .// TODO: POTENTIAL CHANGE NEEDED
         $staf['lname']."(". $state .")" ." " . "</option>";
 }
 
