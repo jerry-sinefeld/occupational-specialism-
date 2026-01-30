@@ -21,7 +21,7 @@ echo "<link rel='stylesheet' href='css/styles.css'>"; //links the file to the st
 echo "</head>"; //closes head
 
 echo "<body>"; //opens body
-echo "<div class='container'>";
+echo "<div class='container'>";//opens the div container
 require_once "assets/topbar.php";// requires these files to run if they are not present the code will not run
 require_once "assets/nav.php";// requires these files to run if they are not present the code will not run
 echo "<div id='main'>"; //opens a div with the id of main this allows for customization

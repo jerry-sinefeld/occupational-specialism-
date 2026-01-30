@@ -5,7 +5,7 @@ session_start();
 require_once "assets/common.php"; //requires these files to run, if they are not present it will not run
 require_once "assets/db_con.php"; //requires these files to run, if they are not present it will not run
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {// posts data
 
     try{
 

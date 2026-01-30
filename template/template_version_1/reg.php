@@ -1,22 +1,22 @@
 <?php
 //OPENS php
-session_start();
+session_start();//start session
 
 require_once "assets/common.php"; //requires these files to run, if they are not present it will not run
 require_once "assets/db_con.php"; //requires these files to run, if they are not present it will not run
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {// posts data
 
-        if (!only_user(dbconnect_insert(), $_POST["username"])) {
+        if (!only_user(dbconnect_insert(), $_POST["username"])) {// if their username is unique
 
-            if (reg_user(dbconnect_insert(), $_POST)) {
-                getnewuserid(dbconnect_insert(),$_POST["username"]);
-                $_SESSION["usermessage"] = "user created successfully.";
+            if (reg_user(dbconnect_insert(), $_POST)) {// if reg user is successful
+                getnewuserid(dbconnect_insert(),$_POST["username"]);//get the userid
+                $_SESSION["usermessage"] = "user created successfully.";// display the message
             } else {
-                $_SESSION["usermessage"] = "user creation failed";
+                $_SESSION["usermessage"] = "user creation failed";// display the message
             }
         } else {
-            $_SESSION["usermessage"] = "user already exists";
+            $_SESSION["usermessage"] = "user already exists";// display the message
         }
     }
 
