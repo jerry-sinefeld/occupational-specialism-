@@ -24,20 +24,20 @@ echo "<body>"; //opens body
 echo "<div class='container'>";
 require_once "assets/topbar.php";// requires these files to run if they are not present the code will not run
 require_once "assets/nav.php";// requires these files to run if they are not present the code will not run
-echo "<div id='main'>";
-echo "<h1></h1>";// TODO: POTENTIAL CHANGE NEEDED
-echo "<p> </p>";// TODO: POTENTIAL CHANGE NEEDED
-echo "<br>";
-echo "<h1>  </h1>";// TODO: POTENTIAL CHANGE NEEDED
-echo "<p> </p>";// TODO: POTENTIAL CHANGE NEEDED
-echo "<br>";
-echo "<h1>  </h1>";// TODO: POTENTIAL CHANGE NEEDED
-echo "<p> </p>";// TODO: POTENTIAL CHANGE NEEDED
+echo "<div id='main'>"; //opens a div with the id of main this allows for customization
+echo "<h1></h1>";// TODO: POTENTIAL CHANGE NEEDED //header
+echo "<p> </p>";// TODO: POTENTIAL CHANGE NEEDED //flavour text
+echo "<br>";//break
+echo "<h1>  </h1>";// TODO: POTENTIAL CHANGE NEEDED //header
+echo "<p> </p>";// TODO: POTENTIAL CHANGE NEEDED //flavour text
+echo "<br>";//break
+echo "<h1>  </h1>";// TODO: POTENTIAL CHANGE NEEDED //header
+echo "<p> </p>";// TODO: POTENTIAL CHANGE NEEDED //flavour text
 
-if (!$message) {
-    echo user_message();
-} else {
-    echo $message;
+if (!$message) {// if there is no message
+    echo user_message();// output the usermessage
+} else {//if not
+    echo $message;// display the message
 }
 
 //try {
@@ -47,9 +47,10 @@ if (!$message) {
 //    echo $e->getMessage();
 //}
 
+// ^ for testing purposes
 
-echo "</div>";
-echo "</div>";
-require_once "assets/bottombar.php";
-echo "</body>";
+echo "</div>";//close the div main
+echo "</div>";//closes the div container
+require_once "assets/bottombar.php";// requires these files to run if they are not present the code will not run
+echo "</body>";//closes body
 echo "</html>"; //closes html
