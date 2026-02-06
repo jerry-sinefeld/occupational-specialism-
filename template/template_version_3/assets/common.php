@@ -23,63 +23,63 @@ function check_pass_strength($password) {
     $errors = [];
     $_tally = 9; // Max score
 
-    // Use the raw password. We don't sanitize passwords because it destroys
-    // characters like < or > that the user intentionally chose.
+    //Use the raw password. We don't sanitize passwords because it destroys
+    //characters like < or > that the user intentionally chose.
     $_password = $password;
 
     // This regex looks for anything that is NOT a letter or a number
     $_spec_char = '/[^a-zA-Z0-9]/';
 
-    // 1. Uppercase Check
+    // Uppercase Check
     if (!preg_match('/[A-Z]/', $_password)) {
         $_tally--;
         $errors[] = "Your password must contain at least one uppercase character.";
     }
 
-    // 2. Lowercase Check
+    // Lowercase Check
     if (!preg_match('/[a-z]/', $_password)) {
         $_tally--;
         $errors[] = "Your password must contain at least one lowercase character.";
     }
 
-    // 3. Number Check
+    // Number Check
     if (!preg_match('/[0-9]/', $_password)) {
         $_tally--;
         $errors[] = "Your password must contain at least one number.";
     }
 
-    // 4. Length Check
+    // Length Check
     if (strlen($_password) < 8) {
         $_tally--;
         $errors[] = "Your password must be at least 8 characters long.";
     }
 
-    // 5. Cannot start with a number
+    // Cannot start with a number
     if (preg_match('/^[0-9]/', $_password)) {
         $_tally--;
         $errors[] = "Your password should not start with a number.";
     }
 
-    // 6. Cannot start with a special character
+    // Cannot start with a special character
     // mb_substr is used to be "multi-byte" safe just in case of emojis/unique symbols
     if (preg_match($_spec_char, mb_substr($_password, 0, 1))) {
         $_tally--;
         $errors[] = "Your password should not start with a special character.";
     }
 
-    // 7. Cannot end with a special character
+    // Cannot end with a special character
     if (preg_match($_spec_char, mb_substr($_password, -1))) {
         $_tally--;
         $errors[] = "Your password should not end with a special character.";
     }
 
-    // 8. Must contain at least one special character
+    // Must contain at least one special character
     if (!preg_match($_spec_char, $_password)) {
         $_tally--;
         $errors[] = "Your password must contain at least one special character.";
     }
 
-    // 9. Simple common password check
+    // Simple common password check
     if (strtolower($_password) === 'password') {
         $_tally--;
         $errors[] = "Your password cannot be the word 'password'.";
